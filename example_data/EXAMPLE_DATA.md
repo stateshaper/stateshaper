@@ -110,7 +110,7 @@ Example:
 ```python
 # data - the data type from these examples.
 # token_count - leave blank, one is generated at a time using this rule.
-# initial_state (optional, default=[66, 67, 54, 3, 34]) - the starting number to derive the output from
+# initial_state (optional, default=5) - the starting number to derive the output from
 # constants (optional, default={"a": 3,"b": 5,"c": 7,"d": 11}) - used for morphing calculations. only needss to be modified if specific determinism is needed. 
 # mod (optional, default=9973) - used for morphing calculations. only needs to be modified if specific determinism is needed. 
 engine = RunEngine(data)

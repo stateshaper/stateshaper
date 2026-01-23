@@ -1,14 +1,16 @@
 import random
 import sys
 
+from tools.functions.Functions import Functions
+
 
 class DeriveVocab:
 
 
-    def __init__(self, **kwargs):
+    def __init__(self, data=None, **kwargs):
         self.vocab = None
 
-        self.original_data = None
+        self.original_data = data 
 
         self.master_rankings = None
 
@@ -18,20 +20,26 @@ class DeriveVocab:
 
         self.input_ranking = 3
 
+        self.functions = Functions()
+
+
+        self.test()
+
 
 
 
     def initial_rankings(self, data=None):
-        data = self.original_data = data if data else self.test_data()
+        data = self.original_data = self.original_data if self.original_data else data if data else self.test_data()
+        self.functions.set_data(data)
         rankings = {}
         similarities = {}
 
         for item in data["input"]:
-            rankings[list(item.keys())[0]] = list(item.values())[0]["rating"]
+            rankings[list(item.keys())[0]] = self.functions.rating(item)
             try:
-                similarities[list(item.keys())[0]] = list(item.values())[0]["data"]["attributes"]
+                similarities[list(item.keys())[0]] = self.functions.attributes(item)
             except:
-                similarities[list(item.keys())[0]] = list(item.values())[0]["data"][0]["attributes"]
+                pass
 
         self.master_rankings = rankings
         self.similarities = similarities
@@ -47,11 +55,7 @@ class DeriveVocab:
         
 
     def current_vocab(self):
-        try:
-            vocab = [list(i.values())[0]["data"][0]["item"] for i in self.original_data["input"] if [j for j in self.vocab if j == list(i.keys())[0]]]
-        except:
-            vocab = [list(i.values())[0]["data"]["item"] for i in self.original_data["input"] if [j for j in self.vocab if j == list(i.keys())[0]]]
-        return vocab
+        return [self.functions.item(i) for i in self.original_data["input"] if [j for j in self.vocab if j == list(i.keys())[0]]]
     
 
     def sort_ratings(self, rankings):
@@ -80,10 +84,12 @@ class DeriveVocab:
 
     def post_derived(self):
         for item in self.original_data["input"]:
-            item[list(item.keys())[0]]["rating"] += round(sum([self.master_rankings[i] for i in item[list(item.keys())[0]]["data"]["attributes"]])/len(item[list(item.keys())[0]]["data"]["attributes"]))
+            self.functions.item(item)["rating"] += round(sum([self.master_rankings[i] for i in self.functions.attributes(item)])/len(self.functions.attributes(item)))
+
         self.sort_data(self.original_data)
+
         for item in self.original_data["input"]:
-            item[list(item.keys())[0]].pop("rating", None)
+            self.functions.item(item).pop("rating", None)
 
         return self.original_data
     
@@ -93,7 +99,7 @@ class DeriveVocab:
     
 
     def sort_data(self, data):
-        sort = sorted(data["input"], key=lambda x: list(x.values())[0]["rating"], reverse=True)
+        sort = sorted(data["input"], key=lambda x: self.functions.rating(x), reverse=True)
         return sort
     
 
@@ -110,7 +116,7 @@ class DeriveVocab:
             rankings[list(item.keys())[0]] = 0
 
         for item in input:
-            adjust = [list(i.keys())[0] for i in data["input"] if self.shared_attributes(item, i[list(i.keys())[0]]["data"]["attributes"]) == True]
+            adjust = [list(i.keys())[0] for i in data["input"] if self.shared_attributes(item, self.functions.attributes(i)) == True]
             rankings = self.fill_rankings(rankings, adjust, item, input[item])
 
         rankings = self.sort_ratings(rankings)
@@ -247,3 +253,5 @@ class DeriveVocab:
             input = self.test_input()
             print("\n\nnew input")
             print(input)
+
+

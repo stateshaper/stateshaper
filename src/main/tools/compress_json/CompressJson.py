@@ -7,7 +7,7 @@ class CompressJson:
 
 
     def __init__(self, **kwargs):
-        
+        pass
 
 
 

@@ -16,16 +16,19 @@ rankings = initial_rankings(input_dataset)
 ```
 
 
-*Altering Rankings*
+*Altering Rankings - REQUIRED FORMAT*
 
-When activity relating to the data occurs in the app, a response string can be built that adjusts the preference ratings for that data.
+When activity relating to the data occurs in the app, a response string can be built that adjusts the preference ratings for that data. This occurs within an app, and can be sent back to the *DeriveVocab* class and used to get a new set of vocab terms. The following shows a json object with each vocab as a key. 
 ```python
-data = [True, ["strength_training", "sprint_speed", "strategy_game"]]
+# True for strategy game indicates that the item will have a LOWER preference in the next vocab
+# False means it will have a HIGHER preference in the next round
+# None means to remove the item from the list of possible terms completely
+from_app = {"strategy_game": True, "vertical_jump": False, "endurance_run": None}
 ```
 
-This can be added to a list and used in the *DeriveVocab* class function **'adjust_rankings'**. It is passed as a parameter, along with the master dataset (minus original ratings). The new vocab is returned.
+This can be used in the *DeriveVocab* class function **'adjust_rankings'**. It is passed as a parameter, along with the original dataset (does not need the original ratings). The new vocab is returned.
 ```python
-vocab = adjust_rankings(input, data)
+vocab = adjust_rankings(from_app, original_data)
 ```
 
 

@@ -9,14 +9,11 @@ description = "An infinite deterministic token stream derived from just one numb
 readme = "README.md"
 requires-python = ">=3.10"
 license = {file = "LICENSE"}
-authors = [{name = "Jason G. Dunn"}]
-dependencies = [
-  # "requests>=2.32",
-]
+authors = [{name = "Jason G. Dunn", email="jasongdunn@outlook.com"}]
+dependencies = []
 
 [project.urls]
 Homepage = "https://github.com/jgddesigns/stateshaper"
-Issues = "https://github.com/jgddesigns/stateshaper"
 
 [tool.setuptools]
 package-dir = {"" = "src"}

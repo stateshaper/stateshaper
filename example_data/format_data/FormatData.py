@@ -37,7 +37,6 @@ class FormatData:
             "rating": self.rating_row
         }
 
-        # self.compound_example()
 
 
     
