@@ -1,7 +1,5 @@
 from random import randint
-import sys
-
-from tools.derive_vocab.DeriveVocab import DeriveVocab
+from stateshaper.tools.derive_vocab.DeriveVocab import DeriveVocab
 
 
 class Vocab:

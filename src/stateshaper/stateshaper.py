@@ -1,15 +1,13 @@
-import json
-import random
 import sys
-from connector.Connector import Connector
-from core import Stateshaper
-from tools.derive_vocab.DeriveVocab import DeriveVocab
-from tools.tiny_state.TinyState import TinyState
+from stateshaper.connector.Connector import Connector
+from stateshaper.core import Core
+from stateshaper.tools.derive_vocab.DeriveVocab import DeriveVocab
+from stateshaper.tools.tiny_state.TinyState import TinyState
 from example_data.format_data.FormatData import FormatData
 
 
 
-class RunEngine:
+class Stateshaper:
 
     def __init__(self, data=None, original_data=None, seed=None, token_count=10, initial_state=5, vocab=None, constants={"a": 3,"b": 5,"c": 7,"d": 11}, mod=9973, **kwargs):
         
@@ -82,7 +80,7 @@ class RunEngine:
 
 
     def define_engine(self, state=None, vocab=None, constants=None, mod=None):
-        self.engine = Stateshaper(
+        self.engine = Core(
             self.seed["state"] if not state else state,
             self.seed["vocab"] if not vocab else vocab,
             self.seed["constants"] if not constants else constants,
