@@ -1,7 +1,7 @@
 # *EXAMPLE DATA*
 
 
-This directory contains example JSON data for accepted input into the *RunEngine* class. This class is called whenever a *Stateshaper Seed* needs to be created for your data. 
+This directory contains example JSON data for accepted input into the *Stateshaper* class. This class is called whenever a *Stateshaper Seed* needs to be created for your data. 
 
 
 <br> <br>
@@ -88,7 +88,7 @@ Example:
 # token_count (optional, default=10) - the total amount of output values desired  
 # constants (optional, default={"a": 3,"b": 5,"c": 7,"d": 11}) - used for morphing calculations. only needss to be modified if specific determinism is needed. 
 # mod (optional, default=9973) - used for morphing calculations. only needss to be modified if specific determinism is needed. 
-engine = RunEngine(data, token_count)
+engine = Stateshaper(data, token_count)
 
 engine.start_engine()
 
@@ -113,7 +113,7 @@ Example:
 # initial_state (optional, default=[66, 67, 54, 3, 34]) - the starting number to derive the output from
 # constants (optional, default={"a": 3,"b": 5,"c": 7,"d": 11}) - used for morphing calculations. only needss to be modified if specific determinism is needed. 
 # mod (optional, default=9973) - used for morphing calculations. only needs to be modified if specific determinism is needed. 
-engine = RunEngine(data)
+engine = Stateshaper(data)
 
 engine.start_engine()
 

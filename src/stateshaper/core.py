@@ -19,9 +19,7 @@ class Core:
         except:
             pass
         self.compound = compound
-        print(compound)
-        
-       
+
         self.iteration = 1 
 
         self.prior_index = 0

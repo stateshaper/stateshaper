@@ -174,7 +174,7 @@ format_data.add_rating("mmorpg", 95)
 Obtain the final dataset.
 ```python
 # retrieves data in the format needed for input into the stateshaper engine.
-# this data is only for the initial dataset. after you run the engine once with this data, get the new master dataset from the RunEngine class and use it going forward. for more instructions, see the QUICK_START or README documentation. 
+# this data is only for the initial dataset. after you run the engine once with this data, get the new master dataset from the Stateshaper class and use it going forward. for more instructions, see the QUICK_START or README documentation. 
 
 format_data.get_data()
 ```

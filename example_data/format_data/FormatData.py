@@ -133,7 +133,6 @@ class FormatData:
 
     def add_rating(self, key, rating):
         row = [i for i in self.current_template["input"] if list(i.keys())[0] == key][0]
-        print(row)
         list(row.items())[0][1]["rating"] = rating
 
 
