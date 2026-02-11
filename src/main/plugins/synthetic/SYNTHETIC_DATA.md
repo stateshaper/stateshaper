@@ -47,7 +47,7 @@ stateshaper.run_engine()
 <br>
 <br>
 
-2. Create an instance of the *SyntheticData* class
+2. Create an instance of the *SyntheticData* class.
 
 <br>
 
@@ -116,8 +116,8 @@ value = get_value(equation=equation)
 # initializing a class for self driving car.
 self_driving = SelfDriving() 
 
-# set the map attributes based on the passed value and the newly created weight value
-self_driving.map_attributes(value, weight) 
+# set the map attributes based on the passed value.
+self_driving.map_attributes(value) 
 
 
 
@@ -180,9 +180,41 @@ def get_weather(value):
     # return the value
     # final value = .361
     return value
+```
+
+<br> 
+<br>
+Lets assume all of the attributes are created this way. These values can then be used in an ML Training scenario. To create new values, the token from the next step must be assigned as the new token, and the previous functions need to be called again. 
+<br>
+6. An example of how the created values can be used.
+<br>
 
 
+```python
+
+
+pass_test = run_test(attributes)
+
+def run_test(attributes):
+    # A map has been created using the attributes created above. The vehicle being used has the following characteristics:
+    vehicle_data = {
+        "speed": .76,
+        "acceleration": .82,
+        "weight": .45,
+        "torque": .8,
+        "efficiency": .24
+    }
+
+    test_results = []
+
+    # The map has other attributes for each mile we won't show. Here is an example of the vehicle running through the map. Each mile has variance data that slightly modifies the attribute list.
+    for mile in current_map:
+        current_attributes = [i * mile[i] for i in attributes]
+        test_results.append({"mile": current_map.index(mile), "data": test_data(vehicle_data, attributes_list)})
+
+    return test_results
+
+
+# This is a pseudocode function that compares attributes and looks for a point of failure. In real ML code, this would be more detailed, but the data that is used can also be created with Stateshaper.
+def test_data(data, attributes):
     
-
-
-
