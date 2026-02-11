@@ -129,7 +129,7 @@ export default function Home() {
 
 
   async function send_api(path) {
-    const res = await fetch(`https://localhost:8000/api/` + path, {
+    const res = await fetch(`http://localhost:8000/api/` + path, {
     // const res = await fetch(`https://stateshaper-qa-backend.vercel.app/api/` + path, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

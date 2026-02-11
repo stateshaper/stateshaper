@@ -7,13 +7,13 @@ class FintechQA:
         test = {
             "accounts_generated": self.random_number(token, 500, 1.25),          # number of ledger accounts created
             "transactions_executed": self.random_number(token, 10000),        # transfers, refunds, reversals
-            "starting_total": 0,                # e.g. 18250000.00
+            "starting_total": 0,                
             "transactions_list": self.transactions_list(token),
             
             # set in front end
             "ending_total": 0,                  # e.g. 18250000.00
             "net_drift": 0,                     # e.g. 0.00
-            "expected_drift": 0,          # invariant
+            "expected_drift": 0,                # invariant
             "assertion_result": "",
         }
 
