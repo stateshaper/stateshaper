@@ -51,7 +51,7 @@ class Stateshaper:
 
 
     def new_value(self, value):
-        return self.morph_logic(value) 
+        return int(self.morph_logic(value))
 
 
     def morph_logic(self, value):
