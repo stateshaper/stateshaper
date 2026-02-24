@@ -1,12 +1,23 @@
 import gzip
 import hashlib
+import math
 import multiprocessing as mp
 from itertools import permutations
+import sys
+from equations import Equation
+from stateshaper import RunEngine  # Import your specific class
+
+
 
 # --- WORKER: Math + Hashing ---
-def worker(order, max_constant, token_count, queue, seen_hashes):
-    from stateshaper import RunEngine  # Import your specific class
+def worker(order, max_constant, token_count, operations, queue, seen_hashes):
+    equation = Equation(repeat=operations)
     engine = RunEngine() 
+    engine.start_engine()
+    custom_equation = next(equation.generate_permutations(iteration=1))
+    # print(f"Constants values {order}, using equation: {engine.engine.custom_morph}")
+    # engine.run_engine(token_count=token_count)
+    # sys.exit()
 
     constants = {"a": 1, "b": 1, "c": 1, "d": 1}
     batch = []
@@ -15,8 +26,9 @@ def worker(order, max_constant, token_count, queue, seen_hashes):
         constants[key] = 1 
         while constants[key] < max_constant:
             engine.define_engine(constants=constants)
+            engine.set_equation(custom_equation)
             current_map = engine.run_engine(token_count=token_count)
-            
+            #print(f"\n\n\n\nGenerated map: \n\nMap {current_map} \n\nEquation: {engine.engine.custom_morph} \n\nConstants: {constants}")
             # 1. THE HASH TRICK: Convert map to a unique 16-byte binary fingerpint
             map_str = ",".join(map(str, current_map))
             # .digest() returns bytes (16 bytes for MD5), much smaller than hex strings
@@ -55,6 +67,8 @@ if __name__ == "__main__":
     MAX_C = 999999
     TOKENS = 128 
     FILE_NAME = "C:/Users/jdunn/Documents/data.sql.gz" 
+    ITERATIONS = 4
+    OPERATIONS = 2
     
     manager = mp.Manager()
     queue = manager.Queue(maxsize=500)
@@ -67,10 +81,13 @@ if __name__ == "__main__":
     print(f"Starting build on {mp.cpu_count()} cores using MD5 Hash Trick...")
     
     with mp.Pool(processes=mp.cpu_count()) as pool:
-        orders = list(permutations(["a", "b", "c", "d"]))
-        jobs = [pool.apply_async(worker, (o, MAX_C, TOKENS, queue, seen_hashes)) for o in orders]
-        for job in jobs:
-            job.get() 
+        for _ in range(math.factorial(ITERATIONS)):  
+            orders = list(permutations(["a", "b", "c", "d"]))
+            jobs = [pool.apply_async(worker, (o, MAX_C, TOKENS, OPERATIONS, queue, seen_hashes)) for o in orders]
+            for job in jobs:
+                job.get() 
+            print(f"Completed iteration with {OPERATIONS} operations. Unique maps so far: {len(seen_hashes)}")
+            OPERATIONS += 1
                 
     queue.put("DONE")
     writer_proc.join()

@@ -1,4 +1,5 @@
 import operator
+import sys
 
 class Stateshaper:
 
@@ -19,15 +20,6 @@ class Stateshaper:
 
         self.custom_morph = None
 
-        # self.original_operators = {
-        #     "+": operator.add,
-        #     "-": operator.sub,
-        #     "*": operator.mul,
-        #     "/": operator.truediv,
-        #     "**": operator.pow
-        # }
-
-
         self.operators = [
             operator.add,
             operator.sub,
@@ -38,13 +30,11 @@ class Stateshaper:
 
         self.operator_count = 5
 
-        self.custom_logic()
-
 
     def step(self): 
         self.morph_array()
         self.iteration += 1
-        return self.get_token() % 222
+        return self.get_token() % 2
 
 
     def reverse(self):
@@ -83,7 +73,10 @@ class Stateshaper:
         if not self.custom_morph:
             return (self.constants["d"] + (self.constants["c"] * round(self.constants["c"]/self.constants["a"])) * self.constants["b"] * self.iteration * value) % self.mod  
         else:
-            return (self.custom_morph  * value) % self.mod
+            # print(f"Using custom morph: {self.custom_morph}")
+            custom_value = self.custom_logic()
+            # print(f"Custom logic value: {custom_value}")
+            return (custom_value  * value) % self.mod
     
 
     def jump(self, index):
@@ -92,16 +85,18 @@ class Stateshaper:
 
 
     def custom_logic(self, iteration=1):
-        operators = [] 
-        while len(operators) < self.operator_count:
-            operators.append(self.operators[(self.iteration_value(iteration, len(operators)+1) + self.iteration_value(iteration * iteration, len(operators)+1)) % len(self.operators)])
+        operators = []
+        if self.custom_morph:
+            operators = self.custom_morph
+        else:
+            while len(operators) < self.operator_count:
+                operators.append(self.operators[(self.iteration_value(iteration, len(operators)+1) + self.iteration_value(iteration * iteration, len(operators)+1)) % len(self.operators)])
         
-        self.custom_morph = sum([i(self.constants["a"], self.constants["c"]) if operators.index(i) % 3 * iteration == 0 else i(self.constants["d"], self.constants["b"]) if operators.index(i) % 5 * iteration == 0 else i(self.constants["c"], self.constants["a"]) for i in operators])
+        value = sum([i(self.constants["a"], self.constants["c"]) if operators.index(i) % 3 * iteration == 0 else i(self.constants["d"], self.constants["b"]) if operators.index(i) % 5 * iteration == 0 else i(self.constants["c"], self.constants["a"]) for i in operators])
 
-        return self.custom_morph
+        return value 
           
 
     def iteration_value(self, iteration, i):
         return list(self.constants.values())[(i + iteration) % len(list(self.constants.values()))] * i * iteration + i if iteration % 3 + iteration == 0 else list(self.constants.values())[(i * i * iteration * iteration) % len(list(self.constants.values()))] + i * i * iteration * iteration if iteration % 5 + i == 0 else list(self.constants.values())[(i + i * i + iteration) % len(list(self.constants.values()))] ** i + i * i + iteration
     
-Stateshaper()

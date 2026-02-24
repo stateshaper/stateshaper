@@ -1,7 +1,8 @@
 import itertools
 import operator
+import sys
 
-class MorphStreamer:
+class Equation:
     def __init__(self, constants={"a": 1, "b": 1, "c": 1, "d": 1}, repeat=2):
         self.constants = constants
         self.repeat = repeat
@@ -24,24 +25,31 @@ class MorphStreamer:
                 else:
                     v1, v2 = self.constants["c"], self.constants["a"]
                 
-                results_list.append(op(v1, v2))
+                results_list.append(op)
                 equation_parts.append(f"({v1}{self.symbols[op]}{v2})")
 
+            # print("current equation parts:", equation_parts)
+            # print(results_list)
+            # print(op)
+            # sys.exit()
+
+            yield results_list
+
             # Combine the 5 parts into a single sum
-            final_sum = sum(results_list)
-            equation_str = " + ".join(equation_parts)
+            # final_sum = sum(results_list)
+            # equation_str = " + ".join(equation_parts)
             
-            yield f"{equation_str} = {final_sum}"
+            # yield f"{equation_str} = {final_sum}"
         
-        self.repeat += 1  # Increment repeat for the next call to generate more complex equations
+        # self.repeat += 1  # Increment repeat for the next call to generate more complex equations
 
 
 # --- Usage ---
-# streamer = MorphStreamer()
+# equation = Equation()
 
 # use in loop for all constants permutations
-# perm_gen = streamer.generate_permutations(iteration=1)
-# perm_gen = streamer.generate_permutations(iteration=2)
+# perm_gen = equation.generate_permutations(iteration=1)
+# perm_gen = equation.generate_permutations(iteration=2)
 
 
 

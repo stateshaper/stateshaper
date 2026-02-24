@@ -60,3 +60,7 @@ class RunEngine:
         print("============================================")
         print(self.tokens)
         return self.tokens
+    
+
+    def set_equation(self, equation):
+        self.engine.custom_morph = equation
