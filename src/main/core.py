@@ -15,11 +15,14 @@ class Stateshaper:
         self.prior_index = 0
         self.token_array = []
 
+        self.current_value = 11
+        self.custom_morph = (self.constants["a"] ** (self.constants["c"] * self.constants["d"] + self.constants["a"])) * self.iteration 
+
 
     def step(self): 
         self.morph_array()
         self.iteration += 1
-        return self.get_token() 
+        return self.get_token() % 222
 
 
     def reverse(self):
@@ -51,13 +54,20 @@ class Stateshaper:
 
 
     def new_value(self, value):
-        return int(self.morph_logic(value))
+        return int(self.morph_logic(value)) 
 
 
     def morph_logic(self, value):
-        return (self.constants["d"] + round((self.constants["c"] * self.constants["c"])/self.constants["a"]) * self.constants["b"] * self.iteration * value) % self.mod
+        if not self.custom_morph:
+            return (self.constants["d"] + (self.constants["c"] * round(self.constants["c"]/self.constants["a"])) * self.constants["b"] * self.iteration * value) % self.mod  
+        else:
+            return (self.custom_morph  * value) % self.mod
     
 
     def jump(self, index):
         tokens = [self.step() for _ in range(index)]
         return tokens[len(tokens)-1]
+
+
+
+    

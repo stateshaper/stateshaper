@@ -24,9 +24,9 @@ class RunEngine:
 
     def run_engine(self, token_count=10):
         self.tokens = self.engine.generate_tokens(token_count)
-        print("\n\nTokens successfully generated from vocab.")
-        print("============================================")
-        print(self.tokens)
+        # print("\n\nTokens successfully generated from vocab.")
+        # print("============================================")
+        # print(self.tokens)
         return self.tokens
     
 
