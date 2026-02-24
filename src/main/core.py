@@ -101,7 +101,6 @@ class Stateshaper:
         return self.custom_morph
           
 
-
     def iteration_value(self, iteration, i):
         return list(self.constants.values())[(i + iteration) % len(list(self.constants.values()))] * i * iteration + i if iteration % 3 + iteration == 0 else list(self.constants.values())[(i * i * iteration * iteration) % len(list(self.constants.values()))] + i * i * iteration * iteration if iteration % 5 + i == 0 else list(self.constants.values())[(i + i * i + iteration) % len(list(self.constants.values()))] ** i + i * i + iteration
     
