@@ -1,3 +1,5 @@
+import operator
+
 class Stateshaper:
 
     def __init__(self, initial_state=1, constants={"a": 3, "b": 5, "c": 7, "d": 11}, mod=9973):
@@ -15,8 +17,28 @@ class Stateshaper:
         self.prior_index = 0
         self.token_array = []
 
-        self.current_value = 11
-        self.custom_morph = (self.constants["a"] ** (self.constants["c"] * self.constants["d"] + self.constants["a"])) * self.iteration 
+        self.custom_morph = None
+
+        # self.original_operators = {
+        #     "+": operator.add,
+        #     "-": operator.sub,
+        #     "*": operator.mul,
+        #     "/": operator.truediv,
+        #     "**": operator.pow
+        # }
+
+
+        self.operators = [
+            operator.add,
+            operator.sub,
+            operator.mul,
+            operator.floordiv,
+            operator.pow
+        ]
+
+        self.operator_count = 5
+
+        self.custom_logic()
 
 
     def step(self): 
@@ -69,5 +91,18 @@ class Stateshaper:
         return tokens[len(tokens)-1]
 
 
+    def custom_logic(self, iteration=1):
+        operators = [] 
+        while len(operators) < self.operator_count:
+            operators.append(self.operators[(self.iteration_value(iteration, len(operators)+1) + self.iteration_value(iteration * iteration, len(operators)+1)) % len(self.operators)])
+        
+        self.custom_morph = sum([i(self.constants["a"], self.constants["c"]) if operators.index(i) % 3 * iteration == 0 else i(self.constants["d"], self.constants["b"]) if operators.index(i) % 5 * iteration == 0 else i(self.constants["c"], self.constants["a"]) for i in operators])
 
+        return self.custom_morph
+          
+
+
+    def iteration_value(self, iteration, i):
+        return list(self.constants.values())[(i + iteration) % len(list(self.constants.values()))] * i * iteration + i if iteration % 3 + iteration == 0 else list(self.constants.values())[(i * i * iteration * iteration) % len(list(self.constants.values()))] + i * i * iteration * iteration if iteration % 5 + i == 0 else list(self.constants.values())[(i + i * i + iteration) % len(list(self.constants.values()))] ** i + i * i + iteration
     
+Stateshaper()
