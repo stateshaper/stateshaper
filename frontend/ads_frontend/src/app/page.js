@@ -149,7 +149,7 @@ export default function Home() {
 
  
       
-      <div className="grid grid-rows-1 place-items-center text-3xl mt-8 text-gray-200 font-bold w-full">
+      <div className="grid grid-rows-1 place-items-center text-3xl mt-8 text-gray-200 font-bold">
         <div>
           Stateshaper Ads Demo
         </div>   
@@ -300,14 +300,14 @@ export default function Home() {
         EXAMPLE ONLY
       </div>
       {ShowCode ?
-        <div className="text-white p-4 py-5 fixed bottom-10 right-168 w-112 h-24 rounded-lg bg-blue-600">
+        <div className="text-white p-4 py-3 fixed bottom-10 right-168 w-112 h-18 rounded-lg bg-blue-600">
         <div className="text-sm">
-          <span className="font-bold">Frontend:</span> <a className="cursor-pointer hover:text-gray-300 hover:italic" href="https://www.github.com/jgddesigns/stateshaper/tree/graphics_demo" target="_blank">https://www.github.com/jgddesigns/stateshaper/tree/graphics_demo</a>
+          <span className="font-bold">Frontend:</span> <a className="cursor-pointer hover:text-gray-300 hover:italic" href="https://www.github.com/jgddesigns/stateshaper/tree/ads_demo" target="_blank">https://www.github.com/jgddesigns/stateshaper/tree/ads_demo</a>
         </div>
         </div>
       : null}
       {ShowExample ?
-        <div className="text-white p-4 fixed bottom-10 right-72 w-88 h-24 rounded-lg bg-blue-600">
+        <div className="text-white px-4 py-3 fixed bottom-10 right-72 w-88 h-18 rounded-lg bg-blue-600">
         <div className="text-sm font-bold">
           Sample app, real logic. 
         </div>
