@@ -352,7 +352,7 @@ export default function Home() {
             </div>
 
             {/* edit: keep this panel visible when scaled + prevent clipping */}
-            <div className="grid grid-rows-2 grid-cols-1 gap-8 w-full max-w-xl min-h-32 static mt-8 bold text-gray-700 p-4 rounded bg-gray-200 overflow-auto break-all">
+            <div className="grid grid-rows-2 grid-cols-1 gap-8 w-full max-w-xl h-32 static mt-8 bold text-gray-700 p-4 rounded bg-gray-200 overflow-auto break-all">
               <code>{SeedText ? SeedText[0] : ""}</code>
               <code className="mt-3">{SeedText ? SeedText[1] : ""}</code>
             </div>
