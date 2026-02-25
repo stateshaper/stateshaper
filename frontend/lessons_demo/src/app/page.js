@@ -106,7 +106,7 @@ export default function Home() {
 
 
   async function send_api(path) {
-    const res = await fetch(`https://stateshaper-lessons-backend.vercel.app/api/` + path, {
+    const res = await fetch(`https://stateshaper-study-backend.vercel.app/api/` + path, {
     // const res = await fetch("http://localhost:8000/api/" + path, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -161,7 +161,15 @@ export default function Home() {
   }
 
   return (
-    
+ <div className="dark:bg-black min-h-screen bg-[#02082c] overflow-hidden">
+  <div
+    style={{
+      transform: "scale(0.75)",
+      transformOrigin: "center top",
+      width: "100%",
+      minHeight: "100%",
+    }}
+  >
     <div className="flex grid grid-auto-rows dark:bg-black h-screen min-h-screen fixed bg-[#02082c]">
       <style>
         {`
@@ -181,141 +189,203 @@ export default function Home() {
           }
         `}
       </style>
+
       <div className="grid grid-rows-1 place-items-center text-3xl mt-8 text-gray-200 font-bold">
-        <div>
-          Stateshaper Personal Lesson Plans Demo
-        </div>   
+        <div>Stateshaper Personal Lesson Plans Demo</div>
       </div>
+
       <div className="grid grid-cols-2 grid-rows-2 place-items-center h-4/5 mt-32 text-gray-200">
         <div className="grid gap-8 h-full static place-items-center">
           <div className="grid grid-rows-1 grid-cols-3 w-128 text-gray-200 text-xl cursor-pointer place-items-center">
-            <a className={ShowInterests ? "font-bold text-2xl" : ""} onClick={()=>show_content("interests")}>Current Quiz</a>
-            <a className={ShowRatings ? "font-bold text-2xl" : ""} onClick={()=>show_content("ratings")}>Ratings</a>
-            <a className={ShowAbout ? "font-bold text-2xl" : ""} onClick={()=>show_content("about")}>About</a>
+            <a className={ShowInterests ? "font-bold text-2xl" : ""} onClick={() => show_content("interests")}>
+              Current Quiz
+            </a>
+            <a className={ShowRatings ? "font-bold text-2xl" : ""} onClick={() => show_content("ratings")}>
+              Ratings
+            </a>
+            <a className={ShowAbout ? "font-bold text-2xl" : ""} onClick={() => show_content("about")}>
+              About
+            </a>
           </div>
-          {ShowInterests ?
-          <div className="grid w-full h-140 place-items-center overflow-y-auto mt-20 p-4 dot-scrollbar" style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
-            <div className="grid grid-auto-rows mt-4 gap-12 mt-8 text-xl">
-              {Attributes && !InBetween ? Attributes.map(item => (
-                <div key={Attributes.indexOf(item)} className="grid grid-rows-2 grid-cols-1">
-                  <div>{item["question"]}</div>
-                  <div className="grid grid-cols-2 grid-rows-1 w-1/2 gap-4 ml-[15%] mt-2">
-                    <div id={Attributes.indexOf(item) + "_true"} className="w-22 h-8 bg-green-400 rounded text-white text-xl px-5 cursor-pointer" onClick={e=> process_answer(item, true, e.target.id)}>True</div>
-                    <div id={Attributes.indexOf(item) + "_false"} className="w-22 h-8 bg-red-400 rounded text-white text-xl px-5 cursor-pointer" onClick={e=> process_answer(item, false, e.target.id)}>False</div>
-                  </div> 
-                </div>
-              ))
-              : <div className="text-white text-3xl flex justify-center">
-                  <span>{Score ? Score : null}</span>
-                </div>
-              }
-              {!InBetween ? 
-                <div className="grid grid-rows-2 grid-cols-1 gap-6">
-                  <div className="w-22 h-8 bg-blue-400 rounded text-white text-xl flex justify-center cursor-pointer static bottom-2 ml-auto" onClick={e=> process_finish()}>Finish</div>
-                  {SubmitError? 
-                    <div className="text-red-400 italic">
-                      Not all questions have been answered.
+
+          {ShowInterests ? (
+            <div
+              className="grid w-full h-140 place-items-center overflow-y-auto mt-20 p-4 dot-scrollbar"
+              style={{ scrollbarWidth: "thin", scrollbarColor: "gray transparent" }}
+            >
+              <div className="grid grid-auto-rows mt-4 gap-12 mt-8 text-xl">
+                {Attributes && !InBetween ? (
+                  Attributes.map((item) => (
+                    <div key={Attributes.indexOf(item)} className="grid grid-rows-2 grid-cols-1">
+                      <div>{item["question"]}</div>
+                      <div className="grid grid-cols-2 grid-rows-1 w-1/2 gap-4 ml-[15%] mt-2">
+                        <div
+                          id={Attributes.indexOf(item) + "_true"}
+                          className="w-22 h-8 bg-green-400 rounded text-white text-xl px-5 cursor-pointer"
+                          onClick={(e) => process_answer(item, true, e.target.id)}
+                        >
+                          True
+                        </div>
+                        <div
+                          id={Attributes.indexOf(item) + "_false"}
+                          className="w-22 h-8 bg-red-400 rounded text-white text-xl px-5 cursor-pointer"
+                          onClick={(e) => process_answer(item, false, e.target.id)}
+                        >
+                          False
+                        </div>
+                      </div>
                     </div>
+                  ))
+                ) : (
+                  <div className="text-white text-3xl flex justify-center">
+                    <span>{Score ? Score : null}</span>
+                  </div>
+                )}
+
+                {!InBetween ? (
+                  <div className="grid grid-rows-2 grid-cols-1 gap-6">
+                    <div
+                      className="w-22 h-8 bg-blue-400 rounded text-white text-xl flex justify-center cursor-pointer static bottom-2 ml-auto"
+                      onClick={(e) => process_finish()}
+                    >
+                      Finish
+                    </div>
+                    {SubmitError ? (
+                      <div className="text-red-400 italic">Not all questions have been answered.</div>
+                    ) : null}
+                  </div>
+                ) : (
+                  <div
+                    className="w-22 h-8 bg-blue-400 rounded text-white text-xl flex justify-center cursor-pointer static ml-6"
+                    onClick={(e) => after_finish()}
+                  >
+                    Proceed
+                  </div>
+                )}
+              </div>
+            </div>
+          ) : ShowRatings ? (
+            <div
+              className="grid place-items-center h-140 mt-20 grid-cols-1 grid-auto-rows w-full gap-4 overflow-y-auto dot-scrollbar p-4 text-lg"
+              style={{ scrollbarWidth: "thin", scrollbarColor: "gray transparent" }}
+            >
+              <div className="italic">The quiz questions are derived from these attributes.</div>
+              <div className="italic">Attributes change based on performance.</div>
+              <div className="grid grid-auto-rows mt-4 gap-12 mt-12 text-xl">
+                {Ratings
+                  ? Ratings.map((item) => (
+                      <div key={Ratings.indexOf(item)} className="grid grid-rows-1 grid-cols-2 gap-18">
+                        <li>{item["attribute"]}</li>
+                        <span>{item["rating"]}</span>
+                      </div>
+                    ))
                   : null}
-                </div>
-              : 
-                <div className="w-22 h-8 bg-blue-400 rounded text-white text-xl flex justify-center cursor-pointer static ml-6" onClick={e=> after_finish()}>Proceed</div>       
-              }
+              </div>
             </div>
-          </div> : ShowRatings ?
-          <div className="grid place-items-center h-140 mt-20 grid-cols-1 grid-auto-rows w-full gap-4 overflow-y-auto dot-scrollbar p-4 text-lg" style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
-            <div className="italic">The quiz questions are derived from these attributes.</div>
-            <div className="italic"> Attributes change based on performance.</div>
-            <div className="grid grid-auto-rows mt-4 gap-12 mt-12 text-xl">
-              {Ratings ? Ratings.map(item => (
-                <div key={Ratings.indexOf(item)} className="grid grid-rows-1 grid-cols-2 gap-18">
-                  <li>{item["attribute"]}</li>
-                  <span>{item["rating"]}</span>
-                </div>
-              ))
-              : null}
+          ) : (
+            <div
+              className="grid place-items-center h-140 mt-20 grid-cols-1 grid-auto-rows w-3/5 gap-6 overflow-y-auto dot-scrollbar p-6 text-lg"
+              style={{ scrollbarWidth: "thin", scrollbarColor: "gray transparent" }}
+            >
+              <div>
+                This <i>Stateshaper</i> demo shows how an entire user profile can be condensed into a 50-125 byte seed. Here we'll
+                use an example of a student's personalized lesson plan from a biology class. The example uses sets of 10 study
+                questions from a bank of 100 possible choices.
+              </div>
+              <div>
+                When a student shows aptitude in a certain areas, those type of questions are phased out of the question set over
+                time. If a student struggles in a particular area, more of those questions will be added over time based on
+                preferences derived from ratings. Additionally, the student's all-time performance can also be compressed into a
+                similar size and reviewed at any time.
+              </div>
+              <div>
+                This consumes very little computational resources and the installed package size is less than 1MB. All that is
+                needed besides the main package is an app-specific plugin that can be tailored to the desired output. Stateshaper
+                plugins are intended to take data (such as the ratings and ad images seen here), and compress it according to
+                developer needs. Along the way, attributes can be adjusted based on variables such as user input or time of the year.
+              </div>
+              <div>
+                Actual data storage size is cut all the way down to the Stateshaper seed formats shown on to the right. This can
+                often account for over 90% reduction in space used, and also allows for privacy through obfuscation.
+              </div>
+              <div>Other uses can include, but are not limited to smart home scheduling, gaming npc behavior, fintech market data QA, ML training, and store inventories.</div>
             </div>
-          </div>
-          :
-          <div className="grid place-items-center h-140 mt-20 grid-cols-1 grid-auto-rows w-3/5 gap-6 overflow-y-auto dot-scrollbar p-6 text-lg" style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
-            <div>
-              This <i>Stateshaper</i> demo shows how an entire user profile can be condensed into a 50-125 byte seed. Here we'll use an example of a student's personalized lesson plan from a biology class. The example uses sets of 10 study questions from a bank of 100 possible choices. 
-            </div>
-            <div>  
-              When a student shows aptitude in a certain areas, those type of questions are phased out of the question set over time. If a student struggles in a particular area, more of those questions will be added over time based on preferences derived from ratings. Additionally, the student's all-time performance can also be compressed into a similar size and reviewed at any time. 
-            </div>
-            <div>
-              This consumes very little computational resources and the installed package size is less than 1MB. All that is needed besides the main package is an app-specific plugin that can be tailored to the desired output. Stateshaper plugins are intended to take data (such as the ratings and ad images seen here), and compress it according to developer needs. Along the way, attributes can be adjusted based on variables such as user input or time of the year.
-            </div>
-            <div>
-              Actual data storage size is cut all the way down to the Stateshaper seed formats shown on to the right. This can often account for over 90% reduction in space used, and also allows for privacy through obfuscation. 
-            </div>
-            <div>
-              Other uses can include, but are not limited to smart home scheduling, gaming npc behavior, fintech market data QA, ML training, and store inventories. 
-            </div>
-          </div>
-        }
+          )}
         </div>
 
         <div className="grid w-3/4 place-items-center h-full static">
           <div className="grid grid-auto-rows mt-12">
-            <div className="text-bold text-lg">
-              Seed State Format
-            </div>
+            <div className="text-bold text-lg">Seed State Format</div>
             <div className="italic mt-4">
-              Once a profile is created, the student profile and study plan is compressed into Seed State format. The quiz questions adjust over time based on the student's answers. 
+              Once a profile is created, the student profile and study plan is compressed into Seed State format. The quiz questions
+              adjust over time based on the student's answers.
             </div>
+
             <div className="grid grid-rows-1 grid-cols-4 place-items-center cursor-pointer text-gray-200 mt-8">
               <a id="0" className={LinkText} onClick={(e) => seed_text(e.target.id)}>
                 Full State
               </a>
-              <a id="1" className="hover:font-bold hover:text-gray-300 cursor-pointer" onMouseOver={(e) => seed_text(e.target.id)} onMouseOut={(e) => seed_text("0")}>
+              <a
+                id="1"
+                className="hover:font-bold hover:text-gray-300 cursor-pointer"
+                onMouseOver={(e) => seed_text(e.target.id)}
+                onMouseOut={(e) => seed_text("0")}
+              >
                 Short State
               </a>
-              <a id="2" className="hover:font-bold hover:text-gray-300 cursor-pointer" onMouseOver={(e) => seed_text(e.target.id)} onMouseOut={(e) => seed_text("0")}>
+              <a
+                id="2"
+                className="hover:font-bold hover:text-gray-300 cursor-pointer"
+                onMouseOver={(e) => seed_text(e.target.id)}
+                onMouseOut={(e) => seed_text("0")}
+              >
                 Tiny State
               </a>
-              <a id="3" className="hover:font-bold hover:text-gray-300 cursor-pointer" onMouseOver={(e) => seed_text(e.target.id)} onMouseOut={(e) => seed_text("0")}>
+              <a
+                id="3"
+                className="hover:font-bold hover:text-gray-300 cursor-pointer"
+                onMouseOver={(e) => seed_text(e.target.id)}
+                onMouseOut={(e) => seed_text("0")}
+              >
                 Raw State
               </a>
             </div>
-            <div className="grid grid-rows-2 grid-cols-1 gap-8 w-3/4 h-32 min-h-32 static mt-8 bold text-gray-700 p-4 rounded bg-gray-200">
-              <code>
-                {SeedText ? SeedText[0] : ""}
-              </code>
-              <code className="mt-3">
-                {SeedText ? SeedText[1] : ""}
-              </code>
-            </div>
-            <div className="italic mt-8">
-              The above strings are all that is needed to generate a student's profile. For sensitive data, some values can be stored in environment variables. 
-            </div>
-            <div className="italic mt-8">
-              For other applications, a plugin file is required to coordinate Stateshaper output with the app's frontend and backend logic. Some plugins will be released along with the package. Custom plugins can also be written. 
-            </div>
-          </div>
 
+            {/* edit: keep this panel visible when scaled + prevent clipping */}
+            <div className="grid grid-rows-2 grid-cols-1 gap-8 w-full max-w-xl min-h-32 static mt-8 bold text-gray-700 p-4 rounded bg-gray-200 overflow-auto break-all">
+              <code>{SeedText ? SeedText[0] : ""}</code>
+              <code className="mt-3">{SeedText ? SeedText[1] : ""}</code>
+            </div>
+
+            <div className="italic mt-8">The above strings are all that is needed to generate a student's profile. For sensitive data, some values can be stored in environment variables.</div>
+            <div className="italic mt-8">For other applications, a plugin file is required to coordinate Stateshaper output with the app's frontend and backend logic. Some plugins will be released along with the package. Custom plugins can also be written.</div>
+          </div>
         </div>
       </div>
-      <div className={!ShowCode ? "text-white text-2xl hover:font-bold bottom-6 right-192 ml-auto absolute hover:text-gray-300 cursor-pointer" : "text-2xl font-bold bottom-6 right-192 ml-auto absolute text-gray-300 cursor-pointer"} onMouseEnter={e=>setShowCode(true)} onClick={e=>setShowCode(false)}>
+    </div>
+
+    {/* edit: if you have any fixed/absolute corner labels/tooltips, they MUST live OUTSIDE the scaled wrapper */}
+  </div>
+
+      <div className={!ShowCode ? "text-white text-lg hover:font-bold fixed bottom-2 right-148 hover:text-gray-300 cursor-pointer" : "text-xl font-bold fixed bottom-2 right-148 text-gray-300 cursor-pointer"} onMouseEnter={e=>setShowCode(true)} onClick={e=>setShowCode(false)}>
         CODE
       </div>
-      <div className="text-white text-2xl hover:font-bold bottom-6 right-12 ml-auto absolute hover:text-gray-300 cursor-pointer" onMouseEnter={e=>setShowExample(true)} onMouseLeave={e=>setShowExample(false)}>
+      <div className="text-white text-lg hover:text-xl hover:font-bold fixed bottom-2 right-56 hover:text-gray-300 cursor-pointer" onMouseEnter={e=>setShowExample(true)} onMouseLeave={e=>setShowExample(false)}>
         EXAMPLE ONLY
       </div>
       {ShowCode ?
-        <div className="text-white p-4 py-5 bottom-18 right-192 ml-auto absolute w-128 h-24 rounded-lg bg-blue-600">
-        <div className="text-md ">
-          <span className="font-bold">Frontend:</span> <a className="cursor-pointer hover:text-gray-300 hover:italic" href="https://www.github.com/jgddesigns/stateshaper/tree/lessons_demo" target="_blank">https://www.github.com/jgddesigns/stateshaper/tree/lessons_demo</a>
+        <div className="text-white p-4 py-4 fixed bottom-10 right-148 w-112 h-18 rounded-lg bg-blue-600">
+        <div className="text-sm">
+          <span className="font-bold">Frontend:</span> <a className="cursor-pointer hover:text-gray-300 hover:italic" href="https://www.github.com/jgddesigns/stateshaper/tree/graphics_demo" target="_blank">https://www.github.com/jgddesigns/stateshaper/tree/graphics_demo</a>
         </div>
         </div>
       : null}
       {ShowExample ?
-        <div className="text-white p-4 bottom-18 right-12 ml-auto absolute w-128 h-24 rounded-lg bg-blue-600">
-        <div className="text-lg font-bold">
+        <div className="text-white px-4 py-3 fixed bottom-10 right-56 w-88 h-18 rounded-lg bg-blue-600">
+        <div className="text-sm font-bold">
           Sample app, real logic. 
         </div>
-        <div className="text-md mt-2">
+        <div className="text-sm mt-2">
           Intended to showcase the tool's capabilities.
         </div>
         </div>
