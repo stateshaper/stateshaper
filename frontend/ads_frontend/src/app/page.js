@@ -276,11 +276,11 @@ export default function Home() {
               </a>
             </div>
 
-            <div className="grid grid-rows-2 grid-cols-1 gap-6 w-full max-w-xl min-h-[8rem] mt-8 text-gray-700 p-4 rounded bg-gray-200 overflow-auto break-all">
+            <div className="grid grid-rows-2 grid-cols-1 gap-6 w-full max-w-xl h-[10rem] mt-8 text-sm text-gray-700 p-4 rounded bg-gray-200 overflow-auto break-all">
               <code>
                 {SeedText ? SeedText[0] : ""}
               </code>
-              <code className="mt-3">
+              <code className="mt-8">
                 {SeedText ? SeedText[1] : ""}
               </code>
             </div>
@@ -293,21 +293,21 @@ export default function Home() {
       </div>
 
 </div></div>
-      <div className={!ShowCode ? "text-white text-lg hover:font-bold fixed bottom-6 right-168 hover:text-gray-300 cursor-pointer" : "text-xl font-bold fixed bottom-6 right-168 text-gray-300 cursor-pointer"} onMouseEnter={e=>setShowCode(true)} onClick={e=>setShowCode(false)}>
+      <div className={!ShowCode ? "text-white text-lg hover:font-bold fixed bottom-2 right-168 hover:text-gray-300 cursor-pointer" : "text-xl font-bold fixed bottom-2 right-168 text-gray-300 cursor-pointer"} onMouseEnter={e=>setShowCode(true)} onClick={e=>setShowCode(false)}>
         CODE
       </div>
-      <div className="text-white text-lg hover:text-xl hover:font-bold fixed bottom-6 right-72 hover:text-gray-300 cursor-pointer" onMouseEnter={e=>setShowExample(true)} onMouseLeave={e=>setShowExample(false)}>
+      <div className="text-white text-lg hover:text-xl hover:font-bold fixed bottom-2 right-72 hover:text-gray-300 cursor-pointer" onMouseEnter={e=>setShowExample(true)} onMouseLeave={e=>setShowExample(false)}>
         EXAMPLE ONLY
       </div>
       {ShowCode ?
-        <div className="text-white p-4 py-5 fixed bottom-14 right-168 w-112 h-24 rounded-lg bg-blue-600">
+        <div className="text-white p-4 py-5 fixed bottom-10 right-168 w-112 h-24 rounded-lg bg-blue-600">
         <div className="text-sm">
           <span className="font-bold">Frontend:</span> <a className="cursor-pointer hover:text-gray-300 hover:italic" href="https://www.github.com/jgddesigns/stateshaper/tree/graphics_demo" target="_blank">https://www.github.com/jgddesigns/stateshaper/tree/graphics_demo</a>
         </div>
         </div>
       : null}
       {ShowExample ?
-        <div className="text-white p-4 fixed bottom-14 right-72 w-88 h-24 rounded-lg bg-blue-600">
+        <div className="text-white p-4 fixed bottom-10 right-72 w-88 h-24 rounded-lg bg-blue-600">
         <div className="text-sm font-bold">
           Sample app, real logic. 
         </div>
