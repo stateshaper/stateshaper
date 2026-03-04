@@ -477,17 +477,16 @@ stateshaper/
 |              └── graphics/
 |                    ├── Graphics.py
 |                    ├── GRAPHICS.md
-|              └── inventory/
-|                    ├── coming soon
 |              └── lesson_plan/
 |                    ├── lessons_list.py
 |                    ├── LessonPlan.py
-|              └── meal_plan/
-|                    ├── coming soon
 |              └── ml_training/
-|                    ├── coming soon
-|              └── smart_home/
-|                    ├── coming soon
+|                    └── data/
+|                       ├── environments.py
+|                       ├── vehicles.py
+|                    ├── BuildEnvironment.py
+|                    ├── MachineLearning.py
+|                    ├── TripTimeline.py
 |              ├── DEMOS.md
 |        └── plugins/
 |              └── compression/
@@ -513,6 +512,8 @@ stateshaper/
 |              ├── TESTS.md
 |              ├── Tests.py
 |        └── tools/
+|              └── compress_json/
+|                 ├── CompressJson.py
 |              └── derive_vocab/
 |                 ├── DeriveVocab.py
 |                 ├── DERIVE_VOCAB.md
@@ -524,6 +525,8 @@ stateshaper/
 │       ├── stateshaper.py
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
+├── CHANGELOG.md
+├── flowchart.png
 ├── LICENSE
 ├── pyproject.toml
 ├── QUICK_START.md
