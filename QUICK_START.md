@@ -7,13 +7,20 @@ For continuous use, the engine can be called in a loop using the *run_engine* fu
 
 To create the same output again, *start_engine* needs to be called once more.
 
+<br> <br>
 
-1. Make sure your data is in one of the formats listed in the *"example_data"* directory. If needed, use the *FormatData* class in the nested *'format_data'* directory.
+<h3><b><u>Steps<br>
+--------
+</b></h3> 
+
+
+1\. Make sure your data is in one of the formats listed in the *"example_data"* directory. If needed, use the *FormatData* class in the nested *'format_data'* directory.
 
 Instructions: [`Formatting Data for Input`](example_data/format_data/FORMAT_DATA.md)
 
+<br> 
 
-2. Initialize a *RunEngine* class 
+2\. Initialize a *RunEngine* class 
 
 
 **IMPORTANT!**
@@ -49,8 +56,9 @@ engine.get_seed()
 engine.get_seed(vocab=True)
 ```
 
+<br>
 
-3. Call the *run_engine* method.
+3\. Call the *run_engine* method.
 
 ```python
 engine.run_engine()
@@ -60,8 +68,9 @@ engine.run_engine()
 # ["your", "input", "values", "are", "returned", "based", "on", "chosen", "stateshaper", "rules"]
 ```
 
+<br>
 
-4. OPTIONAL Call the *rebuild* method or re-instantiate the class to start from the beginning.
+4\. OPTIONAL Call the *rebuild* method or re-instantiate the class to start from the beginning.
 
 ```python
 engine.rebuild()
