@@ -1,7 +1,7 @@
 # *QUICK START GUIDE*
 
 
-The Stateshaper Engine will give you a list/array of deterministic events or variables to use in your logic. 
+The Stateshaper Engine will give you a list/array of deterministic numbers to tokenize for use to call events or define variables in your logic. 
 
 For continuous use, the engine can be called in a loop using the *run_engine* function. For one time, call it once with a specific *token_count* parameter.
 
