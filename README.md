@@ -3,24 +3,19 @@
 **Compress data and generate content using small seeds.**
 
 
-The origin of this idea started with the 'Infinite Map Concept' I created in early 2025. The core logic starts with the idea of using a static length array of numbers which has values that change based on a mathematic function. The function uses a modulus operator to keep the array within a fixed range of values. Because of this, continuing to run the engine will produce an unbound chain of deterministic output. 
-<br> <br> 
-![Alt text](https://github.com/jgddesigns/stateshaper/blob/main/flowchart.png)
-<br> <br> 
-This idea was improved upon, and has become *Stateshaper*.
+*Stateshaper* is a Python project that helps tokenize an infinite array of memorized numbers. The numbers can be re-created from only a few bytes and used along with mapping rules that can be specific for each use. It implements an algorithm that shares similarites with PRNGs (Pseudo-random Number Generator) and LCGs (Linear Congruential Generator). 
 
-The primary benefits of *Stateshaper* are compression, enhanced privacy, and memorization. 
+The primary benefit of the package is that it allows for a reduction in an application's storage size. This in turn saves database costs, including those related to size, bandwidth and energy. This can amount to a savings of over 90% in many cases. It is most efficient when used for programs featuring content generation, personalization, synthetic data and procedural generation. 
 
-As far as compression is concerned, using this tool can reduce data sizes by over 90%. This saves money on both database storage and bandwidth. This is because large amounts of memorized data can be generated from the small, JSON-formatted seed the engine produces during its initial run. 
+*Stateshaper* can also be used securely. If desired, the data created from the starting seed can't be extracted without knowing its specific parameters. For example, in web applications the values can be stored in environment variables the same way that access keys can.
 
-Compressing this data also allows for privacy, where the data contained in a seed it can't be extracted without knowing specific seed parameters. For applications, this can be stored in environment variables the same way that access keys can.
 
 <br> <br> 
 
 Recommended Uses Include:
 
 - Content Feeds
-- Routine Planner
+- ML Training
 - Personalized Suggestions
 - QA Stress Testing
 - Procedural World Generation
@@ -29,11 +24,7 @@ Recommended Uses Include:
 
 This repository contains code written in Python, with other langauges scheduled to be available soon. 
 
-Tests have been created to demonstrate *Stateshaper* engine functionality.
-
-These can be found in the src/main/tests directory.
-
-Additonally, two demonstrations are live online:
+Multiple demonstrations are currently live online:
 
 <br> 
 
