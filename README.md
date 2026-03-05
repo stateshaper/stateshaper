@@ -3,11 +3,11 @@
 **Compress data and generate content using small seeds.**
 
 
-*Stateshaper* is a Python project that helps tokenize an infinite array of memorized numbers. The numbers can be re-created from only a few bytes and used along with mapping rules that can be specific for each use. It implements an algorithm that shares similarites with PRNGs (Pseudo-random Number Generator) and LCGs (Linear Congruential Generator). 
+*Stateshaper* is a Python project that assist in tokenizing an infinite array of memorized numbers. The tokens can be re-created from only a few bytes and used with mapping rules that can call events or derive values for variables. Determinism is achieved by implementing an algorithm that shares similarites with PRNGs (Pseudo-random Number Generator) and LCGs (Linear Congruential Generator). 
 
 The primary benefit of the package is that it allows for a reduction in an application's storage size. This in turn saves database costs, including those related to size, bandwidth and energy. This can amount to a savings of over 90% in many cases. It is most efficient when used for programs featuring content generation, personalization, synthetic data and procedural generation. 
 
-*Stateshaper* can also be used securely. If desired, the data created from the starting seed can't be extracted without knowing its specific parameters. For example, in web applications the values can be stored in environment variables the same way that access keys can.
+*Stateshaper* can also be used securely. If desired, the output created from the starting seed can be unique based on the chosen parameters. For example, in web applications the parameter values can be stored in environment variables the same way that access keys can.
 
 
 <br> <br> 
@@ -24,7 +24,7 @@ Recommended Uses Include:
 
 This repository contains code written in Python, with other langauges scheduled to be available soon. 
 
-Multiple demonstrations are currently live online:
+Multiple demonstrations are currently live online (currently desktop only):
 
 <br> 
 
@@ -32,37 +32,47 @@ Multiple demonstrations are currently live online:
 
 https://stateshaper-ads.vercel.app
 
+<h6>Ruleset: <i>Ratings</i></h6>
+
 Demonstrates the engine's ability to generate data based on personalization. Ads shown are based on user preference ratings and can be adjust in the app. The data needed to recreate the entire profile is condensed into a ~50-250 byte JSON string. 
 
-<br> 
+<br> <br>
 
 *Lesson Plans Demo*
 
 https://stateshaper-lessons.vercel.app
 
+<h6>Ruleset: <i>Ratings</i></h6>
+
 An example of a personalized learning plan based on a student's performance. Condenses the entire profile into a small seed. 
 
-<br> 
+<br> <br>
 
 *Fintech QA Demo*
 
 https://stateshaper-qa.vercel.app
 
+<h6>Ruleset: <i>Tokens</i></h6>
+
 Using numbers as tokens, values are derived to stress test a fintech app's math calculations.
 
-<br> 
+<br> <br>
 
 *Drawing Graphics Demo*
 
 https://stateshaper-graphics.vercel.app
 
+<h6>Ruleset: <i>Tokens</i></h6>
+
 With a plugin file that uses a numerical token to set each graphic object's attributes, an endless amount of onscreen content can be generated. A basic example of 2d shapes and colors is shown. When more precise calculations are used, this output can include even the most modern textures. 
 
-<br> 
+<br> <br>
 
 *ML Training Demo*
 
 https://stateshaper-ml-demo.vercel.app
+
+<h6>Ruleset: <i>Tokens</i></h6>
 
 ML Training can require an enourmous amount of data. *Stateshaper* is able to create nearly all possible test scenarios and re-create them at any time. This only takes a basic plugin file that derives values from tokenized numeric output. This demo shows how *Stateshaper* can be used in ML Training for self-driving cars.
 
@@ -100,9 +110,9 @@ cd stateshaper
 
 **Make sure your data is in one of the formats listed in the *"example_data"* directory. The output that is generated depends on the values contained in this dataset. The data types are based on the following rules:**
 
-***If needed, use the *FormatData* class in the nested *'format_data'* directory.***
-
 Instructions: [`Formatting Data for Input`](example_data/format_data/FORMAT_DATA.md)
+
+<h6><i>If needed, use the FormatData class in the nested 'format_data' directory.</i></h6>
 
 <br> 
 
@@ -200,8 +210,6 @@ To create the same output again, *start_engine* needs to be called once more.
 
 ## Core Logic Example
 ### Details of the Stateshaper Main Class
-
-*Stateshaper* uses an evolving array of numbers that can be tokenized to call events or variables. 
 
 This section shows examples of the main classes included in the engine. **They are not meant to be ran individually**.
 
@@ -488,29 +496,6 @@ stateshaper/
 |                    ├── MachineLearning.py
 |                    ├── TripTimeline.py
 |              ├── DEMOS.md
-|        └── plugins/
-|              └── compression/
-|                    ├── coming soon
-|              └── personalization/
-|                    ├── coming soon
-|              └── procedural/
-|                    ├── coming soon
-|              └── structured/
-|                    ├── coming soon
-|              └── synthetic/
-|                    ├── coming soon
-|              ├── PLUGINS.md
-|        └── tests/
-|              └── cellular_automata/
-|                    ├── coming soon
-|              └── markov_chain/
-|                    ├── Markov.py
-|              └── prng/
-|                    ├── coming soon
-|              └── probalistic/
-|                    ├── coming soon
-|              ├── TESTS.md
-|              ├── Tests.py
 |        └── tools/
 |              └── compress_json/
 |                 ├── CompressJson.py
