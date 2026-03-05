@@ -1,6 +1,6 @@
 # *Stateshaper*
 
-**Compress data and generate content using small seeds.**
+***Reduce file size and generate content using small seeds***
 
 
 *Stateshaper* is a Python project that assist in tokenizing an infinite array of memorized numbers. The tokens can be re-created from only a few bytes and used with mapping rules that can call events or derive values for variables. Determinism is achieved by implementing an algorithm that shares similarites with PRNGs (Pseudo-random Number Generator) and LCGs (Linear Congruential Generator). 
@@ -467,6 +467,8 @@ stateshaper/
 |     ├── rating_initial.json
 |     ├── tokens.json
 |     ├── EXAMPLE_DATA.md
+├── research/
+|     ├── flowchart.png
 ├── src/
 │   └── main/
 |        └── connector/
@@ -510,8 +512,6 @@ stateshaper/
 │       ├── stateshaper.py
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
-├── CHANGELOG.md
-├── flowchart.png
 ├── LICENSE
 ├── pyproject.toml
 ├── QUICK_START.md
@@ -540,4 +540,4 @@ See [`CONTRIBUTING`](CONTRIBUTING.md) instructions if you are interested in crea
 This project is released under the MIT License. See [`LICENSE`](LICENSE) for details.
 
 If you use this in research, products, or experiments, a mention or citation of the
-"Stateshaper", "Jason Dunn", and/or "jgddesigns" is appreciated.
+"Stateshaper" and/or "Jason G. Dunn" is appreciated.
