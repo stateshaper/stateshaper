@@ -5,7 +5,7 @@ from connector.Connector import Connector
 from core import Stateshaper
 from tools.derive_vocab.DeriveVocab import DeriveVocab
 from tools.tiny_state.TinyState import TinyState
-from example_data.format_data.FormatData import FormatData
+
 
 
 
@@ -61,8 +61,6 @@ class RunEngine:
         self.connector = Connector(data=self.data, token_count=token_count, initial_state=initial_state,  constants=constants, vocab=vocab, mod=mod)
 
         self.tiny_state = TinyState()
-
-        self.format_data = FormatData()
 
         self.derive_vocab = DeriveVocab()
 
