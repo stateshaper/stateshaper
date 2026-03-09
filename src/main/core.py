@@ -16,9 +16,9 @@ class Stateshaper:
         self.token_array = []
 
 
-    def step(self): 
+    def step(self, index=None): 
         self.morph_array()
-        self.iteration += 1
+        self.iteration = self.iteration + 1 
         return self.get_token() 
 
 
@@ -28,7 +28,10 @@ class Stateshaper:
             self.iteration = self.iteration - 1
             self.current_state = self.current_state[:len(self.current_state)-1] 
             old_value = [self.reverse_morph(value)]
+            print(f"Old value calculated from reverse morph: {old_value} at iteration: {self.iteration}")
+            print(f"Current state before reverse morph: {self.current_state} at iteration: {self.iteration}")
             self.current_state = old_value + self.current_state
+            print(f"Current state after reverse morph: {self.current_state} at iteration: {self.iteration}")
         return self.get_token() 
 
 
@@ -47,6 +50,7 @@ class Stateshaper:
 
 
     def reverse_morph(self, value):
+        print(f"Calculating reverse morph with current value: {value} at iteration: {self.iteration}")
         return ((value - self.constants["d"]) * pow((round((self.constants["c"] * self.constants["c"]) / self.constants["a"]) * self.constants["b"] * self.iteration) % self.mod, -1, self.mod)) % self.mod
 
 
@@ -55,9 +59,20 @@ class Stateshaper:
 
 
     def morph_logic(self, value):
+        print(f"Calculating new value with current value: {value} at iteration: {self.iteration}")
         return (self.constants["d"] + round((self.constants["c"] * self.constants["c"])/self.constants["a"]) * self.constants["b"] * self.iteration * value) % self.mod
     
 
-    def jump(self, index):
-        tokens = [self.step() for _ in range(index)]
-        return tokens[len(tokens)-1]
+    def jump(self, index, i=0, value=None):
+        value = self.current_state[0] if not value else value
+        if i < index:
+            value = self.morph_logic(value)
+            print(f"Jumping to index: {index} with value: {value} at iteration: {self.iteration}")
+            i = i + 1
+            self.iteration = self.iteration + 1
+            return self.jump(index=index, i=i, value=value) 
+        value = self.morph_logic(value)
+        self.current_state = [value]
+        self.iteration = self.iteration + 1
+        return value + 1
+        

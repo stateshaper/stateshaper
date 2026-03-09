@@ -1,4 +1,4 @@
-from core import Stateshaper
+from .core import Stateshaper
 
 
 class RunEngine:
@@ -32,6 +32,7 @@ class RunEngine:
 
     def reverse(self, token_count=10):
         self.tokens = [self.engine.reverse() for _ in range(token_count)]
+        self.tokens.reverse()
         print("\n\nToken re-created from reverse.")
         print("============================================")
         print(self.tokens)
