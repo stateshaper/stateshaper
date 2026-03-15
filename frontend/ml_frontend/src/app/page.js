@@ -158,7 +158,7 @@ export default function Home() {
 
 
   async function send_api(path) {
-    const res = await fetch(`https://stateshaper-ml-backend.vercel.app/api/` + path, {
+    const res = await fetch(`https://stateshaper-backend.vercel.app/api/` + path, {
     // const res = await fetch("http://localhost:8000/api/" + path, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -423,10 +423,10 @@ export default function Home() {
             </div>
             <div className={ShowAbout ? "grid place-items-center h-140 mt-20 grid-cols-1 grid-auto-rows w-[740px] gap-6 overflow-y-auto dot-scrollbar p-6 text-lg" : "hidden"} style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
             <div>
-              An unlimited amount of training data for machine learning can be created and stored using <i>Stateshaper</i>. The ability for the engine to derive synthetic data by tokenizing its numeric output allows for a wide range of test values to be used. Each test can be stored and re-created at any time from the small seed formats seen to the right of the screen. 
+              An unlimited amount of training data for machine learning can be created and stored using <i>Stateshaper</i>. The ability for the engine to derive synthetic data by tokenizing its numeric output allows for a wide range of training data values to be used. Each test can be stored and re-created at any time from the small seed formats seen to the right of the screen. 
             </div>
             <div>  
-              If the test variations created aren't good enough, output can be adjusted in the plugin file by using the current token as a base to derive test values from. This particular example shows how <i>Stateshaper</i> can be used to run road simulations that help train the AI in self-driving cars. Theoretically, all possible test scenarios can be created based on how output of the program is structured. If needed, the parameter values for the main class and corresponding plugin file can be modified for a particular use.
+              If the data variations created aren't good enough, output can be adjusted in the plugin file by using the current token as a base to derive test values from. This particular example shows how <i>Stateshaper</i> can be used to run road simulations that help train the AI in self-driving cars. Theoretically, all possible test scenarios can be created based on how output of the program is structured. If needed, the parameter values for the main class and corresponding plugin file can be modified for a particular use.
             </div>
             <div>
               Once run, these tests can be stored using almost no space. Any simulation can be revisited at any time. Consider that one prototype for a self-driving car may have several versions. Each version created can have millions of possible AI training sessions conducted before the car begins testing on the road. The data needed for this can take up many terabytes of space. 
@@ -455,7 +455,7 @@ export default function Home() {
               Seed State Format
             </div>
             <div className="italic mt-4">
-              Once a profile is created, the student profile and study plan is compressed into Seed State format. The quiz questions adjust over time based on the student's answers. 
+              The training data can be re-created without loss using this format, a plugin file, and the Stateshaper engine. In some cases, such as those requiring no security, Seed State format can be minimized to only an integer value. 
             </div>
             <div className="grid grid-rows-1 grid-cols-4 place-items-center cursor-pointer text-gray-200 mt-8">
               <a id="0" className={LinkText} onClick={(e) => seed_text(e.target.id)}>
@@ -480,10 +480,10 @@ export default function Home() {
               </code>
             </div>
             <div className="italic mt-8">
-              The above strings are all that is needed to generate a student's profile. For sensitive data, some values can be stored in environment variables. Tiny State and Raw State format are not required for this type of use because no personalized data is selected from the original dataset. 
+              Using the values from these strings as parameters in Stateshaper will allow you to re-create an unlimited chain of data without loss. Tiny State and Raw State format are not required for this type of use because no personalized data is selected from the original dataset. 
             </div>
             <div className="italic mt-8">
-              For other applications, a plugin file is required to coordinate Stateshaper output with the app's frontend and backend logic. Some plugins will be released along with the package. Custom plugins can also be written. 
+              The custom plugin file required to coordinate Stateshaper output can be kept and referenced in the program where Stateshaper is installed. An example of what a plugin file looks like is provided in the documentation section of the main Github branch. Plans for an API are also planned that will allow users to generate training data without needing to create a plugin file. 
             </div>
           </div>
 
@@ -504,7 +504,7 @@ export default function Home() {
       {ShowCode ?
         <div className="text-white p-4 py-5 bottom-18 right-192 ml-auto absolute w-128 h-24 rounded-lg bg-blue-600 overflow-x-auto overflow-y-hidden">
         <div className="text-md ">
-          <span className="font-bold px-2">Github:</span> <a className="cursor-pointer hover:text-gray-300 hover:italic px-2" href="https://www.github.com/jgddesigns/stateshaper/tree/graphics_demo" target="_blank">https://www.github.com/jgddesigns/stateshaper/tree/ml_demo</a>
+          <span className="font-bold px-2">Github:</span> <a className="cursor-pointer hover:text-gray-300 hover:italic px-2" href="https://www.github.com/stateshaper/stateshaper/tree/graphics_demo" target="_blank">https://www.github.com/stateshaper/stateshaper/tree/ml_demo</a>
         </div>
         </div>
       : null}
