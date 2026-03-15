@@ -28,6 +28,16 @@ Multiple demonstrations are currently live online (currently desktop only):
 
 <br> 
 
+*ML Training Demo*
+
+https://stateshaper-ml-demo.vercel.app
+
+<h6>Ruleset: <i>Tokens</i></h6>
+
+ML Training can require an enourmous amount of data. *Stateshaper* is able to create nearly all possible test scenarios and re-create them at any time. This only takes a basic plugin file that derives values from tokenized numeric output. This demo shows how *Stateshaper* can be used in ML Training for self-driving cars.
+
+<br> <br>
+
 *Targeted Ads Compression Demo*
 
 https://stateshaper-ads.vercel.app
@@ -66,15 +76,6 @@ https://stateshaper-graphics.vercel.app
 
 With a plugin file that uses a numerical token to set each graphic object's attributes, an endless amount of onscreen content can be generated. A basic example of 2d shapes and colors is shown. When more precise calculations are used, this output can include even the most modern textures. 
 
-<br> <br>
-
-*ML Training Demo*
-
-https://stateshaper-ml-demo.vercel.app
-
-<h6>Ruleset: <i>Tokens</i></h6>
-
-ML Training can require an enourmous amount of data. *Stateshaper* is able to create nearly all possible test scenarios and re-create them at any time. This only takes a basic plugin file that derives values from tokenized numeric output. This demo shows how *Stateshaper* can be used in ML Training for self-driving cars.
 
 ---
 
