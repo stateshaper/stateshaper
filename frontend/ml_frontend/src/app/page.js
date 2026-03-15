@@ -502,7 +502,7 @@ export default function Home() {
         EXAMPLE ONLY
       </div>
       {ShowCode ?
-        <div className="text-white p-4 py-5 bottom-18 right-192 ml-auto absolute w-128 h-24 rounded-lg bg-blue-600 overflow-x-auto overflow-y-hidden">
+        <div className="text-white p-4 py-5 bottom-18 right-192 ml-auto absolute w-154 h-24 rounded-lg bg-blue-600 overflow-x-auto overflow-y-hidden">
         <div className="text-md ">
           <span className="font-bold px-2">Github:</span> <a className="cursor-pointer hover:text-gray-300 hover:italic px-2" href="https://www.github.com/stateshaper/stateshaper/tree/graphics_demo" target="_blank">https://www.github.com/stateshaper/stateshaper/tree/ml_demo</a>
         </div>
