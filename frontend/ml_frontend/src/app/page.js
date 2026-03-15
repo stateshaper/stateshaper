@@ -1,6 +1,7 @@
 'use client'
 import {useEffect, useState, useRef} from "react"
 import "./shapes.css"
+import {code} from "./data/code.js"
 import Draw from "./classes/Draw"
 import Stats from "./classes/Stats"
 
@@ -258,7 +259,7 @@ export default function Home() {
     let counter = Counter
     counter++
     setCounter(counter)
-    console.log("\ndraw data in adjust trip")
+    console.log("draw data in adjust trip")
     console.log(DrawData)
     setTestTrigger(true)
   }
@@ -495,6 +496,9 @@ export default function Home() {
       <div className="text-white text-2xl hover:font-bold bottom-6 right-12 ml-auto absolute hover:text-gray-300 cursor-pointer" onMouseEnter={e=>setShowExample(true)} onMouseLeave={e=>setShowExample(false)}>
         EXAMPLE ONLY
       </div>
+      <div className={!ShowCode ? "text-white text-2xl hover:font-bold bottom-6 right-118 ml-auto absolute hover:text-gray-300 cursor-pointer" : "text-2xl font-bold bottom-6 right-118 ml-auto absolute text-gray-300 cursor-pointer"} onMouseEnter={e=>setShowAbout(true)} onClick={e=>setShowAbout(false)}>
+        ABOUT
+      </div>
       <div className={!ShowCode ? "text-white text-2xl hover:font-bold bottom-6 right-192 ml-auto absolute hover:text-gray-300 cursor-pointer" : "text-2xl font-bold bottom-6 right-192 ml-auto absolute text-gray-300 cursor-pointer"} onMouseEnter={e=>setShowCode(true)} onClick={e=>setShowCode(false)}>
         CODE
       </div>
@@ -502,10 +506,21 @@ export default function Home() {
         EXAMPLE ONLY
       </div>
       {ShowCode ?
-        <div className="text-white p-4 py-5 bottom-18 right-192 ml-auto absolute w-154 h-24 rounded-lg bg-blue-600 overflow-x-auto overflow-y-hidden">
-        <div className="text-md ">
-          <span className="font-bold px-2">Github:</span> <a className="cursor-pointer hover:text-gray-300 hover:italic px-2" href="https://www.github.com/stateshaper/stateshaper/tree/graphics_demo" target="_blank">https://www.github.com/stateshaper/stateshaper/tree/ml_demo</a>
+        <div className="text-black p-4 py-5 bottom-18 right-36 ml-auto absolute w-4/5 h-5/6 rounded-lg my-6 rounded-xl border border-zinc-800 bg-gray-400 overflow-x-auto overflow-y-auto z-102">
+          <pre className="overflow-x-auto p-5 text-md leading-6 scrollbar-thin scrollbar-thumb-zinc-700">
+            <code className="font-mono whitespace-pre-wrap break-words text-black">
+              {code}
+            </code>
+          </pre>
         </div>
+      : null}
+      {ShowAbout ?
+        <div className="text-black p-4 py-5 bottom-18 right-36 ml-auto absolute w-4/5 h-5/6 rounded-lg my-6 rounded-xl border border-zinc-800 bg-gray-400 overflow-x-auto overflow-y-auto z-102">
+          <pre className="overflow-x-auto p-5 text-md leading-6 scrollbar-thin scrollbar-thumb-zinc-700">
+            <code className="font-mono whitespace-pre-wrap break-words text-black">
+              {about}
+            </code>
+          </pre>
         </div>
       : null}
       {ShowExample ?
