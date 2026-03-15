@@ -449,7 +449,7 @@ export default function Home() {
 
         </div>
 
-        <div className="grid w-3/4 place-items-center h-full static">
+        <div className="grid w-3/4 place-items-center h-full static mb-12">
           <div className="grid grid-auto-rows mt-12">
             <div className="text-bold text-lg">
               Seed State Format
@@ -483,7 +483,7 @@ export default function Home() {
               Using the values from these strings as parameters in Stateshaper will allow you to re-create an unlimited chain of data without loss. Tiny State and Raw State format are not required for this type of use because no personalized data is selected from the original dataset. 
             </div>
             <div className="italic mt-8">
-              The custom plugin file required to coordinate Stateshaper output can be kept and referenced in the program where Stateshaper is installed. An example of what a plugin file looks like is provided in the documentation section of the main Github branch. Plans for an API are also planned that will allow users to generate training data without needing to create a plugin file. 
+              The custom plugin file required to coordinate Stateshaper output can be kept and referenced in the program where Stateshaper is installed. An example of what a plugin file looks like is provided in the documentation section of the main Github branch. 
             </div>
           </div>
 
