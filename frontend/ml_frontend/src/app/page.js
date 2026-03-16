@@ -301,7 +301,7 @@ export default function Home() {
 
 
   return (
-    <div className="flex grid grid-auto-rows dark:bg-black h-screen min-h-screen fixed bg-[#02082c] font-mono">
+    <div className="flex grid grid-auto-rows dark:bg-black h-screen min-h-screen bg-[#02082c] font-mono overflow-y-hidden">
       <style>
         {`
           .dot-scrollbar::-webkit-scrollbar {
@@ -452,7 +452,7 @@ export default function Home() {
 
         </div>
 
-        <div className="grid w-3/4 grid-rows-1 grid-cols-1 place-items-start h-full static mb-12">
+        <div className="grid w-3/4 grid-rows-2 gap-36 grid-cols-1 place-items-start h-full static mb-12">
           <div className="grid grid-rows-1 grid-cols-1 mt-12">
             <div className="text-bold text-lg">
               Seed State Format
@@ -489,17 +489,20 @@ export default function Home() {
               The custom plugin file required to coordinate Stateshaper output can be kept and referenced in the program where Stateshaper is installed. An example of what a plugin file looks like is provided in the documentation section of the main Github branch. 
             </div>
           </div>
+          <div className="w-full text-2xl grid grid-rows-1 grid-cols-3 gap-24 mb-4 mr-12">
+            <div className={!ShowCode && !ShowREADME && !ShowExample ? "text-white  hover:font-bold bottom-6 hover:text-gray-300 cursor-pointer" : ShowCode ? " font-bold bottom-6 text-gray-300" : "text-white  bottom-6"} onMouseEnter={!ShowREADME && !ShowExample ? e=>setShowCode(true) : null} onClick={e=>setShowCode(false)}>
+              CODE
+            </div>
+            <div className={!ShowCode && !ShowREADME && !ShowExample ? "text-white  hover:font-bold bottom-6 hover:text-gray-300 cursor-pointer" : ShowREADME ? " font-bold bottom-6  text-gray-300 cursor-pointer" : "text-white "} onMouseEnter={!ShowCode && !ShowExample ? e=>setShowREADME (true) : null} onClick={e=>setShowREADME(false)}>
+              README
+            </div>
+            <div className={!ShowCode && !ShowREADME && !ShowExample ? "text-white  hover:font-bold hover:text-gray-300 cursor-pointer" : ShowExample ? " font-bold text-gray-300" : "text-white "} onMouseEnter={!ShowCode && !ShowREADME ? e=>setShowExample(true) : null} onMouseLeave={e=>setShowExample(false)}>
+              EXAMPLE ONLY
+            </div>
+          </div>
         </div>
       </div>
-      <div className={!ShowCode && !ShowREADME && !ShowExample ? "text-white text-2xl hover:font-bold bottom-6 right-192 ml-auto absolute hover:text-gray-300 cursor-pointer" : ShowCode ? "text-2xl font-bold bottom-6 right-192 ml-auto absolute text-gray-300" : "text-white text-2xl bottom-6 right-192 ml-auto absolute"} onMouseEnter={!ShowREADME && !ShowExample ? e=>setShowCode(true) : null} onClick={e=>setShowCode(false)}>
-        CODE
-      </div>
-      <div className={!ShowCode && !ShowREADME && !ShowExample ? "text-white text-2xl hover:font-bold bottom-6 right-118 ml-auto absolute hover:text-gray-300 cursor-pointer" : ShowREADME ? "text-2xl font-bold bottom-6 right-118 ml-auto absolute text-gray-300 cursor-pointer" : "text-white text-2xl bottom-6 right-118 ml-auto absolute"} onMouseEnter={!ShowCode && !ShowExample ? e=>setShowREADME (true) : null} onClick={e=>setShowREADME(false)}>
-        README
-      </div>
-      <div className={!ShowCode && !ShowREADME && !ShowExample ? "text-white text-2xl hover:font-bold bottom-6 right-12 ml-auto absolute hover:text-gray-300 cursor-pointer" : ShowExample ? "text-2xl font-bold bottom-6 right-12 ml-auto absolute text-gray-300" : "text-white text-2xl bottom-6 right-12 ml-auto absolute"} onMouseEnter={!ShowCode && !ShowREADME ? e=>setShowExample(true) : null} onMouseLeave={e=>setShowExample(false)}>
-        EXAMPLE ONLY
-      </div>
+
       {ShowREADME || ShowCode && !ShowExample?
         <div className="grid grid-auto-rows grid-auto-cols place-items-center fixed bottom-18 right-36 w-4/5 h-5/6 z-102 p-4 py-5 rounded-lg border border-zinc-800 bg-gray-400 text-white gap-12">
             <div className="grid place-items-center w-full h-full overflow-x-hidden overflow-y-auto">
