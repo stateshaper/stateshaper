@@ -137,7 +137,7 @@ export default function Home() {
 
 
   function tiny_seed(){
-    return Data.token ? "~" + Data.token.length + Data.token : ""
+    return Data ? '["user_176551",' + Data.token + ']' : ""
   }
 
 
@@ -155,7 +155,7 @@ export default function Home() {
   function set_seeds(){
     setSeeds({"0" : [full_seed(), full_seed().length + ` bytes`],
     "1" : [short_seed(), short_seed().length + ` bytes`],
-    "2" : [tiny_seed(),  ``],
+    "2" : [tiny_seed(),  tiny_seed().length + ` bytes`],
     "3" : [raw_seed(), ``]})
   }
 
@@ -467,9 +467,9 @@ export default function Home() {
               <a id="1" className="hover:font-bold hover:text-gray-300 cursor-pointer" onMouseOver={(e) => seed_text(e.target.id)} onMouseOut={(e) => seed_text("0")}>
                 Short State
               </a>
-              <a id="2" className="hover:font-bold hover:text-gray-300 cursor-pointer" onMouseOver={(e) => seed_text(e.target.id)} onMouseOut={(e) => seed_text("0")}>
+              {/* <a id="2" className="hover:font-bold hover:text-gray-300 cursor-pointer" onMouseOver={(e) => seed_text(e.target.id)} onMouseOut={(e) => seed_text("0")}>
                 Minimal State
-              </a>
+              </a> */}
               {/* <a id="3" className="hover:font-bold hover:text-gray-300 cursor-pointer" onMouseOver={(e) => seed_text(e.target.id)} onMouseOut={(e) => seed_text("0")}>
                 Raw State
               </a> */}
