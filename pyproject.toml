@@ -3,9 +3,9 @@ requires = ["setuptools>=69", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "stateshaper"            
-version = "0.1.0"
-description = "An infinite deterministic token stream derived from just one number."
+name = "stateshaper-ml"            
+version = "1.0.0"
+description = "Create an unlimited, memorized chain of synthetic data from a small seed."
 readme = "README.md"
 requires-python = ">=3.10"
 license = {file = "LICENSE"}
@@ -15,8 +15,8 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/jgddesigns/stateshaper"
-Issues = "https://github.com/jgddesigns/stateshaper"
+Homepage = "https://github.com/stateshaper/stateshaper/tree/ml_use"
+Issues = "https://github.com/jgddesigns/stateshaper/tree/ml_use"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
