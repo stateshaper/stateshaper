@@ -20,6 +20,8 @@ export default function Home() {
   const [ShowForm, setShowForm] = useState(true)
   const [ShowAbout, setShowAbout] = useState(false)
   const [ShowData, setShowData] = useState(false)
+  const [ShowMainREADME, setShowMainREADME] = useState(false)
+  const [ShowREADME, setShowREADME] = useState(false)
   const [ShowExample, setShowExample] = useState(false)
   const [ShowCode, setShowCode] = useState(false)
   const [SeedText, setSeedText] = useState("")
@@ -323,7 +325,7 @@ export default function Home() {
           Stateshaper ML Training Demo
         </div>   
       </div>
-      <div className="grid grid-cols-2 grid-rows-2 place-items-center h-4/5 mt-32 text-gray-200 min-w-full tatic">
+      <div className="grid grid-cols-2 grid-rows-1 place-items-center h-4/5 mt-32 text-gray-200 min-w-full static">
         <div className="grid gap-8 h-full static place-items-center">
           <div className="grid grid-rows-1 grid-cols-3 w-128 text-gray-200 text-xl cursor-pointer place-items-center">
             <a className={ShowForm ? "font-bold text-2xl disabled select-none cursor-default" : "hover:text-gray-300"} onClick={()=>show_content("form")}>Trip</a>
@@ -422,7 +424,7 @@ export default function Home() {
                 {Counter < 100 && StartTest == false ? "Run Test" : Counter < 100 && StartTest == true && Pause == false ? "Pause" : Counter < 100 && StartTest == true && Pause == true ? "Resume" : "Restart"}
               </div>
             </div>
-            <div className={ShowAbout ? "grid place-items-center h-140 mt-20 grid-cols-1 grid-auto-rows w-[740px] gap-6 overflow-y-auto dot-scrollbar p-6 text-lg" : "hidden"} style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
+            <div className="grid place-items-center h-140 mt-20 grid-cols-1 grid-auto-rows w-[740px] gap-6 overflow-y-auto dot-scrollbar p-6 text-lg" style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
             <div>
               An unlimited amount of training data for machine learning can be created and stored using <i>Stateshaper</i>. The ability for the engine to derive synthetic data by tokenizing its numeric output allows for a wide range of training data values to be used. Each test can be stored and re-created at any time from the small seed formats seen to the right of the screen. 
             </div>
@@ -450,8 +452,8 @@ export default function Home() {
 
         </div>
 
-        <div className="grid w-3/4 place-items-center h-full static mb-12">
-          <div className="grid grid-auto-rows mt-12">
+        <div className="grid w-3/4 grid-rows-1 grid-cols-1 place-items-start h-full static mb-12">
+          <div className="grid grid-rows-1 grid-cols-1 mt-12">
             <div className="text-bold text-lg">
               Seed State Format
             </div>
@@ -487,43 +489,30 @@ export default function Home() {
               The custom plugin file required to coordinate Stateshaper output can be kept and referenced in the program where Stateshaper is installed. An example of what a plugin file looks like is provided in the documentation section of the main Github branch. 
             </div>
           </div>
-
         </div>
       </div>
-      <div className={!ShowCode ? "text-white text-2xl hover:font-bold bottom-6 right-192 ml-auto absolute hover:text-gray-300 cursor-pointer" : "text-2xl font-bold bottom-6 right-192 ml-auto absolute text-gray-300 cursor-pointer"} onMouseEnter={e=>setShowCode(true)} onClick={e=>setShowCode(false)}>
+      <div className={!ShowCode && !ShowREADME && !ShowExample ? "text-white text-2xl hover:font-bold bottom-6 right-192 ml-auto absolute hover:text-gray-300 cursor-pointer" : ShowCode ? "text-2xl font-bold bottom-6 right-192 ml-auto absolute text-gray-300" : "text-white text-2xl bottom-6 right-192 ml-auto absolute"} onMouseEnter={!ShowREADME && !ShowExample ? e=>setShowCode(true) : null} onClick={e=>setShowCode(false)}>
         CODE
       </div>
-      <div className="text-white text-2xl hover:font-bold bottom-6 right-12 ml-auto absolute hover:text-gray-300 cursor-pointer" onMouseEnter={e=>setShowExample(true)} onMouseLeave={e=>setShowExample(false)}>
+      <div className={!ShowCode && !ShowREADME && !ShowExample ? "text-white text-2xl hover:font-bold bottom-6 right-118 ml-auto absolute hover:text-gray-300 cursor-pointer" : ShowREADME ? "text-2xl font-bold bottom-6 right-118 ml-auto absolute text-gray-300 cursor-pointer" : "text-white text-2xl bottom-6 right-118 ml-auto absolute"} onMouseEnter={!ShowCode && !ShowExample ? e=>setShowREADME (true) : null} onClick={e=>setShowREADME(false)}>
+        README
+      </div>
+      <div className={!ShowCode && !ShowREADME && !ShowExample ? "text-white text-2xl hover:font-bold bottom-6 right-12 ml-auto absolute hover:text-gray-300 cursor-pointer" : ShowExample ? "text-2xl font-bold bottom-6 right-12 ml-auto absolute text-gray-300" : "text-white text-2xl bottom-6 right-12 ml-auto absolute"} onMouseEnter={!ShowCode && !ShowREADME ? e=>setShowExample(true) : null} onMouseLeave={e=>setShowExample(false)}>
         EXAMPLE ONLY
       </div>
-      <div className={!ShowCode ? "text-white text-2xl hover:font-bold bottom-6 right-118 ml-auto absolute hover:text-gray-300 cursor-pointer" : "text-2xl font-bold bottom-6 right-118 ml-auto absolute text-gray-300 cursor-pointer"} onMouseEnter={e=>setShowAbout(true)} onClick={e=>setShowAbout(false)}>
-        ABOUT
-      </div>
-      <div className={!ShowCode ? "text-white text-2xl hover:font-bold bottom-6 right-192 ml-auto absolute hover:text-gray-300 cursor-pointer" : "text-2xl font-bold bottom-6 right-192 ml-auto absolute text-gray-300 cursor-pointer"} onMouseEnter={e=>setShowCode(true)} onClick={e=>setShowCode(false)}>
-        CODE
-      </div>
-      <div className="text-white text-2xl hover:font-bold bottom-6 right-12 ml-auto absolute hover:text-gray-300 cursor-pointer" onMouseEnter={e=>setShowExample(true)} onMouseLeave={e=>setShowExample(false)}>
-        EXAMPLE ONLY
-      </div>
-      {ShowCode ?
-        <div className="text-black p-4 py-5 bottom-18 right-36 ml-auto absolute w-4/5 h-5/6 rounded-lg my-6 rounded-xl border border-zinc-800 bg-gray-400 overflow-x-auto overflow-y-auto z-102">
-          <pre className="overflow-x-auto p-5 text-md leading-6 scrollbar-thin scrollbar-thumb-zinc-700">
-            <code className="font-mono whitespace-pre-wrap break-words text-black">
-              {code}
-            </code>
-          </pre>
+      {ShowREADME || ShowCode && !ShowExample?
+        <div className="grid grid-auto-rows grid-auto-cols place-items-center fixed bottom-18 right-36 w-4/5 h-5/6 z-102 p-4 py-5 rounded-lg border border-zinc-800 bg-gray-400 text-white gap-12">
+            <div className="grid place-items-center w-full h-full overflow-x-hidden overflow-y-auto">
+              <img className="ml-4 mb-4 select-none" src={ShowREADME ? "plugin.png" : "code.png"} />
+            </div>
+            <div>
+              Stateshaper Github: <a href="https://www.github.com/jgddesigns/stateshaper" className="text-blue-500 hover:underline hover:italic hover:text-gray-600" target="_blank" rel="noopener noreferrer">
+                https://www.github.com/jgddesigns/stateshaper
+              </a>
+            </div>
         </div>
       : null}
-      {ShowAbout ?
-        <div className="text-black p-4 py-5 bottom-18 right-36 ml-auto absolute w-4/5 h-5/6 rounded-lg my-6 rounded-xl border border-zinc-800 bg-gray-400 overflow-x-auto overflow-y-auto z-102">
-          <pre className="overflow-x-auto p-5 text-md leading-6 scrollbar-thin scrollbar-thumb-zinc-700">
-            <code className="font-mono whitespace-pre-wrap break-words text-black">
-              {about}
-            </code>
-          </pre>
-        </div>
-      : null}
-      {ShowExample ?
+      {ShowExample && !ShowCode && !ShowREADME ?
         <div className="text-white p-4 bottom-18 right-12 ml-auto absolute w-128 h-24 rounded-lg bg-blue-600">
         <div className="text-lg font-bold">
           Sample app, real logic. 
