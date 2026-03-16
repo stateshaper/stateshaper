@@ -137,7 +137,7 @@ export default function Home() {
 
 
   function tiny_seed(){
-    return "N/A"
+    return Data.token ? "~" + Data.token.length + Data.token : ""
   }
 
 
@@ -468,11 +468,11 @@ export default function Home() {
                 Short State
               </a>
               <a id="2" className="hover:font-bold hover:text-gray-300 cursor-pointer" onMouseOver={(e) => seed_text(e.target.id)} onMouseOut={(e) => seed_text("0")}>
-                Tiny State
+                Minimal State
               </a>
-              <a id="3" className="hover:font-bold hover:text-gray-300 cursor-pointer" onMouseOver={(e) => seed_text(e.target.id)} onMouseOut={(e) => seed_text("0")}>
+              {/* <a id="3" className="hover:font-bold hover:text-gray-300 cursor-pointer" onMouseOver={(e) => seed_text(e.target.id)} onMouseOut={(e) => seed_text("0")}>
                 Raw State
-              </a>
+              </a> */}
             </div>
             <div className="grid grid-rows-2 grid-cols-1 gap-8 w-3/4 h-32 min-h-32 static mt-8 bold text-gray-700 p-4 rounded bg-gray-200">
               <code>
