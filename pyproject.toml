@@ -15,8 +15,8 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/jgddesigns/stateshaper"
-Issues = "https://github.com/jgddesigns/stateshaper"
+Homepage = "https://github.com/stateshaper/stateshaper/tree/ml_use"
+Issues = "https://github.com/stateshaper/stateshaper/tree/ml_use"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
