@@ -12,7 +12,7 @@ export default function Home() {
   const [TestTrigger, setTestTrigger] = useState(false)
   const [X_Interval, setX_Interval] = useState(10)
   const [Counter, setCounter] = useState(-1)
-  const [OriginalToken, setOriginalToken] = useState(0)
+  const [OriginalToken, setOriginalToken] = useState(null)
   const [MapData, setMapData] = useState(0)
   const [MapText, setMapText] = useState("")
   const [Data, setData] = useState("")
@@ -80,7 +80,7 @@ export default function Home() {
     if(Data && LoadedData == false){
       set_seeds()
       change_map(0)
-      !OriginalToken ? setOriginalToken(Data["token"]) : null
+      !OriginalToken && Data["token"] ? setOriginalToken(Data["token"]) : null
       setX_Interval(Data.test.environment[0].range[1]/100)
       setLoadedData(true)
     }
