@@ -2,12 +2,12 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 
-from src.main.connector.Connector import Connector
+from src.stateshaper_ml.connector.Connector import Connector
 
-from src.main.stateshaper import RunEngine
+from src.stateshaper_ml.stateshaper import Stateshaper
 import json
 
-run = RunEngine()
+run = Stateshaper()
 
 app = FastAPI()
 

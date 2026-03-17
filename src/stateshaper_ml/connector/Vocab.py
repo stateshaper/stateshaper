@@ -1,7 +1,7 @@
 from random import randint
 import sys
 
-from tools.derive_vocab.DeriveVocab import DeriveVocab
+from ..tools.derive_vocab.DeriveVocab import DeriveVocab
 
 
 class Vocab:

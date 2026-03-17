@@ -1,6 +1,6 @@
 import random
 import sys
-from tools.tiny_state.TinyState import TinyState
+from ..tools.tiny_state.TinyState import TinyState
 from .Vocab import Vocab
 from .Modify import Modify
 

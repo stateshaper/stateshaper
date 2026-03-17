@@ -21,12 +21,17 @@ For this case, the example will be an outdoor AI security camera. The dataset is
 We will be creating an example dataset in this format that can be used to train the AI in the camera.
 ```python
 data = {
+    # near average object height (compared to a person, 0=invisible - 1=largest recorded height)
     height: .4,
+    # below average object width (compared to a person, 0=invisible - 1=largest recorded human)
     width: .32,
+    # medium-low heat signature (compared to a normal body temperature, 0=dead - 1=maximum fever)
     heat: .34,
     # shows up on camera at slow pace. stops after 15 seconds. begins to move at 18 seconds, speeds up and exits the frame. 
     velocity: [{(.1, 0), (0, 15)}, {(0, .4), (18, 25)}],
+    # noise starts as object enters the frame. goes silence at 3 seconds. sudden loud volume occurs from 15-17 seconds. volume gradually increases as object exits the frame.
     volume: [{(.2, 0), (0, 3)}, {(.6, 0), (15, 17)}, {(0, .2), (20, 25)}],
+    # object is in frame for 25 seconds
     duration: 25
 }
 ```
@@ -35,7 +40,7 @@ data = {
 For each test, the data will be derived from the *Stateshaper* output using custom functions in the actual plugin file. 
 
 ```python
-from stateshaper import Stateshaper
+from stateshaper_ml import Stateshaper
 
 # call the stateshaper class. we won't pass any custom parameters here. the regular output can be used for what we need.
 engine = Stateshaper()
@@ -159,6 +164,7 @@ class Plugin:
         max_duration = 600
         duration = (self.constants["d"] * self.token) % max_duration 
         max_length = int(duration / 10) * 2
+
         return int((self.constants["c"] * self.token) % max_duration)
 
 

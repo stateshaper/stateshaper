@@ -1,6 +1,6 @@
 # *Stateshaper*
 
-***Reduce the size of ML Training datasets by over 90%***
+***Often reduces the size of ML Training datasets by over 90%***
 
 <br>
 
@@ -16,9 +16,60 @@ The plugin ruleset can vary in complexity and is the only heavy-lifting needed t
 
 <br> 
 
-For plugin file requirements, see the [`PLUGIN README`](PLUGINS.md)
+For plugin file requirements, see the Plugin README:
+
+https://github.com/stateshaper/stateshaper/tree/ml_use/PLUGINS.md
 
 <br> <br>
+
+# *QUICK START GUIDE*
+
+From Terminal:
+```cmd
+> pip install stateshaper-ml
+```
+<br>
+
+In Codebase:
+```python 
+from stateshaper_ml import Stateshaper
+
+# initialize the package
+# use a custom initial state to create a variation in output
+stateshaper = Stateshaper(initial_state=123)
+
+# start the engine to prepare it for output
+stateshaper.start_engine()
+
+# the custom class pertaining to the ml training scenario
+ml = MachineLearning()
+
+# create 50 tokens to derive data from
+tokens = stateshaper.run_engine(token_count=50)
+
+# create 50 sets of ml training data
+data = [ml.current_test(token) for token in tokens]
+
+
+# to re-create the data
+stateshaper.rebuild()
+```
+<br>
+
+### *Optional*
+Custom parameters can be passed into the *Stateshaper* class if security or tailored variation is desired. 
+
+1. The output can't be duplicated unless its matching parameters are passed. 
+2. Altering the parameters will change the equation.
+ 
+
+- **initial_state**, *integer* - An integer to determine where the token sequence starts from. 
+- **constants**, *list* - A list of integers used in calculations for synthetic data.
+- **mod**, *integer* (PRIME REQUIRED) - A prime number that determines the max value of a particular token. Increase this to further approach infinity.
+
+<br> <br>
+
+# *LIVE DEMO*
 
 Here is an example web application showing how *Stateshaper* can be used in test runs to train the AI in self-driving cars:
 
@@ -28,63 +79,13 @@ https://stateshaper-ml-demo.vercel.app
 
 The corresponding files associated with this demo can be found in the *src/main/demos* directory, or through this shortcut:
 
-[`SELF-DRIVING CAR DEMO`](src/main/demos/self_driving)
+https://github.com/stateshaper/stateshaper/tree/ml_use/src/main/demos/self_driving
 
 
 
 
-<br> 
+<br> <br>
 
-
-
-
----
-
-<br> 
-
-## Project Structure
-
-```text
-stateshaper/
-├── api/
-|     ├── run_api.py
-|     ├── API.md
-├── docs/
-|     ├── flowchart.png
-├── src/
-│   └── main/
-|        └── connector/
-|              ├── Connector.py
-|              ├── Modify.py
-|              ├── Vocab.py
-|              ├── CONNECTOR.md
-|        └── demos/
-|              └── ml_training/
-|                    └── data/
-|                       ├── environments.py
-|                       ├── vehicles.py
-|                    ├── BuildEnvironment.py
-|                    ├── MachineLearning.py
-|                    ├── TripTimeline.py
-|              ├── DEMOS.md
-|        └── tools/
-|              └── derive_vocab/
-|                 ├── DeriveVocab.py
-|                 ├── DERIVE_VOCAB.md
-|              └── tiny_state/
-|                 ├── TinyState.py
-|                 ├── TINY_STATE.md
-|              ├── TOOLS.md              
-│       ├── core.py
-│       ├── stateshaper.py
-├── CHANGELOG.md
-├── LICENSE
-├── QUICK_START.md
-├── pyproject.toml
-├── QUICK_START.md
-├── README.md
-├── setup.py
-```
 
 ---
 
@@ -92,7 +93,7 @@ stateshaper/
 
 ## License
 
-This project is released under the MIT License. See [`LICENSE`](LICENSE) for details.
+This project is released under the MIT License. See https://github.com/stateshaper/stateshaper/tree/ml_use/LICENSE for details.
 
 If you use this in research, products, or experiments, a mention or citation of the
 "Stateshaper" and/or "Jason G. Dunn" is appreciated.

@@ -2,7 +2,7 @@
 import sys
 
 
-class Stateshaper:
+class Core:
 
     def __init__(self, state=5, vocab=[], constants={"a": 3, "b": 5, "c": 7, "d": 11}, mod=9973, compound=None):
 

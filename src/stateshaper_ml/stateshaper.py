@@ -1,24 +1,31 @@
 import json
 import random
 import sys
-from connector.Connector import Connector
-from core import Stateshaper
-from tools.derive_vocab.DeriveVocab import DeriveVocab
-from tools.tiny_state.TinyState import TinyState
+from .connector.Connector import Connector
+from .core import Core
+from .tools.derive_vocab.DeriveVocab import DeriveVocab
+from .tools.tiny_state.TinyState import TinyState
+
+import os
+
+# Get the directory of the current script, then go up one
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+data_path = os.path.join(base_dir, "example_data", "tokens.json")
 
 
+class Stateshaper:
 
-
-class RunEngine:
-
-    def __init__(self, data=None, original_data=None, seed=None, token_count=10, initial_state=5, vocab=None, constants={"a": 3,"b": 5,"c": 7,"d": 11}, mod=9973, **kwargs):
+    def __init__(self, data=None, original_data=None, seed=None, token_count=10, initial_state=5, vocab=None, constants=[3, 5, 7, 11], mod=9973, **kwargs):
         
 
         if isinstance(data, dict):
-            self.data = data
+            self.data = data 
         else:
-            print("Data is not formatted or formatted incorrectly. See accepted data formats in the 'example_data' directory.")
-            sys.exit()
+            self.data = {
+                "input": [],
+                "rules": "tokens",
+                "length": 1
+            }
 
         self.original_data = original_data
         
@@ -33,30 +40,30 @@ class RunEngine:
             initial_state = [initial_state]
 
 
-        if isinstance(seed, dict):
-            try:
-                initial_state = seed["s"] 
-            except:
-                initial_state = initial_state 
-            try:
-                vocab = seed["v"]
-            except:
-                vocab = vocab
-            try:
-                constants = seed["c"]
-            except:
-                constants = constants
-            try: 
-                mod = seed["m"] 
-            except: 
-                mod = mod
-        
-            self.seed = {
-                "state": initial_state,
-                "vocab": vocab,
-                "constants": constants,
-                "mod": mod
-            }
+
+        try:
+            initial_state = seed["s"] 
+        except:
+            initial_state = initial_state 
+        try:
+            vocab = seed["v"]
+        except:
+            vocab = vocab
+        try:
+            constants = self.define_constants(constants)
+        except:
+            constants = {"a": constants[0], "b": constants[1], "c": constants[2], "d": constants[3]}
+        try: 
+            mod = seed["m"] 
+        except: 
+            mod = mod
+    
+        self.seed = {
+            "state": initial_state,
+            "vocab": vocab,
+            "constants": constants,
+            "mod": mod
+        }
 
         self.connector = Connector(data=self.data, token_count=token_count, initial_state=initial_state,  constants=constants, vocab=vocab, mod=mod)
 
@@ -72,6 +79,20 @@ class RunEngine:
 
 
 
+    def define_constants(self, constants):
+        constants_keys = ["a", "b", "c", "d"]
+        default_constants = [3, 5, 7, 11]
+        constants_values = {}
+
+        for key in constants_keys:
+            try:
+                constants_values[key] = constants[constants_keys.index(key)]
+            except:
+                constants_values[key] = default_constants[constants_keys.index(key)]
+
+        return constants_values
+
+
 
     def start_engine(self):
         self.engine = None
@@ -80,7 +101,7 @@ class RunEngine:
 
 
     def define_engine(self, state=None, vocab=None, constants=None, mod=None):
-        self.engine = Stateshaper(
+        self.engine = Core(
             self.seed["state"] if not state else state,
             self.seed["vocab"] if not vocab else vocab,
             self.seed["constants"] if not constants else constants,
