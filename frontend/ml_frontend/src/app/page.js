@@ -16,6 +16,7 @@ export default function Home() {
   const [MapData, setMapData] = useState(0)
   const [MapText, setMapText] = useState("")
   const [Data, setData] = useState("")
+  const [LoadedData, setLoadedData] = useState(false)
   const [Seeds, setSeeds] = useState("")
   const [ShowForm, setShowForm] = useState(true)
   const [ShowAbout, setShowAbout] = useState(false)
@@ -76,11 +77,12 @@ export default function Home() {
 
 
   useEffect(()=>{
-    if(Data){
+    if(Data && LoadedData == false){
       set_seeds()
       change_map(0)
       !OriginalToken ? setOriginalToken(Data["token"]) : null
       setX_Interval(Data.test.environment[0].range[1]/100)
+      setLoadedData(true)
     }
   }, [Data])
 
