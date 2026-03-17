@@ -127,11 +127,13 @@ export default function Home() {
 
 
   function full_seed(){
+    Data["seed"][0]["s"][0] ? Data["seed"][0]["s"] = Data["seed"][0]["s"][0] : Data["seed"][0]["s"]
     return Data ? '["user_176551",' + JSON.stringify(Data["seed"][0]) + ']' : ""
   }
 
 
   function short_seed(){
+    Data["seed"][0]["s"][0] ? Data["seed"][0]["s"] = Data["seed"][0]["s"][0] : Data["seed"][0]["s"]
     return Data ? '["user_176551",' + JSON.stringify(Data["seed"][0]["s"]) + ']' : ""
   }
 
@@ -161,8 +163,8 @@ export default function Home() {
 
 
   async function send_api(path) {
-    const res = await fetch(`https://stateshaper-backend.vercel.app/api/` + path, {
-    // const res = await fetch("http://localhost:8000/api/" + path, {
+    // const res = await fetch(`https://stateshaper-backend.vercel.app/api/` + path, {
+    const res = await fetch("http://localhost:8000/api/" + path, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: JSON.stringify({"token": 1, "environment": Data ? Data.test.environment : []}) })
@@ -326,105 +328,109 @@ export default function Home() {
         </div>   
       </div>
       <div className="grid grid-cols-2 grid-rows-1 place-items-center h-4/5 mt-32 text-gray-200 min-w-full static">
-        <div className="grid gap-8 h-full static place-items-center">
+        <div className="grid gap-8 h-full content-start place-items-center">
           <div className="grid grid-rows-1 grid-cols-3 w-128 text-gray-200 text-xl cursor-pointer place-items-center">
             <a className={ShowForm ? "font-bold text-2xl disabled select-none cursor-default" : "hover:text-gray-300"} onClick={()=>show_content("form")}>Trip</a>
             <a className={ShowData ? "font-bold text-2xl disabled select-none cursor-default" : "hover:text-gray-300"} onClick={()=>show_content("data")}>Run</a>
             <a className={ShowAbout ? "font-bold text-2xl disabled select-none cursor-default" : "hover:text-gray-300"} onClick={()=>show_content("about")}>About</a>
           </div>
-          <div>
-            <div className={ShowForm ? "grid grid-rows-3 max-w-[800px] h-140 place-items-center overflow-y-auto mt-20 p-4 dot-scrollbar static" : "hidden"} style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
-              <div className="grid grid-rows-1 grid-cols-3 gap-4 w-full text-xl mr-auto mt-24">
-                <div>
-                  Derived From: 
-                </div>
-                <div>
-                  {Data.token}
-                </div>
-                <div className="grid grid-rows-1 grid-cols-2 self-end right-0 ml-auto gap-8 px-8">
-                    <button className={Data ? Data["token"] != OriginalToken ? "w-20 h-12 px-4 py-1 bg-blue-600 rounded-2xl cursor-pointer text-4xl hover:bg-gray-300 hover:text-blue-700 select-none z-99" : "disabled select-none w-20 h-12 px-4 py-1 bg-gray-600 rounded-2xl cursor-none text-4xl" : null} onClick={e => send_api("reverse")} disabled={Data ? Data["token"] == OriginalToken : false}>
-                      &larr;
-                    </button>
-                    <button className="w-20 h-12 px-4 py-1 bg-blue-600 rounded-2xl cursor-pointer px-2 text-4xl hover:bg-gray-300 hover:text-blue-700 select-none z-99"  onClick={e => send_api("forward")}>
-                      &rarr;
-                    </button>
-                </div>
-              </div>
-            <div className="grid grid-rows-1 grid-cols-2 w-full h-24 text-xl mt-36 static">
-              <div className="grid w-full grid-rows-2 grid-cols-1">
-                <div>
-                  <b>Car:</b>
-                </div>   
-                <div className="text-blue-400 text-2xl mt-4">
-                  <i>{Data ? get_name(Data.test.vehicle.name) : null}</i>
-                </div>
-              </div>
-              <div className="grid w-full grid-rows-2 grid-cols-1">
-                <div className="grid grid-rows-1 grid-cols-2">
+          <div className="">
+            <div>
+              <div className={ShowForm ? "grid grid-rows-3 max-w-[800px] h-140 content-start overflow-y-auto gap-10 p-4 dot-scrollbar static mt-24" : "hidden"} style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
+                <div className="grid grid-cols-3 gap-4 w-full text-xl">
                   <div>
-                    <b>Maps:</b> 
+                    Derived From: 
+                  </div>
+                  <div>
+                    {Data.token}
+                  </div>
+                  <div className="grid grid-cols-2 w-full text-xl">
+                      <button className={Data ? Data["token"] != OriginalToken ? "w-20 h-12 px-4 py-1 bg-blue-600 rounded-2xl cursor-pointer text-4xl hover:bg-gray-300 hover:text-blue-700 select-none z-99" : "disabled select-none w-20 h-12 px-4 py-1 bg-gray-600 rounded-2xl cursor-none text-4xl" : null} onClick={e => send_api("reverse")} disabled={Data ? Data["token"] == OriginalToken : false}>
+                        &larr;
+                      </button>
+                      <button className="w-20 h-12 px-4 py-1 bg-blue-600 rounded-2xl cursor-pointer px-2 text-4xl hover:bg-gray-300 hover:text-blue-700 select-none z-99"  onClick={e => send_api("forward")}>
+                        &rarr;
+                      </button>
                   </div>
                 </div>
-                <div className="mt-4">
-                  {Data ? MapText :null}
-                </div>
-              </div>
-            </div>
-            <div className="grid grid-rows-2 grid-cols-1 gap-24 w-full text-lg mt-36">
-                <div className="grid w-full grid-rows-1 grid-cols-1 justify-self-start mt-auto top-0 static">
-                </div>
-                <div className="grid grid-rows-1 grid-cols-2">
-                  <div>
-                    {Data ? Object.keys(Data.test.vehicle).map((item, i) => (
-                      <div key={i}>
-                        {i > 0 ?
-                        <div className="grid w-full grid-rows-1 grid-cols-2 gap-8">
-                          <div>
-                            {capitalize(item)}
-                          </div>
-                          <div className="whitespace-pre">
-                            {Data.test.vehicle[item]}
-                          </div>
-                        </div>
-                        : null}
+                <div className="grid grid-cols-2 w-full gap-8 text-lg">
+                  <div className="grid w-full grid-rows-2 grid-cols-1">
+                    <div>
+                      <b>Car:</b>
+                    </div>   
+                    <div className="text-blue-400 text-2xl mt-4">
+                      <i>{Data ? get_name(Data.test.vehicle.name) : null}</i>
+                    </div>
+                  </div>
+                  <div className="grid w-full grid-rows-2 grid-cols-1">
+                    <div className="grid grid-rows-1 grid-cols-2">
+                      <div>
+                        <b>Maps:</b> 
                       </div>
-                    )):null}
-                  </div>
-                  <div>
-                    {Data ? MapData : null}
+                    </div>
+                    <div className="mt-4">
+                      {Data ? MapText :null}
+                    </div>
                   </div>
                 </div>
-            </div>
-            </div>
-            <div className={ShowData ? "grid grid-rows-3 max-w-[800px] h-150 place-items-center overflow-y-auto  p-4 dot-scrollbar static gap-28" : "hidden"} style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
-              <div>
-                <Stats AttributeStates={[SelectedAttributes, setSelectedAttributes]} StartTest={StartTest} Counter={Counter} DrawData={DrawData}/>
-              </div>
-              <div className="relative mt-12 w-180 h-100 bg-gray-400" ref={ref}>
-                {StartTest == true && Counter >= 0 ?
-                  <div>
-                    <div className="absolute text-black text-sm p-4">
-                      map: {DrawData ? DrawData.environment : null}
+                <div className="grid grid-rows-2 grid-cols-1 gap-24 w-full text-lg">
+                    <div className="grid w-full grid-rows-1 grid-cols-1 justify-self-start mt-auto top-0 static">
                     </div>
-                    <div className="absolute text-black text-sm p-4 ml-auto right-0">
-                      mile: {Counter}
+                    <div className="grid grid-rows-1 grid-cols-2">
+                      <div>
+                        {Data ? Object.keys(Data.test.vehicle).map((item, i) => (
+                          <div key={i}>
+                            {i > 0 ?
+                            <div className="grid w-full grid-rows-1 grid-cols-2 gap-8">
+                              <div>
+                                {capitalize(item)}
+                              </div>
+                              <div className="whitespace-pre">
+                                {Data.test.vehicle[item]}
+                              </div>
+                            </div>
+                            : null}
+                          </div>
+                        )):null}
+                      </div>
+                      <div>
+                        {Data ? MapData : null}
+                      </div>
                     </div>
+                </div>
+            </div>
+            <div>
+              <div className={ShowData ? "grid grid-rows-3 max-w-[800px] h-150 place-items-center overflow-y-auto  p-4 dot-scrollbar static gap-28 mt-18" : "hidden"} style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
+                <div>
+                  <Stats AttributeStates={[SelectedAttributes, setSelectedAttributes]} StartTest={StartTest} Counter={Counter} DrawData={DrawData}/>
+                </div>
+                <div className="relative mt-12 w-180 h-100 bg-gray-400" ref={ref}>
+                  {StartTest == true && Counter >= 0 ?
+                    <div>
+                      <div className="absolute text-black text-sm p-4">
+                        map: {DrawData ? DrawData.environment : null}
+                      </div>
+                      <div className="absolute text-black text-sm p-4 ml-auto right-0">
+                        mile: {Counter}
+                      </div>
 
-                  </div>
-                : null}
-                {LoadedTrip ? 
-                  <div>
-                    {Data ? draw_display().map((data, i) => (
-                      <Draw Value={data.value} PreviousValue={data.prev_value} Counter={data.counter} Color={data.color} setShowDrawData={setShowDrawData} setHoverPos={setHoverPos} RunTestState={[RunTest, setRunTest]} key={i}/>
-                    )) : null}
-                  </div>
-                : null}
-              </div>
-              <div className={Counter < 100 && StartTest == false ? "mt-16 px-4 py-2 ml-auto w-32 h-12 bg-blue-800 hover:bg-blue-900 rounded-lg text-xl text-white cursor-pointer hover:bg-blue-800 select-none" : Counter < 100 && StartTest == true && Pause == false ? "mt-16 px-8 py-2 ml-auto w-32 h-12 bg-green-400 hover:bg-green-500 rounded-lg text-xl text-white cursor-pointer select-none" : Counter < 100 && StartTest == true && Pause == true ? "mt-16 px-6 py-2 ml-auto w-32 h-12 bg-yellow-500 hover:bg-yellow-600 rounded-lg italic text-xl text-white cursor-pointer select-none" : "mt-16 px-5 py-2 ml-auto w-32 h-12 bg-violet-700 hover:bg-violet-800 rounded-lg text-xl text-white cursor-pointer select-none"}  onClick={Counter < 100 && StartTest == false ? e => run_session() : Counter < 100 && StartTest == true && Pause == false ? e => pause_session(true) : Counter < 100 && StartTest == true && Pause == true ? e => pause_session(false) : e => reset_trip()}>
-                {Counter < 100 && StartTest == false ? "Run Test" : Counter < 100 && StartTest == true && Pause == false ? "Pause" : Counter < 100 && StartTest == true && Pause == true ? "Resume" : "Restart"}
+                    </div>
+                  : null}
+                  {LoadedTrip ? 
+                    <div>
+                      {Data ? draw_display().map((data, i) => (
+                        <Draw Value={data.value} PreviousValue={data.prev_value} Counter={data.counter} Color={data.color} setShowDrawData={setShowDrawData} setHoverPos={setHoverPos} RunTestState={[RunTest, setRunTest]} key={i}/>
+                      )) : null}
+                    </div>
+                  : null}
+                </div>
+                <div className={Counter < 100 && StartTest == false ? "mt-16 px-4 py-2 ml-auto w-32 h-12 bg-blue-800 hover:bg-blue-900 rounded-lg text-xl text-white cursor-pointer hover:bg-blue-800 select-none" : Counter < 100 && StartTest == true && Pause == false ? "mt-16 px-8 py-2 ml-auto w-32 h-12 bg-green-400 hover:bg-green-500 rounded-lg text-xl text-white cursor-pointer select-none" : Counter < 100 && StartTest == true && Pause == true ? "mt-16 px-6 py-2 ml-auto w-32 h-12 bg-yellow-500 hover:bg-yellow-600 rounded-lg italic text-xl text-white cursor-pointer select-none" : "mt-16 px-5 py-2 ml-auto w-32 h-12 bg-violet-700 hover:bg-violet-800 rounded-lg text-xl text-white cursor-pointer select-none"}  onClick={Counter < 100 && StartTest == false ? e => run_session() : Counter < 100 && StartTest == true && Pause == false ? e => pause_session(true) : Counter < 100 && StartTest == true && Pause == true ? e => pause_session(false) : e => reset_trip()}>
+                  {Counter < 100 && StartTest == false ? "Run Test" : Counter < 100 && StartTest == true && Pause == false ? "Pause" : Counter < 100 && StartTest == true && Pause == true ? "Resume" : "Restart"}
+                </div>
               </div>
             </div>
-            <div className="grid place-items-center h-140 mt-20 grid-cols-1 grid-auto-rows w-[740px] gap-6 overflow-y-auto dot-scrollbar p-6 text-lg" style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
+            <div>
+            <div className={ShowAbout ? "grid max-w-[800px] h-140 content-start overflow-y-auto gap-10 p-4 dot-scrollbar static mt-24" : "hidden"} style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
             <div>
               An unlimited amount of training data for machine learning can be created and stored using <i>Stateshaper</i>. The ability for the engine to derive synthetic data by tokenizing its numeric output allows for a wide range of training data values to be used. Each test can be stored and re-created at any time from the small seed formats seen to the right of the screen. 
             </div>
@@ -441,13 +447,15 @@ export default function Home() {
               <i>Stateshaper</i> is currently available as a Python package and Github repository. 
             </div>
             <div className="mt-8 grid grid-cols-1 gap-4 grid-rows-2 place-items-center">
-              <code className="bg-gray-700 p-2 w-124 rounded-sm">{'>'} pip install stateshaper</code>
-              <a className="mt-4 underline hover:text-gray-300 hover:italic" href="https://www.github.com/jgddesigns/stateshaper" target="_blank">https://www.github.com/jgddesigns/stateshaper</a>
+              <code className="bg-gray-700 p-2 w-124 rounded-sm">{'>'} pip install stateshaper-ml</code>
+              <a className="mt-4 underline hover:text-gray-300 hover:italic" href="https://www.github.com/stateshaper/stateshaper/tree/ml_use" target="_blank">https://www.github.com/stateshaper/stateshaper/tree/ml_use</a>
             </div>
             <div className="mt-8">
               ML Training is only one of the many uses for this program. There are other demos listed in the project's documentation.  Other uses can include, but are not limited to, smart home scheduling, gaming NPC behavior, content generation, graphic assets and store inventories. 
             </div>
             </div>
+          </div>
+          </div>
           </div>
 
         </div>
@@ -509,8 +517,8 @@ export default function Home() {
               <img className="ml-4 mb-4 select-none" src={ShowREADME ? "plugin.png" : "code.png"} />
             </div>
             <div>
-              Stateshaper Github: <a href="https://www.github.com/jgddesigns/stateshaper" className="text-blue-500 hover:underline hover:italic hover:text-gray-600" target="_blank" rel="noopener noreferrer">
-                https://www.github.com/jgddesigns/stateshaper
+              Stateshaper Github: <a href="https://www.github.com/stateshaper/stateshaper" className="text-blue-500 hover:underline hover:italic hover:text-gray-600" target="_blank" rel="noopener noreferrer">
+                https://www.github.com/stateshaper/stateshaper
               </a>
             </div>
         </div>
