@@ -163,7 +163,7 @@ if is_prime(st.session_state.mod):
                     max_size = state_len + plugin_size + custom_extra
                     max_value = float(round(max_size / data_len, 8)) if data_len > 0 else 0
                     # Cleaned-up print format (same wording, better spacing)
-                    print(f"\n{token_count} sets of synthetic ML TRAINING DATA have been generated from {max_value:.8f} bytes with a total size of {len(str(data))} bytes.\n\n")
+                    print(f"\n{token_count} sets of synthetic ML TRAINING DATA have been generated from {max_size} bytes with a total size of {len(str(data))} bytes.\n\n")
 
                     if compare:
                         if str(compare) == str(data):
