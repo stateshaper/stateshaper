@@ -9,7 +9,7 @@ from MachineLearning import MachineLearning
 st.set_page_config(
     page_title="Stateshaper ML Training Data Test",
     page_icon="",  # Can be an emoji or a path to an image file
-    layout="wide"     # Optional: sets the page to wide mode
+    layout=""     # Optional: sets the page to wide mode
 )
 
 st.title("Stateshaper ML Training Data Test")
