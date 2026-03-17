@@ -19,7 +19,7 @@ Creates examples of ML training data for self-driving cars. Intended to demonstr
 """)
 
 st.markdown("""
-Adjust the parameters below, then click **Start** to generate data and see compression stats.
+Adjust the parameters below, then click **Start** to generate data and see size reduction stats.
 """)
 
 st.markdown("""
@@ -157,19 +157,23 @@ if is_prime(st.session_state.mod):
                     with open("data.txt", "w") as f:
                         f.write(str(data))
 
+                    data_len = len(str(data))
+                    state_len = len(str(state))
+                    custom_extra = len(''.join(map(str, constants))) + len(str(st.session_state.mod))
+                    max_size = state_len + plugin_size + custom_extra
+                    max_value = float(round(max_size / data_len, 8)) if data_len > 0 else 0
                     # Cleaned-up print format (same wording, better spacing)
-                    print(f"\n{token_count} sets of synthetic ML TRAINING DATA have been generated from {len(str(data))} bytes\n\n")
+                    print(f"\n{token_count} sets of synthetic ML TRAINING DATA have been generated from {max_value:.8f} bytes with a total size of {len(str(data))} bytes.\n\n")
 
                     if compare:
                         if str(compare) == str(data):
-                            print("created data MATCHES full dataset without loss\n\n\n")
+                            print("Created data MATCHES full dataset WITHOUT LOSS.\n\n\n")
                         else:
-                            print("created data DOES NOT MATCH full dataset, if this is not the first run using these parameters, there is a loss of data. otherwise, run the test again to match the current data\n\n\n")
+                            print("Created data DOES NOT MATCH full dataset, if this is not the first run using these parameters, there is a loss of data. otherwise, run the test again to match the current data.\n\n\n")
                     else:
-                        print("no previous data to compare.\n\n\n")
+                        print("No previous data to compare.\n\n\n")
 
-                    data_len = len(str(data))
-                    state_len = len(str(state))
+
 
                     print("REDUCTION ANALYSIS\n------------------\n\n")
 
@@ -183,7 +187,7 @@ if is_prime(st.session_state.mod):
                     plugin_value = float(round((state_len + plugin_size) / data_len, 8)) if data_len > 0 else 0
                     print(f"- reduced to {plugin_value:.8f}% from created data with plugins\n\n")
 
-                    custom_extra = len(''.join(map(str, constants))) + len(str(st.session_state.mod))
+                    # custom_extra = len(''.join(map(str, constants))) + len(str(st.session_state.mod))
                     print("INCLUDING CUSTOM PARAMETERS AND PLUGIN (max size required to create the data)")
                     print(f"- the data is created from {state_len + plugin_size + custom_extra} bytes")
                     custom_value = float(round((state_len + plugin_size + custom_extra) / data_len, 8)) if data_len > 0 else 0
@@ -192,8 +196,8 @@ if is_prime(st.session_state.mod):
                     minimum_value = float(round(state_len / data_len, 8)) if data_len > 0 else 0
                     print(f"MINIMUM size required to create the data (initial state only, no plugins or custom params): {state_len} bytes ({minimum_value:.8f}% the size of created data)\n\n")
 
-                    max_size = state_len + plugin_size + custom_extra
-                    max_value = float(round(max_size / data_len, 8)) if data_len > 0 else 0
+                    # max_size = state_len + plugin_size + custom_extra
+                    # max_value = float(round(max_size / data_len, 8)) if data_len > 0 else 0
                     print(f"MAXIMUM size required to create the data (with plugins and custom params): {max_size} bytes ({max_value:.8f}% the size of created data)\n\n")
 
                 except Exception as e:
