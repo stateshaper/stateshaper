@@ -76,11 +76,11 @@ class BuildEnvironment:
 
 
     def create_environment(self, token):
-        print("start environment")
-        print(f"token: {token}")
+        # print("start environment")
+        # print(f"token: {token}")
         intervals = []
         interval_count = (token % self.max_intervals) + 1
-        print(f"interval count {interval_count}")
+        # print(f"interval count {interval_count}")
         current = 0
         adjust = 1
         while len(intervals) < interval_count: 
@@ -95,8 +95,8 @@ class BuildEnvironment:
                     interval_count -= 1
             current = interval_range[1]
             if current >= 100:
-                print("environments created")
-                print(intervals)
+                # print("environments created")
+                # print(intervals)
                 return intervals
     
 
