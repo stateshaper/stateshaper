@@ -327,7 +327,9 @@ export default function Home() {
           Stateshaper ML Training Demo
         </div>   
       </div>
-      <div className="grid grid-cols-2 grid-rows-1 place-items-center h-4/5 mt-32 text-gray-200 min-w-full static">
+
+      {Data ? 
+        <div className="grid grid-cols-2 grid-rows-1 place-items-center h-4/5 mt-32 text-gray-200 min-w-full static">
         <div className="grid gap-8 h-full content-start place-items-center">
           <div className="grid grid-rows-1 grid-cols-3 w-128 text-gray-200 text-xl cursor-pointer place-items-center">
             <a className={ShowForm ? "font-bold text-2xl disabled select-none cursor-default" : "hover:text-gray-300"} onClick={()=>show_content("form")}>Trip</a>
@@ -354,7 +356,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="grid grid-cols-2 w-full gap-8 text-lg">
-                  <div className="grid w-full grid-rows-2 grid-cols-1">
+                  <div className="grid w-full grid-rows-2 grid-cols-1 h-36">
                     <div>
                       <b>Car:</b>
                     </div>   
@@ -362,7 +364,7 @@ export default function Home() {
                       <i>{Data ? get_name(Data.test.vehicle.name) : null}</i>
                     </div>
                   </div>
-                  <div className="grid w-full grid-rows-2 grid-cols-1">
+                  <div className="grid w-full grid-rows-2 grid-cols-1 h-36">
                     <div className="grid grid-rows-1 grid-cols-2">
                       <div>
                         <b>Maps:</b> 
@@ -376,7 +378,7 @@ export default function Home() {
                 <div className="grid grid-rows-2 grid-cols-1 gap-24 w-full text-lg">
                     <div className="grid w-full grid-rows-1 grid-cols-1 justify-self-start mt-auto top-0 static">
                     </div>
-                    <div className="grid grid-rows-1 grid-cols-2">
+                    <div className="grid grid-rows-1 grid-cols-2 static">
                       <div>
                         {Data ? Object.keys(Data.test.vehicle).map((item, i) => (
                           <div key={i}>
@@ -509,7 +511,8 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </div>
+        </div>
+      : null}
 
       {ShowREADME || ShowCode && !ShowExample?
         <div className="grid grid-auto-rows grid-auto-cols place-items-center fixed bottom-18 right-36 w-4/5 h-5/6 z-102 p-4 py-5 rounded-lg border border-zinc-800 bg-gray-400 text-white gap-12">
