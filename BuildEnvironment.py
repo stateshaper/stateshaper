@@ -1,7 +1,7 @@
 import random
 import sys
-from .data.environments import environment_data
-from .TripTimeline import TripTimeline
+from data.environments import environment_data
+from TripTimeline import TripTimeline
 
 class BuildEnvironment:
 

@@ -2,7 +2,7 @@ import copy
 import random
 import sys
 import time
-from .data.environments import environment_data
+from data.environments import environment_data
 
 class TripTimeline:
 

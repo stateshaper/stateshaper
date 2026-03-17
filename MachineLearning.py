@@ -1,8 +1,8 @@
 import random
 import sys
 
-from .BuildEnvironment import BuildEnvironment
-from .data.vehicles import vehicles
+from BuildEnvironment import BuildEnvironment
+from data.vehicles import vehicles
 
 class MachineLearning:
 
