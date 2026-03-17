@@ -158,7 +158,7 @@ if is_prime(st.session_state.mod):
                         if str(compare) == str(data):
                             print("created data MATCHES full dataset without loss\n\n\n")
                         else:
-                            print("created data DOES NOT MATCH full dataset, if this is not the first run, there is a loss of data\n\n\n")
+                            print("created data DOES NOT MATCH full dataset, if this is not the first run using these parameters, there is a loss of data. otherwise, run the test again to match the current data\n\n\n")
                     else:
                         print("no previous data to compare.\n\n\n")
 
