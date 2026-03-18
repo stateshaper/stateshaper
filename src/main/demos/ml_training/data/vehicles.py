@@ -30,7 +30,7 @@ vehicles = [
 {"name":"chevy_silverado","torque":0.95,"acceleration":0.6,"speed":0.65,"durability":0.9,"tread":0.8,"size":0.85,"tank":0.9,"efficiency":0.45},
 {"name":"chevy_colorado","torque":0.8,"acceleration":0.6,"speed":0.65,"durability":0.85,"tread":0.8,"size":0.75,"tank":0.85,"efficiency":0.5},
 {"name":"chevy_malibu","torque":0.55,"acceleration":0.5,"speed":0.6,"durability":0.8,"tread":0.7,"size":0.5,"tank":0.7,"efficiency":0.75},
-{"name":"chevy_camaro_ss","torque":0.85,"acceleration":0.8,"speed":0.85,"durability":0.7,"tread":0.75,"size":0.55,"tank":0.65,"efficiency":0.5},
+{"name":"chevy_camaro_SS","torque":0.85,"acceleration":0.8,"speed":0.85,"durability":0.7,"tread":0.75,"size":0.55,"tank":0.65,"efficiency":0.5},
 {"name":"chevy_tahoe","torque":0.85,"acceleration":0.55,"speed":0.65,"durability":0.9,"tread":0.8,"size":0.9,"tank":0.9,"efficiency":0.4},
 {"name":"chevy_bolt_ev","torque":0.8,"acceleration":0.7,"speed":0.65,"durability":0.75,"tread":0.7,"size":0.45,"tank":0.6,"efficiency":0.9},
 

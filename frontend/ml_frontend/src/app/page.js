@@ -63,6 +63,8 @@ export default function Home() {
 
 
   useEffect(()=>{
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "engine=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     send_api("start")
   }, [])
 
@@ -78,9 +80,10 @@ export default function Home() {
 
   useEffect(()=>{
     if(Data && LoadedData == false){
+      set_cookie("engine", JSON.stringify(Data["seed"][1]))
       set_seeds()
       change_map(0)
-      !OriginalToken && Data["token"] ? setOriginalToken(Data["token"]) : null
+      !get_cookie("token") && Data["token"] ? set_cookie("token", Data["token"]) : null
       setX_Interval(Data.test.environment[0].range[1]/100)
       setLoadedData(true)
     }
@@ -110,7 +113,15 @@ export default function Home() {
   }, [StartTest, Counter, Pause])
 
 
+  function set_cookie(name, value, expire=86400) {
+    document.cookie = `${name}=${value}; max-age=${expire}; path=/`;
+  }
 
+  function get_cookie(name) {
+    const cookie = document.cookie.split("; ").find(row => row.startsWith(`${name}=`))?.split("=")[1]
+
+    return cookie ? cookie.length > 0 ? cookie : null : null
+  }
 
   function draw_value(value){
     if(value < 1){
@@ -165,17 +176,23 @@ export default function Home() {
 
 
   async function send_api(path) {
-      const res = await fetch(`https://stateshaper-backend.vercel.app/api/` + path, {
-      // const res = await fetch("http://localhost:8000/api/" + path, {
+    if(get_cookie("engine") && path == "start"){
+      send_api("refresh")
+    }
+      // const res = await fetch(`https://stateshaper-backend.vercel.app/api/` + path, {
+      const res = await fetch("http://localhost:8000/api/" + path, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: JSON.stringify({"token": 1, "environment": Data ? Data.test.environment : []}) })
+      body: JSON.stringify({ message: JSON.stringify({"token": 1, "environment": Data ? Data.test.environment : [], "engine_state": get_cookie("engine") ? get_cookie("engine") : {}}) })
     });
     const data = await res.json()
     
+    
+
     if(path != "trip" && path != "reset"){
       setData(data.response)
       setDrawData(data.response.test.environment[0].data)
+      set_cookie("engine", JSON.stringify(data.response.seed[1]))
     }
 
     if(path == "trip"){
@@ -346,10 +363,10 @@ export default function Home() {
                     Derived From: 
                   </div>
                   <div>
-                    {Data.token}
+                    {Data["token"] ? Data["token"] : ""}
                   </div>
                   <div className="grid grid-cols-2 w-full text-xl">
-                      <button className={Data ? Data["token"] != OriginalToken ? "w-20 h-12 px-4 py-1 bg-blue-600 rounded-2xl cursor-pointer text-4xl hover:bg-gray-300 hover:text-blue-700 select-none z-99" : "disabled select-none w-20 h-12 px-4 py-1 bg-gray-600 rounded-2xl cursor-none text-4xl" : null} onClick={e => send_api("reverse")} disabled={Data ? Data["token"] == OriginalToken : false}>
+                      <button className={Data && get_cookie("token") ? Data["token"] != get_cookie("token") ? "w-20 h-12 px-4 py-1 bg-blue-600 rounded-2xl cursor-pointer text-4xl hover:bg-gray-300 hover:text-blue-700 select-none z-99" : "disabled select-none w-20 h-12 px-4 py-1 bg-gray-600 rounded-2xl cursor-none text-4xl" : null} onClick={e => send_api("reverse")} disabled={Data && get_cookie("token") ? Data["token"] == get_cookie("token") : false}>
                         &larr;
                       </button>
                       <button className="w-20 h-12 px-4 py-1 bg-blue-600 rounded-2xl cursor-pointer px-2 text-4xl hover:bg-gray-300 hover:text-blue-700 select-none z-99"  onClick={e => send_api("forward")}>

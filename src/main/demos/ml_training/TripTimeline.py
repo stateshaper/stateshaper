@@ -110,11 +110,12 @@ class TripTimeline:
             
 
     def trip_progress(self):
-        print(f"\n\n\n\nCurrent Interval: {self.current_interval['environment']}, Range: {self.current_interval['range']}")
-        print(f"\n{self.current_interval}")
-        if self.next_interval != None:
-            print(f"\n\nNext Interval: {self.next_interval['environment']}, Range: {self.next_interval['range']}")
-            print(f"\n{self.next_interval}\n\n")
+        pass
+        # print(f"\n\n\n\nCurrent Interval: {self.current_interval['environment']}, Range: {self.current_interval['range']}")
+        # print(f"\n{self.current_interval}")
+        # if self.next_interval != None:
+        #     print(f"\n\nNext Interval: {self.next_interval['environment']}, Range: {self.next_interval['range']}")
+        #     print(f"\n{self.next_interval}\n\n")
         
 
     def start_trip(self):
@@ -131,15 +132,15 @@ class TripTimeline:
         try:
             return self.trip[self.trip.index(self.current_interval)+1]
         except:
-            print("No other environments in this trip.")
+            # print("No other environments in this trip.")
             return None
         
 
     def compare_intervals(self):
-        print(f"trip counter {str(self.trip_counter)}")
+        # print(f"trip counter {str(self.trip_counter)}")
         for attribute in self.trip_attributes:
             self.set_attribute(attribute) 
-        print(f"\n\nnext trip interval set: {self.current_interval}")
+        # print(f"\n\nnext trip interval set: {self.current_interval}")
 
 
     def set_attribute(self, attribute):
@@ -163,12 +164,12 @@ class TripTimeline:
         
 
     def adjust_values(self):
-        print(f"\n\n\n\nTrip Counter: {self.trip_counter}")
-        print(f"Environment: {self.current_interval['environment']}, Range: {self.current_interval['range']}")
-        print(self.token)
-        print(self.trip_attributes)
-        print(self.total_trip)
-        print(self.next_interval)
+        # print(f"\n\n\n\nTrip Counter: {self.trip_counter}")
+        # print(f"Environment: {self.current_interval['environment']}, Range: {self.current_interval['range']}")
+        # print(self.token)
+        # print(self.trip_attributes)
+        # print(self.total_trip)
+        # print(self.next_interval)
         for attribute in self.trip_attributes:
             self.total_trip["data"][attribute] = (self.total_trip["data"][attribute] + self.trip_attributes[attribute]) if attribute in self.measured["gradual"] else self.trip_attributes[attribute]
             self.total_trip["data"][attribute] = .99 if self.total_trip["data"][attribute] >= .99 else self.total_trip["data"][attribute]
@@ -184,9 +185,9 @@ class TripTimeline:
 
     def end_check(self, one_trip=False, step=False):
         if (self.trip_counter >= self.trip_length and self.end == False) or one_trip == True and self.trip_counter >= self.current_interval["range"][1]:
-            print("\n\nend of trip")
-            print("\n\nhazards encountered\n")
-            print(self.hazard_data)
+            # print("\n\nend of trip")
+            # print("\n\nhazards encountered\n")
+            # print(self.hazard_data)
             self.trip_data = {"hazard_data": self.hazard_data, "steering_precision": self.steering_precision, "speed_precision": self.speed_precision, "stop_precision": self.stop_precision, "rule_precision": self.rule_precision}
             self.end = True
         else:
@@ -194,8 +195,8 @@ class TripTimeline:
             
 
     def interval_end(self):
-        print("\n\n\nend of interval")
-        print("\n\nnext interval")
-        print(self.next_interval)
-        print("\n\n")
+        # print("\n\n\nend of interval")
+        # print("\n\nnext interval")
+        # print(self.next_interval)
+        # print("\n\n")
         self.trip_progress()

@@ -21,8 +21,8 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    # allow_origins=["http://localhost:3000"],
-    allow_origins=["https://stateshaper-ml.vercel.app"],  
+    allow_origins=["http://localhost:3000"],
+    # allow_origins=["https://stateshaper-ml.vercel.app"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -75,7 +75,7 @@ def forward():
 def reverse():
     token = run.reverse_one()
     test = ml.current_test(token)
-    return {"response": {"test": test, "token": token, "seed": [run.get_seed(state=state), run.engine]}}
+    return {"response": {"test": test, "token": token, "seed": [run.get_seed(state=state), run.engine], "engine_state": run}}
 
 
 @app.post("/api/trip")
@@ -90,8 +90,18 @@ def run_test(input: Input):
 
 
 @app.post("/api/reset")
-def forward():
+def reset():
     run_trip.start_engine()
     run_trip.define_engine(state=state)
     trip.reset_trip()
+    return {"response": {}}
+
+#seed=None, token_count=10, initial_state=[1], vocab=None, constants={"a": 3,"b": 5,"c": 7,"d": 11}
+
+@app.post("/api/refresh")
+def refresh(input: Input):
+    data = json.loads(input.message)
+    data = data["engine_state"]
+    print("\n\nrefreshing engine with data: ", data)
+    run_trip.refresh_engine(state=data["current_state"], original_state=data["original_state"], iteration=data["iteration"], constants=data["constants"], mod=data["mod"])
     return {"response": {}}

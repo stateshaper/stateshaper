@@ -78,7 +78,13 @@ class RunEngine:
             [self.data["compound_length"], self.data["compound_groups"], self.data["compound_terms"]] if self.data["rules"] == "compound" else None
         )
 
-
+    def refresh_engine(self, current_state, original_state, iteration, constants, mod):
+        self.engine["current_state"] = current_state
+        self.engine["original_state"] = original_state
+        self.engine["iteration"] = iteration
+        self.engine["constants"] = constants
+        self.engine["mod"] = mod
+        
     def run_engine(self, token_count=None):
         print(self.seed)
         self.tokens = self.engine.generate_tokens(self.connector.token_count if not token_count else token_count)
