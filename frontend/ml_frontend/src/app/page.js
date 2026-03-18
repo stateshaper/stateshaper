@@ -179,8 +179,8 @@ export default function Home() {
     if(get_cookie("engine") && path == "start"){
       send_api("refresh")
     }
-      // const res = await fetch(`https://stateshaper-backend.vercel.app/api/` + path, {
-      const res = await fetch("http://localhost:8000/api/" + path, {
+      const res = await fetch(`https://stateshaper-backend.vercel.app/api/` + path, {
+      //const res = await fetch("http://localhost:8000/api/" + path, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: JSON.stringify({"token": 1, "environment": Data ? Data.test.environment : [], "engine_state": get_cookie("engine") ? get_cookie("engine") : {}}) })
