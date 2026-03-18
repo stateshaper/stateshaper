@@ -12,7 +12,7 @@ Often times, this can lead to a large amount of storage space being consumed.
 
 Using *Stateshaper* in combination with a custom plugin ruleset can allow for test cases to be created and reproduced, without loss, from seed parameters using only a few bytes of total size.
 
-The plugin ruleset can vary in complexity and is the only heavy-lifting needed to implement this program for ML Training scenarios. In many situations, the file can consist of only a few fuctions. If the data involves detailed requirements, the plugin and corresponding output can still be adjusted to fit this type of use. 
+The plugin ruleset can vary in complexity and is the only heavy-lifting needed to implement this program for ML Training scenarios. In many situations, the file can consist of only a few functions. If the data involves detailed requirements, the plugin and corresponding output can still be adjusted to fit this type of use. 
 
 <br> 
 
