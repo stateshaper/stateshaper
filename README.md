@@ -20,15 +20,15 @@ For plugin file requirements, see the [`PLUGIN README`](PLUGINS.md)
 
 <br> <br>
 
-Here is an example web application showing how *Stateshaper* can be used in test runs to train the AI in self-driving cars:
+The live test demo is up now, containing data reduction statistics and examples of generated ML training data:
 
-https://stateshaper-ml-demo.vercel.app
+[https://stateshaper.onrender.com/](https://stateshaper.onrender.com/)
 
-<br>
 
-The corresponding files associated with this demo can be found in the *src/main/demos* directory, or through this shortcut:
+BETA LAUNCH EXPECTED BY LATE MAY 2024
 
-[`SELF-DRIVING CAR DEMO`](src/main/demos/self_driving)
+Signup: [https://tally.so/r/2ErVEg](https://tally.so/r/2ErVEg)
+
 
 
 
