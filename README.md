@@ -1,6 +1,6 @@
 # *Stateshaper*
 
-***Reduce the size of ML Training datasets by over 90%***
+***Reduces the size of ML Training datasets into almost nothing***
 
 <br>
 
