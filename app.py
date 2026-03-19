@@ -15,12 +15,26 @@ st.set_page_config(
 st.title("Stateshaper ML Training Data Test")
 
 st.markdown("""
-Creates examples of ML training data for self-driving cars. Intended to demonstrate Stateshaper's capability to reduce datasets by over 90% without loss.
+Creates examples of ML training data for self-driving cars. Intended to demonstrate Stateshaper's capability to reduce datasets into almost nothing without loss.
 """)
 
 st.markdown("""
 Adjust the parameters below, then click **Start** to generate data and see size reduction stats.
 """)
+
+st.markdown("""
+<style>
+.instructions {
+    font-size: 14px;
+    font-style: italic;
+    color: #555;
+}
+</style>
+
+<div class="instructions">
+    Run once to generate the data, then run it again with the same parameters to compare the new data to the previous data.
+</div>
+""", unsafe_allow_html=True)
 
 st.markdown("""
 <style>
@@ -46,8 +60,9 @@ st.markdown("""
 </style>
 
 <div class="bottom-right-links">
-    <a href="https://github.com/stateshaper/stateshaper/blob/ml_use/README.md" target="_blank">docs</a>
+    <a href="https://github.com/stateshaper/stateshaper/blob/ml_use/README.md" target="_blank">code</a>
     <a href="https://stateshaper-ml.vercel.app/" target="_blank">demo</a>
+    <a href="https://tally.so/r/2ErVEg" target="_blank">beta</a>
 </div>
 """, unsafe_allow_html=True)
 
@@ -142,6 +157,7 @@ except:
 # ── Run button ────────────────────────────────────────────────────────────
 if is_prime(st.session_state.mod):
     if st.button("Start Generation", type="primary"):
+
         with st.spinner("Generating data..."):
             output_buffer = StringIO()
             with redirect_stdout(output_buffer):
@@ -169,7 +185,7 @@ if is_prime(st.session_state.mod):
                         if str(compare) == str(data):
                             print("Created data MATCHES full dataset WITHOUT LOSS.\n\n\n")
                         else:
-                            print("Created data DOES NOT MATCH full dataset, if this is not the first run using these parameters, there is a loss of data. otherwise, run the test again to match the current data.\n\n\n")
+                            print("Created data DOES NOT MATCH full dataset, if this is not the first run using these parameters, there is a loss of data. Otherwise, run the test again to match the current data.\n\n\n")
                     else:
                         print("No previous data to compare.\n\n\n")
 
@@ -206,6 +222,7 @@ if is_prime(st.session_state.mod):
                     print(traceback.format_exc())
 
             captured = output_buffer.getvalue()
+
 
         # ── Output display ────────────────────────────────────────────────────────
         if captured:
@@ -253,6 +270,8 @@ if is_prime(st.session_state.mod):
 
         else:
             st.info("No output captured.")
+
+        
 
         # Optional preview
         if 'data' in locals():
