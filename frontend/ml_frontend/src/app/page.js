@@ -12,7 +12,6 @@ export default function Home() {
   const [TestTrigger, setTestTrigger] = useState(false)
   const [X_Interval, setX_Interval] = useState(10)
   const [Counter, setCounter] = useState(-1)
-  const [OriginalToken, setOriginalToken] = useState(null)
   const [MapData, setMapData] = useState(0)
   const [MapText, setMapText] = useState("")
   const [Data, setData] = useState("")
@@ -21,7 +20,6 @@ export default function Home() {
   const [ShowForm, setShowForm] = useState(true)
   const [ShowAbout, setShowAbout] = useState(false)
   const [ShowData, setShowData] = useState(false)
-  const [ShowMainREADME, setShowMainREADME] = useState(false)
   const [ShowREADME, setShowREADME] = useState(false)
   const [ShowExample, setShowExample] = useState(false)
   const [ShowCode, setShowCode] = useState(false)
@@ -32,7 +30,8 @@ export default function Home() {
   const [StartTest, setStartTest] = useState(false)
   const [ShowDrawData, setShowDrawData] = useState(false)
   const [HoverPos, setHoverPos] = useState([0, 0])
-    
+  const [BACKEND_ROUTE, setBACKEND_ROUTE] = useState(null)
+
   const classes = ["font-bold", ""]
   const [LinkText, setLinkText] = useState(classes[0])
   
@@ -65,8 +64,21 @@ export default function Home() {
   useEffect(()=>{
     document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     document.cookie = "engine=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    send_api("start")
+    console.log("cookies cleared")
+    demo_route()
   }, [])
+
+  const demo_route = async () => {
+    console.log("fetching backend route")
+    const res = await fetch('./api');
+    const json = await res.json();
+    console.log(json.data);
+    setBACKEND_ROUTE(json.data)
+  }
+
+  useEffect(()=>{
+    BACKEND_ROUTE ? send_api("start") : null
+  }, [BACKEND_ROUTE])
 
 
   useEffect(()=>{
@@ -179,7 +191,7 @@ export default function Home() {
     if(get_cookie("engine") && path == "start"){
       send_api("refresh")
     }
-      const res = await fetch(`https://stateshaper-backend.vercel.app/api/` + path, {
+      const res = await fetch(BACKEND_ROUTE + path, {
       //const res = await fetch("http://localhost:8000/api/" + path, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

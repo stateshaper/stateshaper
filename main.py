@@ -1,14 +1,17 @@
 import json
+import os
 import random
 import sys
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.responses import HTMLResponse
-
 from src.main.demos.ml_training.TripTimeline import TripTimeline
 from src.main.demos.ml_training.MachineLearning import MachineLearning
 from src.main.stateshaper import RunEngine
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
+load_dotenv()
+
 
 
 count = 10
@@ -19,10 +22,13 @@ app = FastAPI(
     version="1.0.0",
 )
 
+
+DEMO_FRONTEND = os.getenv("DEMO_FRONTEND")
+print("DEMO_FRONTEND: ", DEMO_FRONTEND)
 app.add_middleware(
     CORSMiddleware,
     #allow_origins=["http://localhost:3000"],
-    allow_origins=["https://stateshaper-ml.vercel.app"],  
+    allow_origins=[DEMO_FRONTEND],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -37,12 +43,13 @@ class Input(BaseModel):
 
 
 
+
 with open("example_data/tokens.json", "r") as f:
     data = json.loads(f.read())
     f.close()
 run = RunEngine(data, token_count=50)
 run.start_engine()
-state = [314159]
+state = [9973]
 # state=[1]
 run.define_engine(state=state)
 tokens = run.run_engine()
