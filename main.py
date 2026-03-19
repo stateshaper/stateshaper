@@ -24,7 +24,9 @@ app = FastAPI(
 
 
 DEMO_FRONTEND = os.getenv("DEMO_FRONTEND")
-print("DEMO_FRONTEND: ", DEMO_FRONTEND)
+
+
+
 app.add_middleware(
     CORSMiddleware,
     #allow_origins=["http://localhost:3000"],
@@ -49,8 +51,7 @@ with open("example_data/tokens.json", "r") as f:
     f.close()
 run = RunEngine(data, token_count=50)
 run.start_engine()
-state = [9973]
-# state=[1]
+state = [1234]
 run.define_engine(state=state)
 tokens = run.run_engine()
 trip = TripTimeline()
@@ -103,7 +104,6 @@ def reset():
     trip.reset_trip()
     return {"response": {}}
 
-#seed=None, token_count=10, initial_state=[1], vocab=None, constants={"a": 3,"b": 5,"c": 7,"d": 11}
 
 @app.post("/api/refresh")
 def refresh(input: Input):
