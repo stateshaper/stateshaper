@@ -25,12 +25,12 @@ app = FastAPI(
 
 DEMO_FRONTEND = os.getenv("DEMO_FRONTEND")
 
-
+if DEMO_FRONTEND is None:
+    DEMO_FRONTEND = "http://stateshaper-frontend.vercel.app"
 
 app.add_middleware(
     CORSMiddleware,
-    #allow_origins=["http://localhost:3000"],
-    allow_origins=[DEMO_FRONTEND],  
+    allow_origins=["http://localhost:3000", DEMO_FRONTEND, "https://stateshaper-frontend.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
