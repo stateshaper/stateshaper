@@ -193,12 +193,7 @@ export default function Home() {
     }
       const res = await fetch(BACKEND_ROUTE + path, {
       method: "POST",
-      headers: [{ "Content-Type": "application/json" },
-        { "key": "Access-Control-Allow-Credentials", "value": "true" },
-        { "key": "Access-Control-Allow-Origin", "value": "https://stateshaper-ml.vercel.app" },
-        { "key": "Access-Control-Allow-Methods", "value": "GET,OPTIONS,PATCH,DELETE,POST,PUT" },
-        { "key": "Access-Control-Allow-Headers", "value": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version" }
-      ],
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: JSON.stringify({"token": 1, "environment": Data ? Data.test.environment : [], "engine_state": get_cookie("engine") ? get_cookie("engine") : {}}) })
     });
     const data = await res.json()
