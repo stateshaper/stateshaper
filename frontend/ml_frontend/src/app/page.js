@@ -188,10 +188,10 @@ export default function Home() {
 
 
   async function send_api(path) {
-    if(get_cookie("engine") && path == "start"){
-      send_api("refresh")
-    }
-      const res = await fetch(BACKEND_ROUTE + path, {
+    // if(get_cookie("engine") && path == "start"){
+    //   send_api("refresh")
+    // }
+    const res = await fetch(BACKEND_ROUTE + path, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: JSON.stringify({"token": 1, "environment": Data ? Data.test.environment : [], "engine_state": get_cookie("engine") ? get_cookie("engine") : {}}) })

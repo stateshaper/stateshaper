@@ -73,18 +73,20 @@ def start():
 
 
 @app.post("/api/forward")
-def forward():
+def forward(input: Input):
+    input = json.loads(input.message)
+    refresh(input["engine_state"])
     token = run.one_token()
     test = ml.current_test(token)
-    
     return {"response": {"test": test, "token": token, "seed": [run.get_seed(state=state), run.engine]}}
 
 
 @app.post("/api/reverse")
-def reverse():
+def reverse(input: Input):
+    input = json.loads(input.message)
+    refresh(input["engine_state"])
     token = run.reverse_one()
     test = ml.current_test(token)
-    
     return {"response": {"test": test, "token": token, "seed": [run.get_seed(state=state), run.engine], "engine_state": run}}
 
 
@@ -95,7 +97,6 @@ def run_test(input: Input):
     trip.set_trip(token, input["environment"])
     trip.start_trip()
     test = trip.run_timer(False, True)
-    
     return {"response": {"test": test, "token": token, "seed": [run.get_seed(state=state), run.engine]}}
 
 
@@ -107,10 +108,7 @@ def reset():
     return {"response": {}}
 
 
-@app.post("/api/refresh")
-def refresh(input: Input):
-    data = json.loads(input.message)
-    data = data["engine_state"]
+def refresh(data):
     print("\n\nrefreshing engine with data: ", data)
     run_trip.refresh_engine(state=data["current_state"], original_state=data["original_state"], iteration=data["iteration"], constants=data["constants"], mod=data["mod"])
     return {"response": {}}
