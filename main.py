@@ -49,13 +49,13 @@ class Input(BaseModel):
 with open("example_data/tokens.json", "r") as f:
     data = json.loads(f.read())
     f.close()
-run = RunEngine(data, token_count=50)
+run = RunEngine(data, token_count=1)
 run.start_engine()
 state = [1234]
 run.define_engine(state=state)
 tokens = run.run_engine()
 trip = TripTimeline()
-run_trip = RunEngine(data, token_count=50)
+run_trip = RunEngine(data, token_count=1)
 run_trip.start_engine()
 run_trip.define_engine(state=state)
 
@@ -76,6 +76,7 @@ def start():
 def forward():
     token = run.one_token()
     test = ml.current_test(token)
+    
     return {"response": {"test": test, "token": token, "seed": [run.get_seed(state=state), run.engine]}}
 
 
@@ -83,6 +84,7 @@ def forward():
 def reverse():
     token = run.reverse_one()
     test = ml.current_test(token)
+    
     return {"response": {"test": test, "token": token, "seed": [run.get_seed(state=state), run.engine], "engine_state": run}}
 
 
