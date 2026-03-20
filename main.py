@@ -9,8 +9,8 @@ from src.main.demos.ml_training.TripTimeline import TripTimeline
 from src.main.demos.ml_training.MachineLearning import MachineLearning
 from src.main.stateshaper import RunEngine
 from fastapi.middleware.cors import CORSMiddleware
-from dotenv import load_dotenv
-load_dotenv()
+# from dotenv import load_dotenv
+# load_dotenv()
 
 
 
@@ -23,14 +23,14 @@ app = FastAPI(
 )
 
 
-DEMO_FRONTEND = os.getenv("DEMO_FRONTEND")
+# DEMO_FRONTEND = os.getenv("DEMO_FRONTEND")
 
-if DEMO_FRONTEND is None:
-    DEMO_FRONTEND = "http://stateshaper-frontend.vercel.app"
+# if DEMO_FRONTEND is None:
+#     DEMO_FRONTEND = "http://stateshaper-frontend.vercel.app"
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", DEMO_FRONTEND, "https://stateshaper-frontend.vercel.app"],
+    allow_origins=["http://localhost:3000", "https://stateshaper-frontend.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -61,7 +61,7 @@ run_trip.define_engine(state=state)
 
 
 @app.post("/api/start")
-def forward():
+def start():
     run.start_engine()
     run.define_engine(state=state)
     token = run.one_token()
