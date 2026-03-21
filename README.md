@@ -26,7 +26,7 @@ This repository contains code written in Python, with other langauges scheduled 
 
 Multiple demonstrations are currently live online (currently desktop only):
 
-<br> 
+<br> <br>
 
 *ML Training Demo*
 
