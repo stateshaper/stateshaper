@@ -103,7 +103,7 @@ With a plugin file that uses a numerical token to set each graphic object's attr
 Clone this repository:
 
 ```bash
-git clone https://github.com/jgddesigns/stateshaper.git
+git clone https://github.com/stateshaper/stateshaper.git
 cd stateshaper
 ```
 
