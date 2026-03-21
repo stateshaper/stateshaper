@@ -1,7 +1,0 @@
-python -m build
-
-
-twine upload --repository testpypi dist/*
-
-
-pypi-AgENdGVzdC5weXBpLm9yZwIkMGExOWIzNjEtN2I3Mi00Y2E0LTgxODktZGEzNGJjZmI1NDliAAIqWzMsImMwM2I3OWFiLTk5ZmItNDhkNi04MDM3LWZmNWZmNzhiNjU1YiJdAAAGIJDiHfOzd7dsLmmWvR1Q-x3hxWoQ_oXuLNOpxtXX0EdI

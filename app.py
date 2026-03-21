@@ -61,6 +61,7 @@ st.markdown("""
 
 <div class="bottom-right-links">
     <a href="https://github.com/stateshaper/stateshaper/blob/ml_use/README.md" target="_blank">code</a>
+    <a href="https://stateshaper-ml.vercel.app" target="_blank">demo</a>
     <a href="https://tally.so/r/2ErVEg" target="_blank">beta</a>
 </div>
 """, unsafe_allow_html=True)
