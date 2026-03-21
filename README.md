@@ -30,7 +30,7 @@ Multiple demonstrations are currently live online (currently desktop only):
 
 *ML Training Demo*
 
-https://stateshaper-ml-demo.vercel.app
+https://stateshaper-ml.vercel.app
 
 <h6>Ruleset: <i>Tokens</i></h6>
 
