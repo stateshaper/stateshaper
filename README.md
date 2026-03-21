@@ -76,7 +76,7 @@ https://stateshaper-graphics.vercel.app
 
 With a plugin file that uses a numerical token to set each graphic object's attributes, an endless amount of onscreen content can be generated. A basic example of 2d shapes and colors is shown. When more precise calculations are used, this output can include even the most modern textures. 
 
-
+<br> <br>
 ---
 
 <br> <br> 
