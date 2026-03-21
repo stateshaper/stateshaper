@@ -76,6 +76,8 @@ https://stateshaper-graphics.vercel.app
 
 With a plugin file that uses a numerical token to set each graphic object's attributes, an endless amount of onscreen content can be generated. A basic example of 2d shapes and colors is shown. When more precise calculations are used, this output can include even the most modern textures. 
 
+<br> <br>
+
 ---
 
 <br> <br> 
@@ -204,9 +206,11 @@ For continuous use, the engine can be called in a loop using the *run_engine* fu
 
 To create the same output again, *start_engine* needs to be called once more.
 
+<br> <br> 
+
 ---
 
-<br> 
+<br> <br>
 
 ## Core Logic Example
 ### Details of the Stateshaper Main Class
@@ -258,10 +262,11 @@ The *Connector* class can take your data and process it to be ready for compress
 For more ino, see the [`CONNECTOR`](src/main/connector/CONNECTOR.md) documentation.  
 
 
+<br> <br>
 
 ---
 
-<br> 
+<br> <br>
 
 # TinyState Class
 
@@ -358,10 +363,11 @@ The format needed will vary depending on the needs for each application. For app
 For more info, see the [`TINY_STATE`](src/main/tools/tiny_state/TINY_STATE.md) documentation.
 
 
+<br> <br>
 
 ---
 
-<br> 
+<br> <br>
 
 ## How It Works 
 
@@ -390,11 +396,11 @@ Create as many tokens as needed with *Stateshaper*().generate_token(x) method. T
 6. Modify the Stream if Needed 
 The data can be changed based on input such as user behavior or duration. The main class variables can be assigned new values in real time, or a new instance of the class can be created. 
 
-
+<br> <br>
 
 ---
 
-<br> 
+<br> <br>
 
 ## Running Tests
 
@@ -406,11 +412,11 @@ Areas of focus include determinism, reversibility, personalization, direct index
 
 For more info, see the [`TESTS`](src/main/tests/TESTS.md) documentation.
 
-
+<br> <br>
 
 --- 
 
-<br> 
+<br> <br>
 
 ## Use Cases (Expanded)
 
@@ -444,11 +450,11 @@ Statistical Records
 
 Condense large amounts of data into smaller objects. Generate it in real-time based on a set of defined terms/rules. 
 
-
+<br> <br>
 
 ---
 
-<br> 
+<br> <br>
 
 ## Project Structure
 
@@ -529,11 +535,11 @@ Contributions, ideas, and experiments are welcome!
 
 See [`CONTRIBUTING`](CONTRIBUTING.md) instructions if you are interested in creating a custom plugin (or anything else). Right now you can fork this repo to experiment. An open source version of the code will be available soon. 
 
-
+<br> <br>
 
 ---
 
-<br> 
+<br> <br>
 
 ## License
 
