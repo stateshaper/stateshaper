@@ -85,19 +85,19 @@ class MachineLearning:
     def current_test(self, token=None, one_vehicle=None, one_tensors=None): 
         token = random.randint(1, 9999) if not token else token
         self.build_environment = BuildEnvironment(token)
-        print(f"\n\nStarting New ML Training Test with token {token}\n")
+        # print(f"\n\nStarting New ML Training Test with token {token}\n")
         vehicle = self.get_vehicle(token) if not one_vehicle or self.one_vehicle == None else self.one_vehicle
-        print("vehicle generated: ", vehicle)
+        # print("vehicle generated: ", vehicle)
         self.one_vehicle = vehicle 
         tensors = self.get_tensors(token) if not one_tensors or self.one_tensors == None  else self.one_tensors
         self.one_tensors = tensors
-        print("tensors generated: ", tensors)
+        # print("tensors generated: ", tensors)
 
-        print("\n\nNew ML Training Test Created\n")
-        print({"vehicle": vehicle, "tensors": tensors})
-        print("\n\n\n")
+        # print("\n\nNew ML Training Test Created\n")
+        # print({"vehicle": vehicle, "tensors": tensors})
+        # print("\n\n\n")
         environment = self.build_environment.create_environment(token)
-        print("environment generated: ", environment)
+        # print("environment generated: ", environment)
         return {"vehicle": vehicle, "tensors": tensors, "environment": environment}
 
 

@@ -76,17 +76,15 @@ class BuildEnvironment:
 
 
     def create_environment(self, token, adjust=1):
-        print("start environment")
-        print(f"token: {token}")
+        # print("start environment")
+        # print(f"token: {token}")
         intervals = []
         interval_count = token % (self.max_intervals) + 2
-        print(f"interval count {interval_count}")
+        # print(f"interval count {interval_count}")
         current = 0
         i = 0
         environments = self.environments.copy()
         while len(intervals) < interval_count:
-            
-            print("1") 
             multiplier = 3 + i if len(intervals) % 2 == 0 else 5 + i
             
             interval_range = self.get_range(current, intervals, interval_count, token) 
@@ -94,22 +92,22 @@ class BuildEnvironment:
             environment = environments[select_environment]
             environments.pop(select_environment)
             
-            print(f"current: {current}, environment: {environment}, range: {interval_range}")
+            # print(f"current: {current}, environment: {environment}, range: {interval_range}")
             if self.check_included(intervals, environment) == False:
                 interval_range[1] = 100 if interval_count - len(intervals) < 2 else interval_range[1]
                 intervals.append({"environment": environment, "range": interval_range, "data": self.get_environment(token, environment, multiplier * adjust)})  
-                print(f"interval added: {intervals[len(intervals)-1]}")
+                # print(f"interval added: {intervals[len(intervals)-1]}")
             else:
-                print(len(intervals))
-                print(interval_count)
+                # print(len(intervals))
+                # print(interval_count)
                 adjust += 1
                 intervals[len(intervals)-1]["range"][1] = 100 if len(intervals) == interval_count else intervals[len(intervals)-1]["range"][1]
             current = intervals[len(intervals)-1]["range"][1]
             # if len(intervals) == interval_count:
             #     current = 100
             if current >= 100:
-                print("environments created")
-                print(intervals)
+                # print("environments created")
+                # print(intervals)
                 return intervals
     
 
