@@ -16,9 +16,11 @@ export default function Home() {
   const [MapText, setMapText] = useState("")
   const [Data, setData] = useState("")
   const [LoadedData, setLoadedData] = useState(false)
+  const [ReceivedData, setReceivedData] = useState(false)
   const [Seeds, setSeeds] = useState("")
   const [ShowForm, setShowForm] = useState(true)
   const [ShowAbout, setShowAbout] = useState(false)
+  const [ProcessAPI, setProcessAPI] = useState(false)
   const [ShowData, setShowData] = useState(false)
   const [ShowREADME, setShowREADME] = useState(false)
   const [ShowExample, setShowExample] = useState(false)
@@ -31,6 +33,7 @@ export default function Home() {
   const [ShowDrawData, setShowDrawData] = useState(false)
   const [HoverPos, setHoverPos] = useState([0, 0])
   const [BACKEND_ROUTE, setBACKEND_ROUTE] = useState(null)
+  const [MapChange, setMapChange] = useState(false)
 
   const classes = ["font-bold", ""]
   const [LinkText, setLinkText] = useState(classes[0])
@@ -61,13 +64,6 @@ export default function Home() {
   }
 
 
-  useEffect(()=>{
-    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    document.cookie = "engine=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    console.log("cookies cleared")
-    demo_route()
-  }, [])
-
   const demo_route = async () => {
     console.log("fetching backend route")
     const res = await fetch('./api');
@@ -76,9 +72,26 @@ export default function Home() {
     setBACKEND_ROUTE(json.data)
   }
 
+
+  useEffect(()=>{
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "engine=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    console.log("cookies cleared")
+    demo_route()
+  }, [])
+
+
   useEffect(()=>{
     BACKEND_ROUTE ? send_api("start") : null
   }, [BACKEND_ROUTE])
+
+
+  useEffect(()=>{
+    if(ReceivedData == true){
+      setProcessAPI(false)
+      setReceivedData(false)
+    }
+  }, [ReceivedData])
 
 
   useEffect(()=>{
@@ -88,6 +101,14 @@ export default function Home() {
       StartTest == false ? setStartTest(true) : null
     } 
   }, [TestTrigger])
+
+
+  useEffect(()=>{
+    if(MapChange == true){
+      change_map(0)
+      setMapChange(false)
+    } 
+  }, [MapChange])
 
 
   useEffect(()=>{
@@ -119,7 +140,6 @@ export default function Home() {
             run_session()
           }
       }, 500)
-
       return () => clearTimeout(timeoutId)
     }
   }, [StartTest, Counter, Pause])
@@ -129,11 +149,13 @@ export default function Home() {
     document.cookie = `${name}=${value}; max-age=${expire}; path=/`;
   }
 
+
   function get_cookie(name) {
     const cookie = document.cookie.split("; ").find(row => row.startsWith(`${name}=`))?.split("=")[1]
 
     return cookie ? cookie.length > 0 ? cookie : null : null
   }
+
 
   function draw_value(value){
     if(value < 1){
@@ -148,6 +170,7 @@ export default function Home() {
     for(let i=0; i<terms.length; i++){
       content[terms[i]](show == terms[i] ? true : false)
     }
+    reset_trip()
   }
 
 
@@ -188,21 +211,20 @@ export default function Home() {
 
 
   async function send_api(path) {
-    // if(get_cookie("engine") && path == "start"){
-    //   send_api("refresh")
-    // }
+    setProcessAPI(true)
     const res = await fetch(BACKEND_ROUTE + path, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: JSON.stringify({"token": 1, "environment": Data ? Data.test.environment : [], "engine_state": get_cookie("engine") ? get_cookie("engine") : {}}) })
+      body: JSON.stringify({ message: JSON.stringify({"token": 1, "environment": Data ? Data.test.environment : [], "engine_state": Data ? Data.seed[1] : {}}) })
     });
     const data = await res.json()
     
-    
+    data ? setReceivedData(true) : null
 
     if(path != "trip" && path != "reset"){
+      console.log("api called")
       setData(data.response)
-      setDrawData(data.response.test.environment[0].data)
+      setDrawData(data.response.test.environment[0].data) 
       set_cookie("engine", JSON.stringify(data.response.seed[1]))
     }
 
@@ -210,6 +232,12 @@ export default function Home() {
       setDrawData(data.response.test.data)
       setReceiveTrip(true)
     }   
+
+    if(path == "forward" || path == "reverse"){
+      console.log("draw data")
+      console.log(DrawData)
+      setMapChange(true)
+    }
 
     if(path == "reset"){
       setLoadedTrip(true)
@@ -302,9 +330,10 @@ export default function Home() {
   function reset_trip(){
     setLoadedTrip(false)
     setReceiveTrip(false)
-    setCounter(-1)
     setTestTrigger(false)
     setStartTest(false)
+    setCounter(-1)
+    setSelectedAttributes([attributes[0]])
     send_api("reset")
   }
   
@@ -320,7 +349,11 @@ export default function Home() {
         "counter": null,
         "color": null,
       }
+      console.log("selected attributes")
+      console.log(SelectedAttributes)
       data.value = draw_value(DrawData[value])
+      console.log("draw value")
+      console.log(data.value)
       data.prev_value = draw_value(DrawData[value])
       data.counter = Counter
       data.color = colors[value]
@@ -366,9 +399,17 @@ export default function Home() {
             <a className={ShowData ? "font-bold text-2xl disabled select-none cursor-default" : "hover:text-gray-300"} onClick={()=>show_content("data")}>Run</a>
             <a className={ShowAbout ? "font-bold text-2xl disabled select-none cursor-default" : "hover:text-gray-300"} onClick={()=>show_content("about")}>About</a>
           </div>
+          <div className="text-red-400 tex-lg h-8">
+          {ShowData == true && StartTest == true && Pause == false && Counter < 100?
+            <div>
+              A test is currently running...
+            </div>
+        
+          : null}
+          </div>
           <div className="">
             <div>
-              <div className={ShowForm ? "grid grid-rows-3 max-w-[800px] h-140 content-start overflow-y-auto gap-10 p-4 dot-scrollbar static mt-24" : "hidden"} style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
+              <div className={ShowForm ? "grid grid-rows-3 max-w-[800px] h-140 content-start overflow-y-auto gap-10 p-4 dot-scrollbar static mt-12" : "hidden"} style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
                 <div className="grid grid-cols-3 gap-4 w-full text-xl">
                   <div>
                     Derived From: 
@@ -377,10 +418,10 @@ export default function Home() {
                     {Data["token"] ? Data["token"] : ""}
                   </div>
                   <div className="grid grid-cols-2 w-full text-xl">
-                      <button className={Data && get_cookie("token") ? Data["token"] != get_cookie("token") ? "w-20 h-12 px-4 py-1 bg-blue-600 rounded-2xl cursor-pointer text-4xl hover:bg-gray-300 hover:text-blue-700 select-none z-99" : "disabled select-none w-20 h-12 px-4 py-1 bg-gray-600 rounded-2xl cursor-none text-4xl" : null} onClick={e => send_api("reverse")} disabled={Data && get_cookie("token") ? Data["token"] == get_cookie("token") : false}>
+                      <button className={Data && get_cookie("token") ? Data["token"] != get_cookie("token") && ProcessAPI == false ? "w-20 h-12 px-4 py-1 bg-blue-600 rounded-2xl cursor-pointer text-4xl hover:bg-gray-300 hover:text-blue-700 select-none z-99" : "disabled select-none w-20 h-12 px-4 py-1 bg-gray-600 rounded-2xl cursor-none text-4xl" : null} onClick={e => send_api("reverse")} disabled={Data && get_cookie("token") ? Data["token"] == get_cookie("token") : false}>
                         &larr;
                       </button>
-                      <button className="w-20 h-12 px-4 py-1 bg-blue-600 rounded-2xl cursor-pointer px-2 text-4xl hover:bg-gray-300 hover:text-blue-700 select-none z-99"  onClick={e => send_api("forward")}>
+                      <button className={ProcessAPI == false ? "w-20 h-12 px-4 py-1 bg-blue-600 rounded-2xl cursor-pointer px-2 text-4xl hover:bg-gray-300 hover:text-blue-700 select-none z-99" : "disabled select-none w-20 h-12 px-4 py-1 bg-gray-600 rounded-2xl cursor-none text-4xl"} onClick={e => send_api("forward")}>
                         &rarr;
                       </button>
                   </div>
@@ -432,7 +473,7 @@ export default function Home() {
                 </div>
             </div>
             <div>
-              <div className={ShowData ? "grid grid-rows-3 max-w-[800px] h-150 place-items-center overflow-y-auto  p-4 dot-scrollbar static gap-28 mt-18" : "hidden"} style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
+              <div className={ShowData ? "grid grid-rows-3 max-w-[800px] h-150 place-items-center overflow-y-auto  p-4 dot-scrollbar static gap-28 mt-4" : "hidden"} style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
                 <div>
                   <Stats AttributeStates={[SelectedAttributes, setSelectedAttributes]} StartTest={StartTest} Counter={Counter} DrawData={DrawData}/>
                 </div>
@@ -462,7 +503,7 @@ export default function Home() {
               </div>
             </div>
             <div>
-            <div className={ShowAbout ? "grid max-w-[800px] h-140 content-start overflow-y-auto gap-10 p-4 dot-scrollbar static mt-24" : "hidden"} style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
+            <div className={ShowAbout ? "grid max-w-[800px] h-140 content-start overflow-y-auto gap-10 p-4 dot-scrollbar static mt-12" : "hidden"} style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
             <div>
               An unlimited amount of training data for machine learning can be created and stored using <i>Stateshaper</i>. The ability for the engine to derive synthetic data by tokenizing its numeric output allows for a wide range of training data values to be used. Each test can be stored and re-created at any time from the small seed formats seen to the right of the screen. 
             </div>
@@ -530,13 +571,13 @@ export default function Home() {
             </div>
           </div>
           <div className="w-full text-2xl grid grid-rows-1 grid-cols-3 gap-24 mb-4 mr-12">
-            <div className={!ShowCode && !ShowREADME && !ShowExample ? "text-white  hover:font-bold bottom-6 hover:text-gray-300 cursor-pointer" : ShowCode ? " font-bold bottom-6 text-gray-300" : "text-white  bottom-6"} onMouseEnter={!ShowREADME && !ShowExample ? e=>setShowCode(true) : null} onClick={e=>setShowCode(false)}>
+            <div className={!ShowREADME && !ShowExample ? "text-white  hover:font-bold bottom-6 hover:text-gray-300 cursor-pointer" : ShowCode ? " font-bold bottom-6 text-gray-300" : "text-white bottom-6"} onMouseEnter={!ShowREADME && !ShowExample ? e=>setShowCode(true) : null} onClick={e=>setShowCode(false)}>
               CODE
             </div>
-            <div className={!ShowCode && !ShowREADME && !ShowExample ? "text-white  hover:font-bold bottom-6 hover:text-gray-300 cursor-pointer" : ShowREADME ? " font-bold bottom-6  text-gray-300 cursor-pointer" : "text-white "} onMouseEnter={!ShowCode && !ShowExample ? e=>setShowREADME (true) : null} onClick={e=>setShowREADME(false)}>
+            <div className={!ShowCode && !ShowExample ? "text-white  hover:font-bold bottom-6 hover:text-gray-300 cursor-pointer" : ShowREADME ? " font-bold bottom-6  text-gray-300 cursor-pointer" : "text-white "} onMouseEnter={!ShowCode && !ShowExample ? e=>setShowREADME (true) : null} onClick={e=>setShowREADME(false)}>
               README
             </div>
-            <div className={!ShowCode && !ShowREADME && !ShowExample ? "text-white  hover:font-bold hover:text-gray-300 cursor-pointer" : ShowExample ? " font-bold text-gray-300" : "text-white "} onMouseEnter={!ShowCode && !ShowREADME ? e=>setShowExample(true) : null} onMouseLeave={e=>setShowExample(false)}>
+            <div className={!ShowCode && !ShowREADME ? "text-white  hover:font-bold hover:text-gray-300 cursor-pointer" : ShowExample ? " font-bold text-gray-300" : "text-white "} onMouseEnter={!ShowCode && !ShowREADME ? e=>setShowExample(true) : null} onMouseLeave={e=>setShowExample(false)}>
               EXAMPLE ONLY
             </div>
           </div>
@@ -559,7 +600,7 @@ export default function Home() {
       {ShowExample && !ShowCode && !ShowREADME ?
         <div className="text-white p-4 bottom-18 right-12 ml-auto absolute w-128 h-24 rounded-lg bg-blue-600">
         <div className="text-lg font-bold">
-          Sample app, real logic. 
+          Sample app, real logic. Guaranteed numbers.
         </div>
         <div className="text-md mt-2">
           Intended to showcase the tool's capabilities.

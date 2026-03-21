@@ -159,7 +159,11 @@ class TripTimeline:
             self.trip_counter += 1
             self.adjust_values()
             self.end_check(one_trip, step)
+            print()
+            print(self.total_trip)
             return self.total_trip
+        print()
+        print(self.total_trip)
         return self.total_trip
         
 

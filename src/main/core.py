@@ -34,6 +34,8 @@ class Stateshaper:
 
     def step(self): 
         self.morph_array()
+        print("array morphed")
+        print("current state: ", self.current_state)
         self.iteration += 1
         return self.get_token() if not self.compound else self.compound_token()
 

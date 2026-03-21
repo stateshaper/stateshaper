@@ -58,7 +58,7 @@ class BuildEnvironment:
             "weather_type": []
         }
 
-        self.max_intervals = 6
+        self.max_intervals = 5
         self.trip_duration = 100
         self.intervals = []
         self.deviation = 20
@@ -76,26 +76,40 @@ class BuildEnvironment:
 
 
     def create_environment(self, token, adjust=1):
-        # print("start environment")
-        # print(f"token: {token}")
+        print("start environment")
+        print(f"token: {token}")
         intervals = []
-        interval_count = 1 + (token % self.max_intervals) + 1
-        # print(f"interval count {interval_count}")
+        interval_count = token % (self.max_intervals) + 2
+        print(f"interval count {interval_count}")
         current = 0
-        while len(intervals) < interval_count: 
-            multiplier = 3 if len(intervals) % 2 == 0 else 5
+        i = 0
+        environments = self.environments.copy()
+        while len(intervals) < interval_count:
+            
+            print("1") 
+            multiplier = 3 + i if len(intervals) % 2 == 0 else 5 + i
+            
             interval_range = self.get_range(current, intervals, interval_count, token) 
-            environment = self.environments[(token * (len(intervals) + 1) * multiplier * adjust)  % len(self.environments)]
+            select_environment = (token * (len(intervals) + 1) * multiplier * adjust)  % len(environments)
+            environment = environments[select_environment]
+            environments.pop(select_environment)
+            
+            print(f"current: {current}, environment: {environment}, range: {interval_range}")
             if self.check_included(intervals, environment) == False:
                 interval_range[1] = 100 if interval_count - len(intervals) < 2 else interval_range[1]
                 intervals.append({"environment": environment, "range": interval_range, "data": self.get_environment(token, environment, multiplier * adjust)})  
+                print(f"interval added: {intervals[len(intervals)-1]}")
             else:
+                print(len(intervals))
+                print(interval_count)
                 adjust += 1
                 intervals[len(intervals)-1]["range"][1] = 100 if len(intervals) == interval_count else intervals[len(intervals)-1]["range"][1]
             current = intervals[len(intervals)-1]["range"][1]
+            # if len(intervals) == interval_count:
+            #     current = 100
             if current >= 100:
-                # print("environments created")
-                # print(intervals)
+                print("environments created")
+                print(intervals)
                 return intervals
     
 
@@ -105,7 +119,9 @@ class BuildEnvironment:
 
     def get_range(self, current, intervals, interval_count, token):
         min_range = 10
+        max_range = 50
         remaining = self.trip_duration - current
+        remaining = 50 if remaining > 50 else remaining
         start = current
         end = current + (token % remaining) if len(intervals) < interval_count - 1 else 100
         end = end + min_range if current - end < min_range else end

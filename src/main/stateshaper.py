@@ -79,11 +79,20 @@ class RunEngine:
         )
 
     def refresh_engine(self, current_state, original_state, iteration, constants, mod):
-        self.engine["current_state"] = current_state
-        self.engine["original_state"] = original_state
-        self.engine["iteration"] = iteration
-        self.engine["constants"] = constants
-        self.engine["mod"] = mod
+        self.engine = Stateshaper(
+            state=current_state,
+            constants=constants,
+            mod=mod
+        )
+        # self.engine.current_state = current_state
+        self.engine.original_state = original_state
+        self.engine.iteration = int(iteration)
+        # self.engine.constants["a"] = dict(constants)["a"]
+        # self.engine.constants["b"] = dict(constants)["b"]
+        # self.engine.constants["c"] = dict(constants)["c"]
+        # self.engine.constants["d"] = dict(constants)["d"]
+        # self.engine.mod = mod
+
         
     def run_engine(self, token_count=None):
         print(self.seed)
@@ -158,6 +167,7 @@ class RunEngine:
     
     
     def one_token(self):
+        print("Current state:", self.engine.current_state)
         return self.engine.step()
     
 
