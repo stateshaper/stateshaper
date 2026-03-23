@@ -20,7 +20,7 @@ This rule uses the following special values:
 How many words combined into a string value. Using a list of multiple values will create a variation in the number of combined terms in each output.
 
 
-**"compound_groups": ["breakfast", "meat", drink]**
+**"compound_groups": ["breakfast", "meat", "drink"]**
 
 Groups to include in the compound. Each generated token will include items only from these included sets. A different token can have different items if there are multiple groups.
 
@@ -67,7 +67,7 @@ Primary Use: Synthetic Datasets (Procedural Worlds, Code/ID Generation)
 
 *rating_initial.json*
 
-For 'rating' data ruleset. Creates an output set based on ratings-derived preferences. Only needed during the first run of the engine for each profile. The ratings values can be defineds beforehand using whatever methods deemed necessary. DOES NOT NEED TO BE STORED.
+For 'rating' data ruleset. Creates an output set based on ratings-derived preferences. Only needed during the first run of the engine for each profile. The ratings values can be defined beforehand using whatever methods deemed necessary. DOES NOT NEED TO BE STORED.
 
 Primary Use: Personalization (Content Feeds, Routine Schedules)
 
