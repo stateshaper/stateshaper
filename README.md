@@ -26,19 +26,6 @@ The live test demo is up now, containing data reduction statistics and examples 
 
 <br> <br>
 
-BETA LAUNCH EXPECTED BY LATE MAY 2024
-
-Signup: [https://tally.so/r/2ErVEg](https://tally.so/r/2ErVEg)
-
-
-
-
-
-<br> 
-
-
-
-
 ---
 
 <br> 
