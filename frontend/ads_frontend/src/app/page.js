@@ -30,8 +30,9 @@ export default function Home() {
   const [LinkText, setLinkText] = useState(classes[0])
   const [ShowExample, setShowExample] = useState(false)
   const [ShowCode, setShowCode] = useState(false)
-
-
+  const [DesktopOnly, setDesktopOnly] = useState(false)
+  const min_width = 800
+  
   useEffect(()=>{
     send_api("start")
     setLoaded(true)
@@ -120,6 +121,18 @@ export default function Home() {
 
 
   async function send_api(path) {
+    try{
+       if(window.innerWidth < min_width){
+          setDesktopOnly(true)
+          setData(null)
+          setProcessAPI(false)
+          setReceivedData(true)
+          return false
+      }else{
+          setDesktopOnly(false)
+      }
+    }catch{}
+    
     const res = await fetch(`https://stateshaper-ads-backend.vercel.app/api/` + path, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -150,9 +163,12 @@ export default function Home() {
  
       
       <div className="grid grid-rows-1 place-items-center text-3xl mt-8 text-gray-200 font-bold">
-        <div>
-          Stateshaper Ads Demo
+        <div className={DesktopOnly == true ? "grid place-items-center text-lg" : ""}>
+          <div>
+             Stateshaper Personalized Ads Demo
+          </div>
         </div>   
+   
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center gap-12 text-gray-200 mt-12 lg:mt-16 pb-28">
@@ -305,7 +321,14 @@ export default function Home() {
           <span className="font-bold">Frontend:</span> <a className="cursor-pointer hover:text-gray-300 hover:italic" href="https://www.github.com/jgddesigns/stateshaper/tree/ads_demo" target="_blank">https://www.github.com/jgddesigns/stateshaper/tree/ads_demo</a>
         </div>
         </div>
+      : DesktopOnly == true ? 
+        <div className="grid place-items-center text-white text-md italic">
+           <div>
+              For Desktop Only
+           </div>
+        </div>
       : null}
+                
       {ShowExample ?
         <div className="text-white px-4 py-3 fixed bottom-10 right-72 w-88 h-18 rounded-lg bg-blue-600">
         <div className="text-sm font-bold">
