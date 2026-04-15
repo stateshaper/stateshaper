@@ -27,16 +27,15 @@ export default function Home() {
   const [SeedText, setSeedText] = useState("")
   const classes = ["font-bold", ""]
   const [LinkText, setLinkText] = useState(classes[0])
-
+  const [DesktopOnly, setDesktopOnly] = useState(false)
+  const min_width = 800
+  
  
-
-
   const content = {
     "form" : setShowForm,
     "about":  setShowAbout,
     "tests": setShowTests
   }
-
 
   const transactions = {
     "accounts": setAccountsNumber,
@@ -129,6 +128,18 @@ export default function Home() {
 
 
   async function send_api(path) {
+    try{
+         if(window.innerWidth < min_width){
+            setDesktopOnly(true)
+            setData(null)
+            setProcessAPI(false)
+            setReceivedData(true)
+            return false
+         }else{
+           setDesktopOnly(false)
+         }
+    }catch{}
+    
     const res = await fetch(`http://localhost:8000/api/` + path, {
     // const res = await fetch(`https://stateshaper-qa-backend.vercel.app/api/` + path, {
       method: "POST",
@@ -221,11 +232,13 @@ export default function Home() {
           }
         `}
       </style>
-      <div className="grid grid-rows-1 place-items-center text-3xl mt-8 text-gray-200 font-bold">
+      <div className={DesktopOnly == true ? "grid place-items-center text-lg" : ""}>
         <div>
-          Stateshaper Systems QA Testing Demo
-        </div>   
+          Stateshaper Fintech QA Demo
+        </div>
       </div>
+
+✓.    {Data ?
       <div className="grid grid-cols-2 grid-rows-2 place-items-center h-4/5 mt-32 text-gray-200">
         <div className="grid gap-8 h-full static place-items-center">
           <div className="grid grid-rows-1 grid-cols-3 w-128 text-gray-200 text-xl cursor-pointer place-items-center">
@@ -420,6 +433,14 @@ export default function Home() {
           </div>
         }
         </div>
+        : DesktopOnly == true ? 
+        <div className="grid place-items-center text-white text-md italic">
+           <div>
+              For Desktop Only
+           </div>
+        </div>
+      : null}
+              
         <div className="grid w-3/4 place-items-center h-full static">
           <div className="grid grid-auto-rows mt-12">
             <div className="text-bold text-lg">
