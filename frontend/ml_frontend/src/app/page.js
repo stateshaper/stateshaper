@@ -223,7 +223,7 @@ export default function Home() {
          }else{
            setDesktopOnly(false)
          }
-    }except{}
+    }catch{}
 
     setProcessAPI(true)
     const res = await fetch(BACKEND_ROUTE + path, {
