@@ -502,7 +502,6 @@ export default function Home() {
                       <div className="absolute text-black text-sm p-4 ml-auto right-0">
                         mile: {Counter}
                       </div>
-
                     </div>
                   : null}
                   {LoadedTrip ? 
@@ -600,7 +599,7 @@ export default function Home() {
         </div>
         </div>
       : DesktopOnly == true ? 
-        <div className="grid place-items-center mt-12 text-white text-md italic">
+        <div className="grid place-items-center text-white text-md italic">
            <div>
               Demo is for desktop only.
            </div>
