@@ -601,7 +601,7 @@ export default function Home() {
       : DesktopOnly == true ? 
         <div className="grid place-items-center text-white text-md italic">
            <div>
-              Demo for desktop only.
+              Desktop Only
            </div>
         </div>
       : null}
