@@ -16,8 +16,8 @@ export default function Home() {
   const [LinkText, setLinkText] = useState(classes[0])
   const [ShapesData, setShapesData] = useState(null)
   const [Shapes, setShapes] = useState(null)
-
-
+  const [DesktopOnly, setDesktopOnly] = useState(false)
+  const min_width = 800
   const grid_size = 25
 
   const colors = ["bg-red-400","bg-blue-400","bg-green-400","bg-yellow-400","bg-orange-400","bg-purple-400","bg-pink-400","bg-cyan-400","bg-lime-400","bg-teal-400","bg-emerald-400","bg-indigo-400"]
@@ -138,6 +138,18 @@ export default function Home() {
 
 
   async function send_api(path) {
+    try{
+         if(window.innerWidth < min_width){
+            setDesktopOnly(true)
+            setData(null)
+            setProcessAPI(false)
+            setReceivedData(true)
+            return false
+         }else{
+           setDesktopOnly(false)
+         }
+    }catch{}
+    
     const res = await fetch(`https://stateshaper-graphics-backend.vercel.app/api/` + path, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -169,11 +181,13 @@ export default function Home() {
           }
         `}
       </style>
-      <div className="grid grid-rows-1 place-items-center text-3xl mt-8 text-gray-200 font-bold">
+  
+      <div className={DesktopOnly == true ? "grid place-items-center text-lg" : ""}>
         <div>
           Stateshaper Graphics Demo
-        </div>   
-      </div>
+        </div>
+      </div>   
+      {Data ? 
       <div className="grid grid-cols-2 grid-rows-2 place-items-center h-4/5 mt-32 text-gray-200 min-w-full tatic">
         <div className="grid gap-8 h-full static place-items-center">
           <div className="grid grid-rows-1 grid-cols-2 w-128 text-gray-200 text-xl cursor-pointer place-items-center">
@@ -282,9 +296,7 @@ export default function Home() {
               For other applications, a plugin file is required to coordinate Stateshaper output with the app's frontend and backend logic. Some plugins will be released along with the package. Custom plugins can also be written. 
             </div>
           </div>
-
         </div>
-      </div>
       <div className={!ShowCode ? "text-white text-2xl hover:font-bold bottom-6 right-192 ml-auto absolute hover:text-gray-300 cursor-pointer" : "text-2xl font-bold bottom-6 right-192 ml-auto absolute text-gray-300 cursor-pointer"} onMouseEnter={e=>setShowCode(true)} onClick={e=>setShowCode(false)}>
         CODE
       </div>
@@ -314,6 +326,13 @@ export default function Home() {
         </div>
         </div>
       : null}
-    </div>
+    </div> : DesktopOnly == true ? 
+        <div className="grid place-items-center text-white text-md italic">
+           <div>
+              For Desktop Only
+           </div>
+        </div>
+  : null}
+                                                                                                                                                                                                                                                                                                    
   )
 }
