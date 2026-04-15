@@ -400,8 +400,10 @@ export default function Home() {
         `}
       </style>
       <div className="grid grid-rows-1 place-items-center text-3xl mt-8 text-gray-200 font-bold">
-        <div>
-          Stateshaper ML Training Demo
+        <div className={DesktopOnly == true ? "grid place-items-center text-lg" : ""}>
+          <div>
+             Stateshaper ML Training Demo
+          </div>
         </div>   
       </div>
 
@@ -598,7 +600,7 @@ export default function Home() {
         </div>
         </div>
       : DesktopOnly == true ? 
-        <div className="mt-24 text-white text-xl">
+        <div className="mt-24 text-white text-md">
            Demo is for desktop only.
         </div>
       : null}
