@@ -17,6 +17,7 @@ export default function Home() {
   const [Data, setData] = useState("")
   const [LoadedData, setLoadedData] = useState(false)
   const [ReceivedData, setReceivedData] = useState(false)
+  const [DesktopOnly, setDesktopOnly] = useState(false)
   const [Seeds, setSeeds] = useState("")
   const [ShowForm, setShowForm] = useState(true)
   const [ShowAbout, setShowAbout] = useState(false)
@@ -41,6 +42,7 @@ export default function Home() {
   const attributes = ["temperature","humidity","light","elevation","curves","road_size","road_texture","incline","traffic","hazard","weather"]
   const [SelectedAttributes, setSelectedAttributes] = useState([attributes[0]])
 
+  const min_width = 800
 
   const content = {
     "form": setShowForm,
@@ -211,6 +213,18 @@ export default function Home() {
 
 
   async function send_api(path) {
+    try{
+         if(window.innerWidth < min_width){
+            setDesktopOnly(true)
+            setData(null)
+            setProcessAPI(false)
+            setReceivedData(true)
+            return false
+         }else{
+           setDesktopOnly(false)
+         }
+    }except{}
+
     setProcessAPI(true)
     const res = await fetch(BACKEND_ROUTE + path, {
       method: "POST",
@@ -582,6 +596,10 @@ export default function Home() {
             </div>
           </div>
         </div>
+        </div>
+      : DesktopOnly == true ? 
+        <div className="mt-24 text-white text-xl">
+           Demo is for desktop only.
         </div>
       : null}
 
