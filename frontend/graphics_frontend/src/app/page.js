@@ -5,7 +5,7 @@ import "./shapes.css"
 export default function Home() {
   const [CurrentToken, setCurrentToken] = useState(0)
   const [OriginalToken, setOriginalToken] = useState(0)
-  const [Data, setData] = useState("")
+  const [Data, setData] = useState(null)
   const [Seeds, setSeeds] = useState("")
   const [ShowForm, setShowForm] = useState(true)
   const [ShowAbout, setShowAbout] = useState(false)
