@@ -38,25 +38,21 @@ export default function Home() {
     setLoaded(true)
   }, [])
 
-
   useEffect(()=>{
     set_seeds()
   }, [Data])
-
 
   useEffect(()=>{
     setSeedText(Seeds["0"])
   }, [Seeds])
 
-
   function seed_text(type){
-    type == "0" ? setLinkText(classes[0]) : setLinkText(classes[1]) 
+    type == "0" ? setLinkText(classes[0]) : setLinkText(classes[1])
     setSeedText(Seeds[type])
   }
 
-
   function adjust_values(e){
-    let value = e.target.value.replace(/[^0-9]/g, '') 
+    let value = e.target.value.replace(/[^0-9]/g, '')
     parseInt(value) > 100 ? value = 100 : null
     parseInt(value) < 0 ? value = 0 : null
     document.getElementById(e.target.id).value = value
@@ -65,7 +61,6 @@ export default function Home() {
     setAttributes(temp_arr)
   }
 
-
   function show_content(show){
     let terms = ["interests", "ratings", "about"]
     for(let i=0; i<terms.length; i++){
@@ -73,26 +68,21 @@ export default function Home() {
     }
   }
 
-
   function full_seed(){
     return Data ? '["user_176551",' + JSON.stringify(Data[1]) + ']' : ""
   }
-
 
   function short_seed(){
     return Data ? '["user_176551",' + JSON.stringify(Data[1]["state"]) + ',' + JSON.stringify(Data[0]["v"]) + ']' : ""
   }
 
-
   function tiny_seed(){
     return Data ? Data[0]["v"][0] : ""
   }
 
-
   function raw_seed(){
     return Data ? Data[0]["v"][1] : ""
   }
-
 
   function set_seeds(){
     setSeeds({"0" : [full_seed(), `~` + full_seed().length + ` bytes`],
@@ -101,41 +91,40 @@ export default function Home() {
     "3" : [raw_seed(), `~` + raw_seed().length + ` bytes`]})
   }
 
-
   async function send_api(path) {
     try{
-         if(window.innerWidth < min_width){
-            setDesktopOnly(true)
-            setData(null)
-            return false
-         }else{
-           setDesktopOnly(false)
-         }
+      if(window.innerWidth < min_width){
+        setDesktopOnly(true)
+        setData(null)
+        return false
+      }else{
+        setDesktopOnly(false)
+      }
     }catch{}
-    
+
     const res = await fetch(`https://stateshaper-study-backend.vercel.app/api/` + path, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: JSON.stringify(Answers) })
     })
 
-    const data = await res.json();
+    const data = await res.json()
     console.log(data)
     setData(data.response["seed"])
-    setNewAds(false)  
+    setNewAds(false)
     setAttributes(data.response["questions"])
     setRatings(data.response["ratings"])
     setAnswers([])
   }
 
   function process_answer(item, answer, id){
-    let answers = Answers 
+    let answers = Answers
 
     for (let i=0; i<answers.length; i++){
       answers[i]["question"] == item ? answers.splice(i, 1) : null
     }
 
-    document.getElementById(id).className = selected + document.getElementById(id).className 
+    document.getElementById(id).className = selected + document.getElementById(id).className
     if(answer == true){
       id = id.replace("true", "false")
       document.getElementById(id).className = document.getElementById(id).className.replace(selected, "")
@@ -154,7 +143,7 @@ export default function Home() {
     }else{
       setInBetween(true)
       setSubmitError(false)
-      const count = Answers.reduce((c, item) => c + (item["answer"] === true), 0);
+      const count = Answers.reduce((c, item) => c + (item["answer"] === true), 0)
       setScore(count + " out of " + Answers.length)
       console.log(count)
       send_api("process")
@@ -254,7 +243,7 @@ export default function Home() {
                           <div className="grid grid-rows-2 grid-cols-1 gap-6">
                             <div
                               className="w-22 h-8 bg-blue-400 rounded text-white text-xl flex justify-center cursor-pointer static bottom-2 ml-auto"
-                              onClick={(e) => process_finish()}
+                              onClick={() => process_finish()}
                             >
                               Finish
                             </div>
@@ -265,7 +254,7 @@ export default function Home() {
                         ) : (
                           <div
                             className="w-22 h-8 bg-blue-400 rounded text-white text-xl flex justify-center cursor-pointer static ml-6"
-                            onClick={(e) => after_finish()}
+                            onClick={() => after_finish()}
                           >
                             Proceed
                           </div>
@@ -316,7 +305,9 @@ export default function Home() {
                         Actual data storage size is cut all the way down to the Stateshaper seed formats shown on to the right. This can
                         often account for over 90% reduction in space used, and also allows for privacy through obfuscation.
                       </div>
-                      <div>Other uses can include, but are not limited to smart home scheduling, gaming npc behavior, fintech market data QA, ML training, and store inventories.</div>
+                      <div>
+                        Other uses can include, but are not limited to smart home scheduling, gaming npc behavior, fintech market data QA, ML training, and store inventories.
+                      </div>
                     </div>
                   )}
                 </div>
@@ -364,8 +355,12 @@ export default function Home() {
                       <code className="mt-3">{SeedText ? SeedText[1] : ""}</code>
                     </div>
 
-                    <div className="italic mt-8">The above strings are all that is needed to generate a student's profile. For sensitive data, some values can be stored in environment variables.</div>
-                    <div className="italic mt-8">For other applications, a plugin file is required to coordinate Stateshaper output with the app's frontend and backend logic. Some plugins will be released along with the package. Custom plugins can also be written.</div>
+                    <div className="italic mt-8">
+                      The above strings are all that is needed to generate a student's profile. For sensitive data, some values can be stored in environment variables.
+                    </div>
+                    <div className="italic mt-8">
+                      For other applications, a plugin file is required to coordinate Stateshaper output with the app's frontend and backend logic. Some plugins will be released along with the package. Custom plugins can also be written.
+                    </div>
                   </div>
                 </div>
               </div>
@@ -387,7 +382,7 @@ export default function Home() {
             {ShowExample ?
               <div className="text-white px-4 py-3 fixed bottom-10 right-56 w-88 h-18 rounded-lg bg-blue-600">
                 <div className="text-sm font-bold">
-                  Sample app, real logic. 
+                  Sample app, real logic.
                 </div>
                 <div className="text-sm mt-2">
                   Intended to showcase the tool's capabilities.
@@ -398,5 +393,5 @@ export default function Home() {
         }
       </div>
     </div>
-  );
-                            }
+  )
+    }
