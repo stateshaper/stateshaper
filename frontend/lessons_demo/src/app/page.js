@@ -325,7 +325,7 @@ export default function Home() {
                         Full State
                       </a>
                       
-                        id="1"
+                       <a id="1"
                         className="hover:font-bold hover:text-gray-300 cursor-pointer"
                         onMouseOver={(e) => seed_text(e.target.id)}
                         onMouseOut={(e) => seed_text("0")}
@@ -333,7 +333,7 @@ export default function Home() {
                         Short State
                       </a>
                       
-                        id="2"
+                      <a id="2"
                         className="hover:font-bold hover:text-gray-300 cursor-pointer"
                         onMouseOver={(e) => seed_text(e.target.id)}
                         onMouseOut={(e) => seed_text("0")}
@@ -341,7 +341,7 @@ export default function Home() {
                         Tiny State
                       </a>
                       
-                        id="3"
+                      <a  id="3"
                         className="hover:font-bold hover:text-gray-300 cursor-pointer"
                         onMouseOver={(e) => seed_text(e.target.id)}
                         onMouseOut={(e) => seed_text("0")}
