@@ -162,7 +162,7 @@ export default function Home() {
 
 
   return (
-    <div className="flex grid grid-auto-rows dark:bg-black h-screen min-h-screen fixed bg-[#02082c]">
+    <div className="flex grid grid-auto-rows dark:bg-black h-screen min-h-screen w-full relative overflow-x-hidden bg-[#02082c]">
       <style>
         {`
           .dot-scrollbar::-webkit-scrollbar {
