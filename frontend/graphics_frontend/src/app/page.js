@@ -5,7 +5,7 @@ import "./shapes.css"
 export default function Home() {
   const [CurrentToken, setCurrentToken] = useState(0)
   const [OriginalToken, setOriginalToken] = useState(0)
-  const [Data, setData] = useState(null)
+  const [Data, setData] = useState("")
   const [Seeds, setSeeds] = useState("")
   const [ShowForm, setShowForm] = useState(true)
   const [ShowAbout, setShowAbout] = useState(false)
@@ -18,6 +18,7 @@ export default function Home() {
   const [Shapes, setShapes] = useState(null)
   const [DesktopOnly, setDesktopOnly] = useState(false)
   const min_width = 800
+  
   const grid_size = 25
 
   const colors = ["bg-red-400","bg-blue-400","bg-green-400","bg-yellow-400","bg-orange-400","bg-purple-400","bg-pink-400","bg-cyan-400","bg-lime-400","bg-teal-400","bg-emerald-400","bg-indigo-400"]
@@ -138,17 +139,16 @@ export default function Home() {
 
 
   async function send_api(path) {
+    
     try{
          if(window.innerWidth < min_width){
             setDesktopOnly(true)
             setData(null)
-            setProcessAPI(false)
-            setReceivedData(true)
             return false
          }else{
            setDesktopOnly(false)
          }
-    }catch{}
+     }catch{}
     
     const res = await fetch(`https://stateshaper-graphics-backend.vercel.app/api/` + path, {
       method: "POST",
@@ -181,152 +181,160 @@ export default function Home() {
           }
         `}
       </style>
-  
-      <div className={DesktopOnly == true ? "grid place-items-center text-lg" : ""}>
-        <div>
-          Stateshaper Graphics Demo
-        </div>
-      </div>   
-      {Data ? 
-      <div className="grid grid-cols-2 grid-rows-2 place-items-center h-4/5 mt-32 text-gray-200 min-w-full tatic">
-        <div className="grid gap-8 h-full static place-items-center">
-          <div className="grid grid-rows-1 grid-cols-2 w-128 text-gray-200 text-xl cursor-pointer place-items-center">
-            <a className={ShowForm ? "font-bold text-2xl" : ""} onClick={()=>show_content("form")}>Draw</a>
-            <a className={ShowAbout ? "font-bold text-2xl" : ""} onClick={()=>show_content("about")}>About</a>
+      {DesktopOnly == true ? (
+        <div className="grid grid-auto-rows place-items-center text-lg gap-12">
+          <div>
+             Stateshaper ML Training Demo
           </div>
-          {ShowForm ?
-          <div className="grid max-w-[800px] h-140 place-items-center  overflow-y-auto mt-20 p-4 dot-scrollbar static" style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
-            <div className="ml-auto px-12 grid grid-cols-3 grid-rows-1 max-w-[750px] gap-34 place-items-center mr-10">
-              <div className={OriginalToken == CurrentToken ? "w-28 h-12 bg-gray-600 text-black rounded px-5 py-3 cursor-none mr-auto disabled select-none" : "w-28 h-12 bg-blue-600 text-white rounded px-5 py-3 cursor-pointer hover:text-gray-300 mr-auto select-none"} onClick={OriginalToken != CurrentToken ? ()=>send_api("reverse") : null}>
-                Prior Map
+      
+        
+        <div className="text-white text-md italic">
+          For Desktop Only
+        </div>
+        </div>
+      ) : (
+        <>
+          <div className="grid grid-rows-1 place-items-center text-3xl mt-8 text-gray-200 font-bold">
+            <div>
+              Stateshaper Graphics Demo
+            </div>   
+          </div>
+          <div className="grid grid-cols-2 grid-rows-2 place-items-center h-4/5 mt-32 text-gray-200 min-w-full tatic">
+            <div className="grid gap-8 h-full static place-items-center">
+              <div className="grid grid-rows-1 grid-cols-2 w-128 text-gray-200 text-xl cursor-pointer place-items-center">
+                <a className={ShowForm ? "font-bold text-2xl" : ""} onClick={()=>show_content("form")}>Draw</a>
+                <a className={ShowAbout ? "font-bold text-2xl" : ""} onClick={()=>show_content("about")}>About</a>
               </div>
-              <div className="grid grid-cols-1 grid-rows-2 place-items-center">
-                <div className="">
-                  Derived From
-                </div>
-                <div className="mt-1">
-                    {CurrentToken}
-                </div>
-              </div>
-              <div className="w-28 h-12 bg-blue-600 text-white rounded px-5 py-2 cursor-pointer grid-rows-1 grid-cols-2 hover:text-gray-300 ml-auto select-none" onClick={e=>send_api("forward")}>
-                <div>
-                  Next Map 
-                </div>
-                <div className="text-2xl justify-self-center mt-[-12px]">
-                  {'\u{221E}'}
-                </div>
-              </div>
-            </div>
-            {Shapes ?
-              <div className="grid grid-rows-5 grid-cols-1 mt-24 max-w-[700px] p-4 self-start gap-32">
-                {Array.from({ length: 5 }).map((_, index) => {
-                  const start = index * 5
-                  const row_shapes = Shapes.slice(start, start + 5)
-                  return (
-                    <div
-                      key={index}
-                      className="grid grid-rows-1 grid-cols-5 gap-4 min-w-[600px] h-32 place-items-center"
-                    >
-                      {row_shapes.map((shape, cols) => (
-                        <div key={cols} className={shape}>
-                          {shape}
-                        </div>
-                      ))}
+              {ShowForm ?
+              <div className="grid max-w-[800px] h-140 place-items-center  overflow-y-auto mt-20 p-4 dot-scrollbar static" style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
+                <div className="ml-auto px-12 grid grid-cols-3 grid-rows-1 max-w-[750px] gap-34 place-items-center mr-10">
+                  <div className={OriginalToken == CurrentToken ? "w-28 h-12 bg-gray-600 text-black rounded px-5 py-3 cursor-none mr-auto disabled select-none" : "w-28 h-12 bg-blue-600 text-white rounded px-5 py-3 cursor-pointer hover:text-gray-300 mr-auto select-none"} onClick={OriginalToken != CurrentToken ? ()=>send_api("reverse") : null}>
+                    Prior Map
+                  </div>
+                  <div className="grid grid-cols-1 grid-rows-2 place-items-center">
+                    <div className="">
+                      Derived From
                     </div>
-                  )
-                })}
+                    <div className="mt-1">
+                        {CurrentToken}
+                    </div>
+                  </div>
+                  <div className="w-28 h-12 bg-blue-600 text-white rounded px-5 py-2 cursor-pointer grid-rows-1 grid-cols-2 hover:text-gray-300 ml-auto select-none" onClick={e=>send_api("forward")}>
+                    <div>
+                      Next Map 
+                    </div>
+                    <div className="text-2xl justify-self-center mt-[-12px]">
+                      {'\u{221E}'}
+                    </div>
+                  </div>
+                </div>
+                {Shapes ?
+                  <div className="grid grid-rows-5 grid-cols-1 mt-24 max-w-[700px] p-4 self-start gap-32">
+                    {Array.from({ length: 5 }).map((_, index) => {
+                      const start = index * 5
+                      const row_shapes = Shapes.slice(start, start + 5)
+                      return (
+                        <div
+                          key={index}
+                          className="grid grid-rows-1 grid-cols-5 gap-4 min-w-[600px] h-32 place-items-center"
+                        >
+                          {row_shapes.map((shape, cols) => (
+                            <div key={cols} className={shape}>
+                              {shape}
+                            </div>
+                          ))}
+                        </div>
+                      )
+                    })}
+                  </div>
+                : null}
               </div>
-            : null}
-          </div>
-          : 
-          <div className="grid place-items-center h-140 mt-20 grid-cols-1 grid-auto-rows w-[740px] gap-6 overflow-y-auto dot-scrollbar p-6 text-lg" style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
-            <div>
-              Implementing <i>Stateshaper</i> here allows for graphics to be drawn on the screen by using the token output to derive each graphic's attributes. This is a basic example that can be expanded upon up to the most detailed textures needed (such as modern video games or CGI). The key here is that this can be done from just a few bytes of memory. The limits are only what the GPU can handle and how detailed the code is. The output is not literally infinite (based on mathematical rules) but can come close depending on how large of a mod value is set.
+              : 
+              <div className="grid place-items-center h-140 mt-20 grid-cols-1 grid-auto-rows w-[740px] gap-6 overflow-y-auto dot-scrollbar p-6 text-lg" style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
+                <div>
+                  Implementing <i>Stateshaper</i> here allows for graphics to be drawn on the screen by using the token output to derive each graphic's attributes. This is a basic example that can be expanded upon up to the most detailed textures needed (such as modern video games or CGI). The key here is that this can be done from just a few bytes of memory. The limits are only what the GPU can handle and how detailed the code is. The output is not literally infinite (based on mathematical rules) but can come close depending on how large of a mod value is set.
+                </div>
+                <div>  
+                  Potentially, an entire map can be built using these methods without storing any of the sprites in static memory. The graphics can be seemingly random, or mapped exactly as needed depending on the token output from <i>Stateshaper</i>. For more detailed applications, the token output can be modified within the package's source code by altering its morph function or passing custom class parameters. This can also be achieved within the methods written in the plugin file connecting to a specific app.
+                </div>
+                <div>
+                  Once a plugin file is written that defines rules for the graphics, the values can be passed into your application and used to generate on-screen content. The plugin file can be easily connected to the Stateshaper engine and used to generate your data at any time. Examples for creating a plugin like this can be found in the <i>Stateshaper</i> GitHub repository:
+                </div>
+                <div className="mt-4 underline">
+                  <a className="hover:text-gray-300 hover:italic" href="https://www.github.com/jgddesigns/stateshaper" target="_blank">https://www.github.com/jgddesigns/stateshaper</a>
+                </div>
+                <div className="mt-4">
+                  Other uses can include, but are not limited to, smart home scheduling, gaming NPC behavior, content generation, ML training, and store inventories. 
+                </div>
+              </div>
+            }
             </div>
-            <div>  
-              Potentially, an entire map can be built using these methods without storing any of the sprites in static memory. The graphics can be seemingly random, or mapped exactly as needed depending on the token output from <i>Stateshaper</i>. For more detailed applications, the token output can be modified within the package's source code by altering its morph function or passing custom class parameters. This can also be achieved within the methods written in the plugin file connecting to a specific app.
-            </div>
-            <div>
-              Once a plugin file is written that defines rules for the graphics, the values can be passed into your application and used to generate on-screen content. The plugin file can be easily connected to the Stateshaper engine and used to generate your data at any time. Examples for creating a plugin like this can be found in the <i>Stateshaper</i> GitHub repository:
-            </div>
-            <div className="mt-4 underline">
-              <a className="hover:text-gray-300 hover:italic" href="https://www.github.com/jgddesigns/stateshaper" target="_blank">https://www.github.com/jgddesigns/stateshaper</a>
-            </div>
-            <div className="mt-4">
-              Other uses can include, but are not limited to, smart home scheduling, gaming NPC behavior, content generation, ML training, and store inventories. 
-            </div>
-          </div>
-        }
-        </div>
 
-        <div className="grid w-3/4 place-items-center h-full static">
-          <div className="grid grid-auto-rows mt-12">
-            <div className="text-bold text-lg">
-              Seed State Format
-            </div>
-            <div className="italic mt-4">
-              Once a profile is created, the student profile and study plan is compressed into Seed State format. The quiz questions adjust over time based on the student's answers. 
-            </div>
-            <div className="grid grid-rows-1 grid-cols-4 place-items-center cursor-pointer text-gray-200 mt-8">
-              <a id="0" className={LinkText} onClick={(e) => seed_text(e.target.id)}>
-                Full State
-              </a>
-              <a id="1" className="hover:font-bold hover:text-gray-300 cursor-pointer" onMouseOver={(e) => seed_text(e.target.id)} onMouseOut={(e) => seed_text("0")}>
-                Short State
-              </a>
-              <a id="2" className="hover:font-bold hover:text-gray-300 cursor-pointer" onMouseOver={(e) => seed_text(e.target.id)} onMouseOut={(e) => seed_text("0")}>
-                Tiny State
-              </a>
-              <a id="3" className="hover:font-bold hover:text-gray-300 cursor-pointer" onMouseOver={(e) => seed_text(e.target.id)} onMouseOut={(e) => seed_text("0")}>
-                Raw State
-              </a>
-            </div>
-            <div className="grid grid-rows-2 grid-cols-1 gap-8 w-3/4 h-32 min-h-32 static mt-8 bold text-gray-700 p-4 rounded bg-gray-200">
-              <code>
-                {SeedText ? SeedText[0] : ""}
-              </code>
-              <code className="mt-3">
-                {SeedText ? SeedText[1] : ""}
-              </code>
-            </div>
-            <div className="italic mt-8">
-              The above strings are all that is needed to generate a student's profile. For sensitive data, some values can be stored in environment variables. Tiny State and Raw State format are not required for this type of use because no personalized data is selected from the original dataset. 
-            </div>
-            <div className="italic mt-8">
-              For other applications, a plugin file is required to coordinate Stateshaper output with the app's frontend and backend logic. Some plugins will be released along with the package. Custom plugins can also be written. 
+            <div className="grid w-3/4 place-items-center h-full static">
+              <div className="grid grid-auto-rows mt-12">
+                <div className="text-bold text-lg">
+                  Seed State Format
+                </div>
+                <div className="italic mt-4">
+                  Once a profile is created, the student profile and study plan is compressed into Seed State format. The quiz questions adjust over time based on the student's answers. 
+                </div>
+                <div className="grid grid-rows-1 grid-cols-4 place-items-center cursor-pointer text-gray-200 mt-8">
+                  <a id="0" className={LinkText} onClick={(e) => seed_text(e.target.id)}>
+                    Full State
+                  </a>
+                  <a id="1" className="hover:font-bold hover:text-gray-300 cursor-pointer" onMouseOver={(e) => seed_text(e.target.id)} onMouseOut={(e) => seed_text("0")}>
+                    Short State
+                  </a>
+                  <a id="2" className="hover:font-bold hover:text-gray-300 cursor-pointer" onMouseOver={(e) => seed_text(e.target.id)} onMouseOut={(e) => seed_text("0")}>
+                    Tiny State
+                  </a>
+                  <a id="3" className="hover:font-bold hover:text-gray-300 cursor-pointer" onMouseOver={(e) => seed_text(e.target.id)} onMouseOut={(e) => seed_text("0")}>
+                    Raw State
+                  </a>
+                </div>
+                <div className="grid grid-rows-2 grid-cols-1 gap-8 w-3/4 h-32 min-h-32 static mt-8 bold text-gray-700 p-4 rounded bg-gray-200">
+                  <code>
+                    {SeedText ? SeedText[0] : ""}
+                  </code>
+                  <code className="mt-3">
+                    {SeedText ? SeedText[1] : ""}
+                  </code>
+                </div>
+                <div className="italic mt-8">
+                  The above strings are all that is needed to generate a student's profile. For sensitive data, some values can be stored in environment variables. Tiny State and Raw State format are not required for this type of use because no personalized data is selected from the original dataset. 
+                </div>
+                <div className="italic mt-8">
+                  For other applications, a plugin file is required to coordinate Stateshaper output with the app's frontend and backend logic. Some plugins will be released along with the package. Custom plugins can also be written. 
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      <div className={!ShowCode ? "text-white text-2xl hover:font-bold bottom-6 right-192 ml-auto absolute hover:text-gray-300 cursor-pointer" : "text-2xl font-bold bottom-6 right-192 ml-auto absolute text-gray-300 cursor-pointer"} onMouseEnter={e=>setShowCode(true)} onClick={e=>setShowCode(false)}>
-        CODE
-      </div>
-      <div className="text-white text-2xl hover:font-bold bottom-6 right-12 ml-auto absolute hover:text-gray-300 cursor-pointer" onMouseEnter={e=>setShowExample(true)} onMouseLeave={e=>setShowExample(false)}>
-        EXAMPLE ONLY
-      </div>
-      {ShowCode ?
-        <div className="text-white p-4 py-5 bottom-18 right-192 ml-auto absolute w-128 h-24 rounded-lg bg-blue-600">
-        <div className="text-md ">
-          <span className="font-bold">Frontend:</span> <a className="cursor-pointer hover:text-gray-300 hover:italic" href="https://www.github.com/jgddesigns/stateshaper/tree/graphics_demo" target="_blank">https://www.github.com/jgddesigns/stateshape/tree/graphics_demo</a>
-        </div>
-        </div>
-      : null}
-      {ShowExample ?
-        <div className="text-white p-4 bottom-18 right-12 ml-auto absolute w-128 h-24 rounded-lg bg-blue-600">
-        <div className="text-lg font-bold">
-          Sample app, real logic. 
-        </div>
-        <div className="text-md mt-2">
-          Intended to showcase the tool's capabilities.
-        </div>
-        </div>
-      : null}
-    </div> : DesktopOnly == true ? 
-        <div className="grid place-items-center text-white text-md italic">
-           <div>
-              For Desktop Only
-           </div>
-        </div>
-  : null}
-                                                                                                                                                                                                                                                                                                    
+
+          <div className={!ShowCode ? "text-white text-2xl hover:font-bold bottom-6 right-192 ml-auto absolute hover:text-gray-300 cursor-pointer" : "text-2xl font-bold bottom-6 right-192 ml-auto absolute text-gray-300 cursor-pointer"} onMouseEnter={e=>setShowCode(true)} onClick={e=>setShowCode(false)}>
+            CODE
+          </div>
+          <div className="text-white text-2xl hover:font-bold bottom-6 right-12 ml-auto absolute hover:text-gray-300 cursor-pointer" onMouseEnter={e=>setShowExample(true)} onMouseLeave={e=>setShowExample(false)}>
+            EXAMPLE ONLY
+          </div>
+          {ShowCode ?
+            <div className="text-white p-4 py-5 bottom-18 right-192 ml-auto absolute w-128 h-24 rounded-lg bg-blue-600">
+            <div className="text-md ">
+              <span className="font-bold">Frontend:</span> <a className="cursor-pointer hover:text-gray-300 hover:italic" href="https://www.github.com/jgddesigns/stateshaper/tree/graphics_demo" target="_blank">https://www.github.com/jgddesigns/stateshape/tree/graphics_demo</a>
+            </div>
+            </div>
+          : null}
+          {ShowExample ?
+            <div className="text-white p-4 bottom-18 right-12 ml-auto absolute w-128 h-24 rounded-lg bg-blue-600">
+            <div className="text-lg font-bold">
+              Sample app, real logic. 
+            </div>
+            <div className="text-md mt-2">
+              Intended to showcase the tool's capabilities.
+            </div>
+            </div>
+          : null}
+        </>
+      )}
+    </div>
   )
 }
