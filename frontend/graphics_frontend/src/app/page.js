@@ -181,25 +181,20 @@ export default function Home() {
           }
         `}
       </style>
-      {DesktopOnly == true ? (
-        <div className="grid grid-auto-rows place-items-center text-lg gap-12">
-          <div>
-             Stateshaper ML Training Demo
+      <div className="grid grid-rows-1 place-items-center text-3xl mt-8 text-gray-200 font-bold">
+        <div>
+          Stateshaper Graphics Demo
+        </div>   
+      </div>
+      {DesktopOnly == true ? 
+        <div className="grid place-items-center">
+          <div className="text-white text-md italic">
+            For Desktop Only
           </div>
-      
-        
-        <div className="text-white text-md italic">
-          For Desktop Only
         </div>
-        </div>
-      ) : (
+        :
         <>
-          <div className="grid grid-rows-1 place-items-center text-3xl mt-8 text-gray-200 font-bold">
-            <div>
-              Stateshaper Graphics Demo
-            </div>   
-          </div>
-          <div className="grid grid-cols-2 grid-rows-2 place-items-center h-4/5 mt-32 text-gray-200 min-w-full tatic">
+          <div className="grid grid-cols-2 grid-rows-2 place-items-center h-4/5 mt-32 text-gray-200 min-w-full static">
             <div className="grid gap-8 h-full static place-items-center">
               <div className="grid grid-rows-1 grid-cols-2 w-128 text-gray-200 text-xl cursor-pointer place-items-center">
                 <a className={ShowForm ? "font-bold text-2xl" : ""} onClick={()=>show_content("form")}>Draw</a>
@@ -318,23 +313,23 @@ export default function Home() {
           </div>
           {ShowCode ?
             <div className="text-white p-4 py-5 bottom-18 right-192 ml-auto absolute w-128 h-24 rounded-lg bg-blue-600">
-            <div className="text-md ">
-              <span className="font-bold">Frontend:</span> <a className="cursor-pointer hover:text-gray-300 hover:italic" href="https://www.github.com/jgddesigns/stateshaper/tree/graphics_demo" target="_blank">https://www.github.com/jgddesigns/stateshape/tree/graphics_demo</a>
-            </div>
+              <div className="text-md ">
+                <span className="font-bold">Frontend:</span> <a className="cursor-pointer hover:text-gray-300 hover:italic" href="https://www.github.com/jgddesigns/stateshaper/tree/graphics_demo" target="_blank">https://www.github.com/jgddesigns/stateshape/tree/graphics_demo</a>
+              </div>
             </div>
           : null}
           {ShowExample ?
             <div className="text-white p-4 bottom-18 right-12 ml-auto absolute w-128 h-24 rounded-lg bg-blue-600">
-            <div className="text-lg font-bold">
-              Sample app, real logic. 
-            </div>
-            <div className="text-md mt-2">
-              Intended to showcase the tool's capabilities.
-            </div>
+              <div className="text-lg font-bold">
+                Sample app, real logic. 
+              </div>
+              <div className="text-md mt-2">
+                Intended to showcase the tool's capabilities.
+              </div>
             </div>
           : null}
         </>
-      )}
+      }
     </div>
   )
 }
