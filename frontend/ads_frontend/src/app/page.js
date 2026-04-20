@@ -150,8 +150,8 @@ export default function Home() {
       <div className="flex grid grid-auto-rows dark:bg-black min-h-screen w-full relative bg-[#02082c]">
 
         <div className="grid grid-rows-1 place-items-center text-3xl mt-8 text-gray-200 font-bold">
-          <div>
-            Stateshaper Personalized Ads Demo
+          <div className={DesktopOnly == true ? "text-lg" : "">
+            Stateshaper Ads Demo
           </div>
         </div>
 
