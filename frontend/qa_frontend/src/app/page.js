@@ -234,7 +234,8 @@ return (
         </style>
 
         <div className="grid grid-rows-1 place-items-center text-3xl mt-8 text-gray-200 font-bold">
-          <div>
+          <div className={DesktopOnly == true ? "grid place-items-center text-lg" : ""}>
+
             Stateshaper Fintech QA Demo
           </div>
         </div>
