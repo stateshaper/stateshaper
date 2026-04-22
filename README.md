@@ -40,7 +40,7 @@ ML Training can require an enourmous amount of data. *Stateshaper* is able to cr
 
 *Targeted Ads Compression Demo*
 
-https://stateshaper-ads.vercel.app
+https://ads-demo.vercel.app
 
 <h6>Ruleset: <i>Ratings</i></h6>
 
@@ -50,7 +50,7 @@ Demonstrates the engine's ability to generate data based on personalization. Ads
 
 *Lesson Plans Demo*
 
-https://stateshaper-lessons.vercel.app
+https://lessons-demo.vercel.app
 
 <h6>Ruleset: <i>Ratings</i></h6>
 
@@ -60,7 +60,7 @@ An example of a personalized learning plan based on a student's performance. Con
 
 *Fintech QA Demo*
 
-https://stateshaper-qa.vercel.app
+https://stateshaper-qa-demo.vercel.app
 
 <h6>Ruleset: <i>Tokens</i></h6>
 
@@ -70,7 +70,7 @@ Using numbers as tokens, values are derived to stress test a fintech app's math 
 
 *Drawing Graphics Demo*
 
-https://stateshaper-graphics.vercel.app
+https://stateshaper-drawing.vercel.app
 
 <h6>Ruleset: <i>Tokens</i></h6>
 
