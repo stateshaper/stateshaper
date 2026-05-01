@@ -483,8 +483,7 @@ return (
                   </div>
                 </div>
               </div>
-            : null}
-
+          
             <div className={!ShowCode ? "text-white text-2xl hover:font-bold bottom-6 right-192 ml-auto absolute hover:text-gray-300 cursor-pointer" : "text-2xl font-bold bottom-6 right-192 ml-auto absolute text-gray-300 cursor-pointer"} onMouseEnter={e=>setShowCode(true)} onClick={e=>setShowCode(false)}>
               CODE
             </div>
@@ -508,6 +507,7 @@ return (
                 </div>
               </div>
             : null}
+          : null}
           </>
         }
       </div>
