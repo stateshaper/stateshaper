@@ -141,7 +141,7 @@ export default function Home() {
     }catch{}
     
     /// const res = await fetch(`http://localhost:8000/api/` + path, {
-    const res = await fetch(`https://stateshaper-qa-backend.vercel.app/api/` + path, {
+    const res = await fetch(`https://qa-demo-backend.vercel.app/api/` + path, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: "" })
