@@ -150,7 +150,7 @@ export default function Home() {
          }
      }catch{}
     
-    const res = await fetch(`https://stateshaper-graphics-backend.vercel.app/api/` + path, {
+    const res = await fetch(`https://graphics-backend.vercel.app/api/` + path, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: "" })
