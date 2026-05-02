@@ -15,7 +15,7 @@ app = FastAPI(
     title="Vercel + FastAPI",
     description="Vercel + FastAPI",
     version="1.0.0",
-)a
+)
 
 app.add_middleware(
     CORSMiddleware,
