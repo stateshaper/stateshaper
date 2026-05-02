@@ -15,12 +15,12 @@ app = FastAPI(
     title="Vercel + FastAPI",
     description="Vercel + FastAPI",
     version="1.0.0",
-)
+)a
 
 app.add_middleware(
     CORSMiddleware,
     # allow_origins=["http://localhost:3000"],
-    allow_origins=["https://stateshaper-graphics.vercel.app"],  
+    allow_origins=["https://stateshaper-drawing.vercel.app"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
