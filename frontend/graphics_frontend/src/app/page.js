@@ -17,6 +17,7 @@ export default function Home() {
   const [ShapesData, setShapesData] = useState(null)
   const [Shapes, setShapes] = useState(null)
   const [DesktopOnly, setDesktopOnly] = useState(false)
+  const [IsMobile, setIsMobile] = useState(false)
   const min_width = 800
   
   const grid_size = 25
@@ -142,11 +143,9 @@ export default function Home() {
     
     try{
          if(window.innerWidth < min_width){
-            setDesktopOnly(true)
-            setData(null)
-            return false
+            setIsMobile(true)
          }else{
-           setDesktopOnly(false)
+           setIsMobile(false)
          }
      }catch{}
     
@@ -162,8 +161,8 @@ export default function Home() {
 
 
   return (
-     <div className="dark:bg-black min-h-screen w-full bg-[#02082c] overflow-x-hidden">
-      <div className="flex grid grid-auto-rows dark:bg-black min-h-screen w-full relative bg-[#02082c]"> <style>
+    <div className="flex grid grid-auto-rows dark:bg-black min-h-screen w-full relative overflow-x-hidden bg-[#02082c]">
+      <style>
         {`
           .dot-scrollbar::-webkit-scrollbar {
             width: 12px;
@@ -181,31 +180,30 @@ export default function Home() {
           }
         `}
       </style>
-      <div className="grid grid-rows-1 place-items-center text-3xl mt-8 text-gray-200 font-bold">
-        <div className={DesktopOnly == true ? "text-lg" : ""}>
+      <div className="grid grid-rows-1 place-items-center text-3xl mt-8 text-gray-200 font-bold px-4 text-center">
+        <div className={IsMobile ? "text-lg" : ""}>
       
           Stateshaper Graphics Demo
       
         </div>
       </div>
-      {DesktopOnly == true ? 
-        <div className="grid place-items-center">
-          <div className="text-white text-md italic">
-            For Desktop Only
+      {IsMobile && (
+        <div className="grid place-items-center mt-2">
+          <div className="text-yellow-300 text-sm italic px-4 text-center">
+            Best experienced on desktop. Some features may be limited on mobile.
           </div>
         </div>
-        :
-        <>
+      )}
       {Data ?
-          <div className="grid grid-cols-2 grid-rows-2 place-items-center h-4/5 mt-32 text-gray-200 min-w-full static">
-            <div className="grid gap-8 h-full static place-items-center">
-              <div className="grid grid-rows-1 grid-cols-2 w-128 text-gray-200 text-xl cursor-pointer place-items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 grid-rows-auto place-items-center mt-8 md:mt-32 text-gray-200 min-w-full static gap-8 pb-24">
+            <div className="grid gap-8 h-full static place-items-center w-full px-4">
+              <div className="grid grid-rows-1 grid-cols-2 w-full max-w-xs text-gray-200 text-xl cursor-pointer place-items-center">
                 <a className={ShowForm ? "font-bold text-2xl" : ""} onClick={()=>show_content("form")}>Draw</a>
                 <a className={ShowAbout ? "font-bold text-2xl" : ""} onClick={()=>show_content("about")}>About</a>
               </div>
               {ShowForm ?
-              <div className="grid max-w-[800px] h-140 place-items-center  overflow-y-auto mt-20 p-4 dot-scrollbar static" style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
-                <div className="ml-auto px-12 grid grid-cols-3 grid-rows-1 max-w-[750px] gap-34 place-items-center mr-10">
+              <div className="grid w-full max-w-[800px] h-auto place-items-center overflow-y-auto mt-4 md:mt-20 p-4 dot-scrollbar static" style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
+                <div className="w-full px-2 grid grid-cols-3 grid-rows-1 max-w-[750px] gap-4 place-items-center">
                   <div className={OriginalToken == CurrentToken ? "w-28 h-12 bg-gray-600 text-black rounded px-5 py-3 cursor-none mr-auto disabled select-none" : "w-28 h-12 bg-blue-600 text-white rounded px-5 py-3 cursor-pointer hover:text-gray-300 mr-auto select-none"} onClick={OriginalToken != CurrentToken ? ()=>send_api("reverse") : null}>
                     Prior Map
                   </div>
@@ -227,14 +225,14 @@ export default function Home() {
                   </div>
                 </div>
                 {Shapes ?
-                  <div className="grid grid-rows-5 grid-cols-1 mt-24 max-w-[700px] p-4 self-start gap-32">
+                  <div className="grid grid-rows-5 grid-cols-1 mt-8 md:mt-24 w-full max-w-[700px] p-2 md:p-4 self-start gap-8 md:gap-32">
                     {Array.from({ length: 5 }).map((_, index) => {
                       const start = index * 5
                       const row_shapes = Shapes.slice(start, start + 5)
                       return (
                         <div
                           key={index}
-                          className="grid grid-rows-1 grid-cols-5 gap-4 min-w-[600px] h-32 place-items-center"
+                          className="grid grid-rows-1 grid-cols-5 gap-2 md:gap-4 w-full h-16 md:h-32 place-items-center"
                         >
                           {row_shapes.map((shape, cols) => (
                             <div key={cols} className={shape}>
@@ -248,7 +246,7 @@ export default function Home() {
                 : null}
               </div>
               : 
-              <div className="grid place-items-center h-140 mt-20 grid-cols-1 grid-auto-rows w-[740px] gap-6 overflow-y-auto dot-scrollbar p-6 text-lg" style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
+              <div className="grid place-items-center h-auto mt-4 md:mt-20 grid-cols-1 grid-auto-rows w-full max-w-[740px] gap-6 overflow-y-auto dot-scrollbar p-4 md:p-6 text-base md:text-lg" style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
                 <div>
                   Implementing <i>Stateshaper</i> here allows for graphics to be drawn on the screen by using the token output to derive each graphic's attributes. This is a basic example that can be expanded upon up to the most detailed textures needed (such as modern video games or CGI). The key here is that this can be done from just a few bytes of memory. The limits are only what the GPU can handle and how detailed the code is. The output is not literally infinite (based on mathematical rules) but can come close depending on how large of a mod value is set.
                 </div>
@@ -268,7 +266,7 @@ export default function Home() {
             }
             </div>
 
-            <div className="grid w-3/4 place-items-center h-full static">
+            <div className="grid w-full max-w-xl px-4 md:w-3/4 place-items-center h-full static">
               <div className="grid grid-auto-rows mt-12">
                 <div className="text-bold text-lg">
                   Seed State Format
@@ -290,7 +288,7 @@ export default function Home() {
                     Raw State
                   </a>
                 </div>
-                <div className="grid grid-rows-2 grid-cols-1 gap-8 w-3/4 h-32 min-h-32 static mt-8 bold text-gray-700 p-4 rounded bg-gray-200">
+                <div className="grid grid-rows-2 grid-cols-1 gap-8 w-full h-auto min-h-32 static mt-8 bold text-gray-700 p-4 rounded bg-gray-200 break-all">
                   <code>
                     {SeedText ? SeedText[0] : ""}
                   </code>
@@ -312,21 +310,21 @@ export default function Home() {
 {Data ?
   <div>
 
-          <div className={!ShowCode ? "text-white text-2xl hover:font-bold bottom-6 right-192 ml-auto absolute hover:text-gray-300 cursor-pointer" : "text-2xl font-bold bottom-6 right-192 ml-auto absolute text-gray-300 cursor-pointer"} onMouseEnter={e=>setShowCode(true)} onClick={e=>setShowCode(false)}>
+          <div className={!ShowCode ? "text-white text-xl hover:font-bold bottom-4 right-4 md:bottom-6 md:right-192 ml-auto absolute hover:text-gray-300 cursor-pointer" : "text-xl font-bold bottom-4 right-4 md:bottom-6 md:right-192 ml-auto absolute text-gray-300 cursor-pointer"} onMouseEnter={e=>setShowCode(true)} onClick={e=>setShowCode(false)}>
             CODE
           </div>
-          <div className="text-white text-2xl hover:font-bold bottom-6 right-12 ml-auto absolute hover:text-gray-300 cursor-pointer" onMouseEnter={e=>setShowExample(true)} onMouseLeave={e=>setShowExample(false)}>
+          <div className="text-white text-xl hover:font-bold bottom-4 left-4 md:bottom-6 md:right-12 md:left-auto ml-auto absolute hover:text-gray-300 cursor-pointer" onMouseEnter={e=>setShowExample(true)} onMouseLeave={e=>setShowExample(false)}>
             EXAMPLE ONLY
           </div>
           {ShowCode ?
-            <div className="text-white p-4 py-5 bottom-18 right-192 ml-auto absolute w-128 h-24 rounded-lg bg-blue-600">
+            <div className="text-white p-4 py-5 bottom-16 right-4 md:bottom-18 md:right-192 ml-auto absolute w-[90vw] max-w-sm md:w-128 h-auto rounded-lg bg-blue-600">
               <div className="text-md ">
                 <span className="font-bold">Frontend:</span> <a className="cursor-pointer hover:text-gray-300 hover:italic" href="https://www.github.com/jgddesigns/stateshaper/tree/graphics_demo" target="_blank">https://www.github.com/jgddesigns/stateshape/tree/graphics_demo</a>
               </div>
             </div>
           : null}
           {ShowExample ?
-            <div className="text-white p-4 bottom-18 right-12 ml-auto absolute w-128 h-24 rounded-lg bg-blue-600">
+            <div className="text-white p-4 bottom-16 left-4 md:bottom-18 md:right-12 md:left-auto ml-auto absolute w-[90vw] max-w-sm md:w-128 h-auto rounded-lg bg-blue-600">
               <div className="text-lg font-bold">
                 Sample app, real logic. 
               </div>
@@ -337,8 +335,6 @@ export default function Home() {
           : null}
             </div>
               : null}
-        </>
-      }
-    </div></div>
+    </div>
   )
 }
