@@ -49,7 +49,11 @@ export default function Home() {
 
 
   useEffect(()=>{
+    const checkMobile = () => setIsMobile(window.innerWidth < min_width)
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
     send_api("forward")
+    return () => window.removeEventListener("resize", checkMobile)
   }, [])
 
 
