@@ -206,7 +206,7 @@ export default function Home() {
 
                   {ShowInterests ? (
                     <div
-                      className="grid w-full h-auto place-items-center overflow-y-auto mt-4 md:mt-20 p-4 dot-scrollbar"
+                      className="grid w-full h-140 place-items-center overflow-y-auto mt-4 md:mt-20 p-4 dot-scrollbar"
                       style={{ scrollbarWidth: "thin", scrollbarColor: "gray transparent" }}
                     >
                       <div className="grid grid-auto-rows mt-4 gap-12 mt-8 text-xl">
@@ -262,7 +262,7 @@ export default function Home() {
                     </div>
                   ) : ShowRatings ? (
                     <div
-                      className="grid place-items-center h-auto mt-4 md:mt-20 grid-cols-1 grid-auto-rows w-full gap-4 overflow-y-auto dot-scrollbar p-4 text-lg"
+                      className="grid place-items-center h-140 mt-4 md:mt-20 grid-cols-1 grid-auto-rows w-full gap-4 overflow-y-auto dot-scrollbar p-4 text-lg"
                       style={{ scrollbarWidth: "thin", scrollbarColor: "gray transparent" }}
                     >
                       <div className="italic">The quiz questions are derived from these attributes.</div>
@@ -280,7 +280,7 @@ export default function Home() {
                     </div>
                   ) : (
                     <div
-                      className="grid place-items-center h-auto mt-4 md:mt-20 grid-cols-1 grid-auto-rows w-full md:w-3/5 gap-6 overflow-y-auto dot-scrollbar p-4 md:p-6 text-base md:text-lg"
+                      className="grid place-items-center h-140 mt-4 md:mt-20 grid-cols-1 grid-auto-rows w-full md:w-3/5 gap-6 overflow-y-auto dot-scrollbar p-4 md:p-6 text-base md:text-lg"
                       style={{ scrollbarWidth: "thin", scrollbarColor: "gray transparent" }}
                     >
                       <div>
@@ -398,4 +398,4 @@ export default function Home() {
       </div>
     </div>
   )
-    }
+      }
