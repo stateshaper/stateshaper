@@ -23,6 +23,7 @@ export default function Home() {
   const classes = ["font-bold", ""]
   const [LinkText, setLinkText] = useState(classes[0])
   const [DesktopOnly, setDesktopOnly] = useState(false)
+  const [IsMobile, setIsMobile] = useState(false)
   const min_width = 800
   const selected = "font-bold h-9 w-23 border-4 border-blue-300 "
   const total_questions = 10
@@ -94,11 +95,9 @@ export default function Home() {
   async function send_api(path) {
     try{
       if(window.innerWidth < min_width){
-        setDesktopOnly(true)
-        setData(null)
-        return false
+        setIsMobile(true)
       }else{
-        setDesktopOnly(false)
+        setIsMobile(false)
       }
     }catch{}
 
@@ -176,24 +175,24 @@ export default function Home() {
           `}
         </style>
 
-        <div className="grid grid-rows-1 place-items-center text-3xl mt-8 text-gray-200 font-bold">
-          <div className={DesktopOnly == true ? "grid place-items-center text-lg" : ""}>
+        <div className="grid grid-rows-1 place-items-center text-3xl mt-8 text-gray-200 font-bold px-4 text-center">
+          <div className={IsMobile ? "text-lg" : ""}>
             Stateshaper Study Plan Demo
           </div>
         </div>
 
-        {DesktopOnly == true ?
-          <div className="grid place-items-center">
-            <div className="text-white text-md italic">
-              For Desktop Only
+        {IsMobile && (
+          <div className="grid place-items-center mt-2">
+            <div className="text-yellow-300 text-sm italic px-4 text-center">
+              Best experienced on desktop. Some features may be limited on mobile.
             </div>
           </div>
-        :
-          <>
-            {Data ?
-              <div className="grid grid-cols-2 grid-rows-2 place-items-center h-4/5 mt-32 text-gray-200">
-                <div className="grid gap-8 h-full static place-items-center">
-                  <div className="grid grid-rows-1 grid-cols-3 w-128 text-gray-200 text-xl cursor-pointer place-items-center">
+        )}
+
+        {Data ?
+              <div className="grid grid-cols-1 grid-rows-2 place-items-center mt-8 text-gray-200 min-w-full gap-8 pb-24">
+                <div className="grid gap-8 h-full static place-items-center w-full px-4">
+                  <div className="grid grid-rows-1 grid-cols-3 w-full max-w-sm text-gray-200 text-xl cursor-pointer place-items-center">
                     <a className={ShowInterests ? "font-bold text-2xl" : ""} onClick={() => show_content("interests")}>
                       Current Quiz
                     </a>
@@ -207,7 +206,7 @@ export default function Home() {
 
                   {ShowInterests ? (
                     <div
-                      className="grid w-full h-140 place-items-center overflow-y-auto mt-20 p-4 dot-scrollbar"
+                      className="grid w-full h-auto place-items-center overflow-y-auto mt-4 md:mt-20 p-4 dot-scrollbar"
                       style={{ scrollbarWidth: "thin", scrollbarColor: "gray transparent" }}
                     >
                       <div className="grid grid-auto-rows mt-4 gap-12 mt-8 text-xl">
@@ -263,7 +262,7 @@ export default function Home() {
                     </div>
                   ) : ShowRatings ? (
                     <div
-                      className="grid place-items-center h-140 mt-20 grid-cols-1 grid-auto-rows w-full gap-4 overflow-y-auto dot-scrollbar p-4 text-lg"
+                      className="grid place-items-center h-auto mt-4 md:mt-20 grid-cols-1 grid-auto-rows w-full gap-4 overflow-y-auto dot-scrollbar p-4 text-lg"
                       style={{ scrollbarWidth: "thin", scrollbarColor: "gray transparent" }}
                     >
                       <div className="italic">The quiz questions are derived from these attributes.</div>
@@ -281,7 +280,7 @@ export default function Home() {
                     </div>
                   ) : (
                     <div
-                      className="grid place-items-center h-140 mt-20 grid-cols-1 grid-auto-rows w-3/5 gap-6 overflow-y-auto dot-scrollbar p-6 text-lg"
+                      className="grid place-items-center h-auto mt-4 md:mt-20 grid-cols-1 grid-auto-rows w-full md:w-3/5 gap-6 overflow-y-auto dot-scrollbar p-4 md:p-6 text-base md:text-lg"
                       style={{ scrollbarWidth: "thin", scrollbarColor: "gray transparent" }}
                     >
                       <div>
@@ -312,7 +311,7 @@ export default function Home() {
                   )}
                 </div>
 
-                <div className="grid w-3/4 place-items-center h-full static">
+                <div className="grid w-full max-w-xl px-4 md:w-3/4 place-items-center h-full static">
                   <div className="grid grid-auto-rows mt-12">
                     <div className="text-bold text-lg">Seed State Format</div>
                     <div className="italic mt-4">
@@ -369,22 +368,22 @@ export default function Home() {
 {Data ?
 
 <div>
-            <div className={!ShowCode ? "text-white text-lg hover:font-bold fixed bottom-2 right-148 hover:text-gray-300 cursor-pointer" : "text-xl font-bold fixed bottom-2 right-148 text-gray-300 cursor-pointer"} onMouseEnter={e=>setShowCode(true)} onClick={e=>setShowCode(false)}>
+            <div className={!ShowCode ? "text-white text-lg hover:font-bold fixed bottom-2 right-4 md:right-148 hover:text-gray-300 cursor-pointer" : "text-xl font-bold fixed bottom-2 right-4 md:right-148 text-gray-300 cursor-pointer"} onMouseEnter={e=>setShowCode(true)} onClick={e=>setShowCode(false)}>
               CODE
             </div>
-            <div className="text-white text-lg hover:text-xl hover:font-bold fixed bottom-2 right-56 hover:text-gray-300 cursor-pointer" onMouseEnter={e=>setShowExample(true)} onMouseLeave={e=>setShowExample(false)}>
+            <div className="text-white text-lg hover:text-xl hover:font-bold fixed bottom-2 left-4 md:left-auto md:right-56 hover:text-gray-300 cursor-pointer" onMouseEnter={e=>setShowExample(true)} onMouseLeave={e=>setShowExample(false)}>
               EXAMPLE ONLY
             </div>
 
             {ShowCode ?
-              <div className="text-white p-4 py-4 fixed bottom-10 right-148 w-112 h-18 rounded-lg bg-blue-600">
+              <div className="text-white p-4 py-4 fixed bottom-10 right-4 md:right-148 w-[90vw] max-w-sm md:w-112 h-auto rounded-lg bg-blue-600">
                 <div className="text-sm">
                   <span className="font-bold">Frontend:</span> <a className="cursor-pointer hover:text-gray-300 hover:italic" href="https://www.github.com/jgddesigns/stateshaper/tree/graphics_demo" target="_blank">https://www.github.com/jgddesigns/stateshaper/tree/graphics_demo</a>
                 </div>
               </div>
             : null}
             {ShowExample ?
-              <div className="text-white px-4 py-3 fixed bottom-10 right-56 w-88 h-18 rounded-lg bg-blue-600">
+              <div className="text-white px-4 py-3 fixed bottom-10 left-4 md:left-auto md:right-56 w-[90vw] max-w-sm md:w-88 h-auto rounded-lg bg-blue-600">
                 <div className="text-sm font-bold">
                   Sample app, real logic.
                 </div>
@@ -396,8 +395,6 @@ export default function Home() {
 
 </div>
 : null}
-          </>
-        }
       </div>
     </div>
   )
