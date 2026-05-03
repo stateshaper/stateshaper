@@ -302,7 +302,7 @@ export default function Home() {
             </div>
             : null}
 
-{.          {Data ?
+           {Data ?
             <div className={!ShowCode ? "text-white text-lg hover:font-bold fixed bottom-2 right-168 hover:text-gray-300 cursor-pointer" : "text-xl font-bold fixed bottom-2 right-168 text-gray-300 cursor-pointer"} onMouseEnter={e=>setShowCode(true)} onClick={e=>setShowCode(false)}>
               CODE
             </div>
