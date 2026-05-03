@@ -104,21 +104,6 @@ With a plugin file that uses a numerical token to set each graphic object's attr
 
 <br> <br> 
 
-## Features
-
-- **Deterministic** – same seed → same output on any machine.
-- **Lightweight** – core state is just a handful of integers (< 1 KB).
-- **No training** – no datasets, no GPUs, no model weights.
-- **Semantic output** – not just random noise; tokens can represent text, events, or structures.
-- **Reproducible** – perfect for QA, research, and simulation replays.
-- **Offline-friendly** – runs on laptops, servers, and small embedded devices.
-
-<br> <br>
-
----
-
-<br> <br> 
-
 ## Quick Start
 
 ### Installation
@@ -292,13 +277,19 @@ For more ino, see the [`CONNECTOR`](src/main/connector/CONNECTOR.md) documentati
 
 # TinyState Class
 
-Aside from the plugin file (which can be a template that does not include specific numbers), relevant data such as the event map and ratings can be condensed into *Tiny State* and/or *Raw State* format. Example:
+Relevant data for applications featuring personalization can be stored in *Tiny State* and/or *Raw State* format. This format is needed in addition to the regular parameters because it is intended to decode user-specific data subsets. The subsets can be selected from a larger dataset featured within a plugin file. 
+
+The rules are flexible and dependent on a specific app and/or user. For example, assigning a ranking for a specific data item based on user attributes obtained when a profile is created.
+
+*Example:*
 
 **Tiny State: ABC-12345**
 
+The original rankings or ratings for all relevant data after the initial profile is created.
+
 **Raw State: QV589JX4**
 
-These values can be encoded and decoded in the *TinyState* class within the 'tools' directory. The main data map is represented as a long string of numbers. These numbers stand for positions in the map and are encoded into *Tiny State* format. A subset of numbers from the vocab used in the engine is also kept and encoded into *Raw State* format.
+The subset of data that is selected to be displayed or included for the profile. This can evolve based on user input or other events. The cutoff rules for what is included can be set in the application's plugin file.
 
 
 ```python 
@@ -328,76 +319,13 @@ For a given user, all that will be needed to be stored for the above example is:
 
 From that, all other content can be generated during run time, and be personalized to each user. 
 
-The ratings can be modified as needed, then re-encoded as a different seed. 
-
-For some uses, a longer seed may be required. Sometimes this can be because a custom initial state, mod or constants are  required. Also if a very large amount of data causes the *Tiny State* seed to need additional characters. 
-
-In total, there are four types of data used in *Stateshaper*. They are really just strings, dicts and lists in a certain format. The specific formats are as follows:
-
-
-Full State:
-```python
-
-seed = {"user_id": "johnq1234", "s": 5, "v": ["ABC12345", "567yQ90T34"], "c": {"a": 3,"b": 5,"c": 7,"d": 11}, "m": 9973}
-
-# ~115 bytes
-
-```
-
-<br> 
-
-Short State:
-```python
-
-seed = ["user_176551",5,["ABC12345", "567yQ90T34"]]
-
-# ~45 bytes
-
-```
-
-<br> 
-
-Tiny State
-```python
-
-seed = "ABC12345"
-
-# ~8 bytes
-
-```
-
-<br> 
-
-Raw State
-```python
-
-seed = "567yQ90T34"
-
-# ~10 bytes
-
-```
-
-<br> 
-
-The format needed will vary depending on the needs for each application. For applications needing only continuous, random data Tiny or Raw format may be all that is needed. For those that require more complex, personalized data, *Full State* may be needed. A combination of any of these can be used, as long as the required 'vocab' parameter is passed into the engine.
-
-
-For more info, see the [`TINY_STATE`](src/main/tools/tiny_state/TINY_STATE.md) documentation.
-
+*For more info, see the [`TINY_STATE`](src/main/tools/tiny_state/TINY_STATE.md) documentation.*
 
 <br> <br>
 
 ---
 
 <br> <br>
-
-## How It Works 
-
-The 'seed' array, 'constants' and 'mod' value are used for calculations during each iteration. The array numbers during that iteration are used to call tokens from the list of values defined in the 'vocab' parameter. This can be seemingly random if needed, or designed to occur in a specific sequence. 
-
-For basic use, no plugin is required. Only an array of the tokens (variables or functions) is needed. If no particular order is needed (such as generating data to stress test a system for QA, or cooking app that suggests a random recipe) this may be all that is needed.
-
-For more specialized designs, a custom plugin file can be written. This will be used along with *Stateshaper* *'Connector'* class to define specific rules for the tokens included in 'vocab' list. This can be based on developer needs and can be based on attributes, sequence or frequency the tokens are called if needed.
 
 **Considerations for Designing Custom Plugins**
 
@@ -433,44 +361,6 @@ These tests demonstrate *Stateshaper's* ability to generate data against popular
 Areas of focus include determinism, reversibility, personalization, direct indexing, semantic flow and compression.
 
 For more info, see the [`TESTS`](src/main/tests/TESTS.md) documentation.
-
-<br> <br>
-
---- 
-
-<br> <br>
-
-## Use Cases (Expanded)
-
-### Personalization Without Storing User Data
-
-Personal Ads or News
-Fitness Routine
-Smart Home Scheduling
-Student Test Sets/Lesson Plans
-
-Assign each user a seed and derive their long-term content pattern from it, without storing
-behavioral data or personally identifiable information. The output evolves over time based on input such as user interaction.
-
-
-### Synthetic Data 
-
-Video Game Simulations
-QA System Testing
-Fintech Data
-Experimental Values
-
-Generate large, reproducible datasets from a single small seed. This avoids privacy issues and reduces cost compared to collecting real-world data. Relevant data can be continually created and called within an application.
-
-
-### Structures
-
-Inventory 
-Application Content
-Bookkeeping
-Statistical Records
-
-Condense large amounts of data into smaller objects. Generate it in real-time based on a set of defined terms/rules. 
 
 <br> <br>
 
