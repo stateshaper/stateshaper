@@ -5,7 +5,7 @@
 
 *Stateshaper* is a Python project that assists in tokenizing an infinite array of memorized numbers. The tokens can be re-created from only a few bytes and used with mapping rules that can call events or derive values for variables. Determinism is achieved by implementing an algorithm that shares similarites with PRNGs (Pseudo-random Number Generator) and LCGs (Linear Congruential Generator). 
 
-The primary benefit of the package is that it allows for a reduction in an application's storage size. This in turn saves database costs, including those related to size, bandwidth and energy. This can amount to a savings of over 90% in many cases. It is most efficient when used for programs featuring content generation, personalization, synthetic data and procedural generation. 
+The primary benefit of the package is that it allows for a reduction in the storage size of many types of datasets. This in turn saves database costs, including those related to size, bandwidth and energy. This can amount to a savings of over 90% in many cases. It is most efficient when used for programs featuring content generation, personalization, synthetic data and procedural generation. 
 
 *Stateshaper* can also be used securely. If desired, the output created from the starting seed can be unique based on the chosen parameters. For example, in web applications the parameter values can be stored in environment variables the same way that access keys can.
 
@@ -14,11 +14,33 @@ The primary benefit of the package is that it allows for a reduction in an appli
 
 Recommended Uses Include:
 
-- Content Feeds
+- Content Generation
 - ML Training
 - Personalized Suggestions
 - QA Stress Testing
 - Procedural World Generation
+
+<br>
+
+Examples:
+
+- Targeted Ads
+- News for You
+- Movie/Music Suggestions
+- Evolving Study Plans
+- Personalized Tests
+- Fitness Routine
+- Meal Planner
+- Document/Record Compliance
+- Application Stress Testing
+- UUID Generator
+- ML Training
+- Cryptography
+- Data Simulations
+- Procedural Graphics and Lore
+- NPC Behavior
+  
+
 
 <br> <br> 
 
