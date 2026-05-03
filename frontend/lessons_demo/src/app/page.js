@@ -366,12 +366,16 @@ export default function Home() {
               </div>
             : null}
 
+{Data ?
+
+<div>
             <div className={!ShowCode ? "text-white text-lg hover:font-bold fixed bottom-2 right-148 hover:text-gray-300 cursor-pointer" : "text-xl font-bold fixed bottom-2 right-148 text-gray-300 cursor-pointer"} onMouseEnter={e=>setShowCode(true)} onClick={e=>setShowCode(false)}>
               CODE
             </div>
             <div className="text-white text-lg hover:text-xl hover:font-bold fixed bottom-2 right-56 hover:text-gray-300 cursor-pointer" onMouseEnter={e=>setShowExample(true)} onMouseLeave={e=>setShowExample(false)}>
               EXAMPLE ONLY
             </div>
+
             {ShowCode ?
               <div className="text-white p-4 py-4 fixed bottom-10 right-148 w-112 h-18 rounded-lg bg-blue-600">
                 <div className="text-sm">
@@ -389,6 +393,9 @@ export default function Home() {
                 </div>
               </div>
             : null}
+
+</div>
+: null}
           </>
         }
       </div>
