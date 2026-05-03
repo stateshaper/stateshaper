@@ -196,6 +196,7 @@ export default function Home() {
         </div>
         :
         <>
+      {Data ?
           <div className="grid grid-cols-2 grid-rows-2 place-items-center h-4/5 mt-32 text-gray-200 min-w-full static">
             <div className="grid gap-8 h-full static place-items-center">
               <div className="grid grid-rows-1 grid-cols-2 w-128 text-gray-200 text-xl cursor-pointer place-items-center">
@@ -306,6 +307,10 @@ export default function Home() {
               </div>
             </div>
           </div>
+                    : null}
+
+{Data ?
+  <div>
 
           <div className={!ShowCode ? "text-white text-2xl hover:font-bold bottom-6 right-192 ml-auto absolute hover:text-gray-300 cursor-pointer" : "text-2xl font-bold bottom-6 right-192 ml-auto absolute text-gray-300 cursor-pointer"} onMouseEnter={e=>setShowCode(true)} onClick={e=>setShowCode(false)}>
             CODE
@@ -330,6 +335,8 @@ export default function Home() {
               </div>
             </div>
           : null}
+            </div>
+              : null}
         </>
       }
     </div>
