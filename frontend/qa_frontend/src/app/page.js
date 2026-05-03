@@ -251,10 +251,10 @@ return (
         {Data ?
               <div className="grid grid-cols-1 grid-rows-2 place-items-center mt-8 text-gray-200 min-w-full gap-8 pb-24">
                 <div className="grid gap-8 h-full static place-items-center w-full px-4">
-                  <div className="grid grid-rows-1 grid-cols-3 w-full max-w-sm text-gray-200 text-xl cursor-pointer place-items-center">
-                    <a className={ShowForm ? "font-bold text-2xl" : ""} onClick={()=>show_content("form")}>Form Data</a>
-                    <a className={ShowTests ? "font-bold text-2xl" : ""} onClick={()=>show_content("tests")}>Test Data</a>
-                    <a className={ShowAbout ? "font-bold text-2xl" : ""} onClick={()=>show_content("about")}>About</a>
+                  <div className="grid grid-rows-1 grid-cols-3 w-full max-w-sm md:max-w-none text-gray-200 text-sm md:text-xl cursor-pointer place-items-center gap-2 px-2">
+                    <a className={ShowForm ? "font-bold text-base md:text-2xl text-center" : "text-center"} onClick={()=>show_content("form")}>Form Data</a>
+                    <a className={ShowTests ? "font-bold text-base md:text-2xl text-center" : "text-center"} onClick={()=>show_content("tests")}>Test Data</a>
+                    <a className={ShowAbout ? "font-bold text-base md:text-2xl text-center" : "text-center"} onClick={()=>show_content("about")}>About</a>
                   </div>
                   {ShowForm ?
                   <div className="grid w-full h-140 place-items-center overflow-y-auto mt-4 md:mt-20 p-4 dot-scrollbar" style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
