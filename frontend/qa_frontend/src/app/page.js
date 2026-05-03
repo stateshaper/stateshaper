@@ -28,6 +28,7 @@ export default function Home() {
   const classes = ["font-bold", ""]
   const [LinkText, setLinkText] = useState(classes[0])
   const [DesktopOnly, setDesktopOnly] = useState(false)
+  const [IsMobile, setIsMobile] = useState(false)
   const min_width = 800
   
  
@@ -130,13 +131,9 @@ export default function Home() {
   async function send_api(path) {
     try{
          if(window.innerWidth < min_width){
-            setDesktopOnly(true)
-            setData(null)
-            setProcessAPI(false)
-            setReceivedData(true)
-            return false
+            setIsMobile(true)
          }else{
-           setDesktopOnly(false)
+           setIsMobile(false)
          }
     }catch{}
     
@@ -233,33 +230,32 @@ return (
           `}
         </style>
 
-        <div className="grid grid-rows-1 place-items-center text-3xl mt-8 text-gray-200 font-bold">
-          <div className={DesktopOnly == true ? "grid place-items-center text-lg" : ""}>
-
+        <div className="grid grid-rows-1 place-items-center text-3xl mt-8 text-gray-200 font-bold px-4 text-center">
+          <div className={IsMobile ? "text-lg" : ""}>
             Stateshaper Fintech QA Demo
           </div>
         </div>
 
-        {DesktopOnly == true ?
-          <div className="grid place-items-center">
-            <div className="text-white text-md italic">
-              For Desktop Only
+        {IsMobile && (
+          <div className="grid place-items-center mt-2">
+            <div className="text-yellow-300 text-sm italic px-4 text-center">
+              Best experienced on desktop. Some features may be limited on mobile.
             </div>
           </div>
-        :
-          <>
-            {Data ?
-              <div className="grid grid-cols-2 grid-rows-2 place-items-center h-4/5 mt-32 text-gray-200">
-                <div className="grid gap-8 h-full static place-items-center">
-                  <div className="grid grid-rows-1 grid-cols-3 w-128 text-gray-200 text-xl cursor-pointer place-items-center">
+        )}
+
+        {Data ?
+              <div className="grid grid-cols-1 grid-rows-2 place-items-center mt-8 text-gray-200 min-w-full gap-8 pb-24">
+                <div className="grid gap-8 h-full static place-items-center w-full px-4">
+                  <div className="grid grid-rows-1 grid-cols-3 w-full max-w-sm text-gray-200 text-xl cursor-pointer place-items-center">
                     <a className={ShowForm ? "font-bold text-2xl" : ""} onClick={()=>show_content("form")}>Form Data</a>
                     <a className={ShowTests ? "font-bold text-2xl" : ""} onClick={()=>show_content("tests")}>Test Data</a>
                     <a className={ShowAbout ? "font-bold text-2xl" : ""} onClick={()=>show_content("about")}>About</a>
                   </div>
                   {ShowForm ?
-                  <div className="grid w-4/5 h-140 place-items-center overflow-y-auto mt-20 p-4 dot-scrollbar" style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
+                  <div className="grid w-full h-140 place-items-center overflow-y-auto mt-4 md:mt-20 p-4 dot-scrollbar" style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
                     <div className="grid grid-auto-rows mt-4 gap-8 text-xl">
-                      <div className="ml-auto px-12 grid grid-cols-3 grid-rows-1 w-full">
+                      <div className="w-full px-2 grid grid-cols-3 grid-rows-1 gap-4 place-items-center">
                         <div className={OriginalToken == CurrentToken ? "w-28 h-12 bg-gray-600 text-black rounded px-4 py-3 text-lg cursor-none mr-auto disabled select-none" : "w-28 h-12 bg-blue-600 text-white rounded px-4 py-3 text-lg cursor-pointer hover:text-gray-300 mr-auto select-none"} onClick={OriginalToken != CurrentToken ? e=>send_api("reverse") : null}>
                           Prior Test
                         </div>
@@ -413,7 +409,7 @@ return (
                     </div>
                   </div>
                   : ShowTests ?
-                  <div className="grid h-140 mt-20 grid-cols-1 w-5/4 gap-24 overflow-y-auto dot-scrollbar p-6 text-lg static" style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
+                  <div className="grid h-140 mt-4 md:mt-20 grid-cols-1 w-full gap-24 overflow-y-auto dot-scrollbar p-4 md:p-6 text-lg static" style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
                     <div className="grid grid-rows-2 gap-4">
                       <div className="text-xl underline">
                         Original
@@ -424,7 +420,7 @@ return (
                     </div>
                   </div>
                   :
-                  <div className="grid place-items-center h-140 mt-20 grid-cols-1 grid-auto-rows w-4/5 gap-6 overflow-y-auto dot-scrollbar p-6 text-lg" style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
+                  <div className="grid place-items-center h-140 mt-4 md:mt-20 grid-cols-1 grid-auto-rows w-full md:w-4/5 gap-6 overflow-y-auto dot-scrollbar p-4 md:p-6 text-base md:text-lg" style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
                     <div>
                       This <i>Stateshaper</i> demo shows how QA (quality assurance) test results can be stored using very little memory. Only mock values are used, and are intended to depict the flow of systems testing for a fintech app. The output is not literally infinite (based on mathematical rules) but can come close depending on how large of a mod value is set. In software QA, the intent is look for bugs by trying to break the code that is written. This is done by stressing the system using any and all combinations of functions and possible values.
                     </div>
@@ -444,7 +440,7 @@ return (
                   }
                 </div>
 
-                <div className="grid w-3/4 place-items-center h-full static">
+                <div className="grid w-full max-w-xl px-4 md:w-3/4 place-items-center h-full static">
                   <div className="grid grid-auto-rows mt-12">
                     <div className="text-bold text-lg">
                       Seed State Format
@@ -466,7 +462,7 @@ return (
                         Raw State
                       </a>
                     </div>
-                    <div className="grid grid-rows-2 grid-cols-1 gap-8 w-3/4 h-32 min-h-32 static mt-8 bold text-gray-700 p-4 rounded bg-gray-200">
+                    <div className="grid grid-rows-2 grid-cols-1 gap-8 w-full h-auto min-h-32 static mt-8 bold text-gray-700 p-4 rounded bg-gray-200 break-all">
                       <code>
                         {SeedText ? SeedText[0] : ""}
                       </code>
@@ -484,21 +480,21 @@ return (
                 </div>
           
           
-            <div className={!ShowCode ? "text-white text-2xl hover:font-bold bottom-6 right-192 ml-auto absolute hover:text-gray-300 cursor-pointer" : "text-2xl font-bold bottom-6 right-192 ml-auto absolute text-gray-300 cursor-pointer"} onMouseEnter={e=>setShowCode(true)} onClick={e=>setShowCode(false)}>
+            <div className={!ShowCode ? "text-white text-xl hover:font-bold bottom-4 right-4 md:bottom-6 md:right-192 ml-auto absolute hover:text-gray-300 cursor-pointer" : "text-xl font-bold bottom-4 right-4 md:bottom-6 md:right-192 ml-auto absolute text-gray-300 cursor-pointer"} onMouseEnter={e=>setShowCode(true)} onClick={e=>setShowCode(false)}>
               CODE
             </div>
-            <div className="text-white text-2xl hover:font-bold bottom-6 right-12 ml-auto absolute hover:text-gray-300 cursor-pointer" onMouseEnter={e=>setShowExample(true)} onMouseLeave={e=>setShowExample(false)}>
+            <div className="text-white text-xl hover:font-bold bottom-4 left-4 md:bottom-6 md:right-12 md:left-auto ml-auto absolute hover:text-gray-300 cursor-pointer" onMouseEnter={e=>setShowExample(true)} onMouseLeave={e=>setShowExample(false)}>
               EXAMPLE ONLY
             </div>
             {ShowCode ?
-              <div className="text-white p-4 py-5 bottom-18 right-192 ml-auto absolute w-128 h-24 rounded-lg bg-blue-600">
+              <div className="text-white p-4 py-5 bottom-16 right-4 md:bottom-18 md:right-192 ml-auto absolute w-[90vw] max-w-sm md:w-128 h-auto rounded-lg bg-blue-600">
                 <div className="text-md">
                   <span className="font-bold">Frontend:</span> <a className="cursor-pointer hover:text-gray-300 hover:italic" href="https://www.github.com/jgddesigns/stateshaper/tree/qa_demo" target="_blank">https://www.github.com/jgddesigns/stateshape/tree/qa_demo</a>
                 </div>
               </div>
             : null}
             {ShowExample ?
-              <div className="text-white p-4 bottom-18 right-12 ml-auto absolute w-128 h-24 rounded-lg bg-blue-600">
+              <div className="text-white p-4 bottom-16 left-4 md:bottom-18 md:right-12 md:left-auto ml-auto absolute w-[90vw] max-w-sm md:w-128 h-auto rounded-lg bg-blue-600">
                 <div className="text-lg font-bold">
                   Sample app, real logic.
                 </div>
@@ -509,8 +505,6 @@ return (
             : null}
 </div>
           : null}
-          </>
-        }
       </div>
     </div>
   )
