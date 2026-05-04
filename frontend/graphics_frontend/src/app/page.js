@@ -275,7 +275,7 @@ export default function Home() {
               </div>
                   </div>
             }
-            </div>
+            
 
             <div className="grid w-full max-w-xl px-4 md:w-3/4 place-items-center h-full static">
               <div className="grid grid-auto-rows mt-12">
@@ -315,7 +315,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </div>
+          </div></div>
                     : null}
 
 {Data ?
