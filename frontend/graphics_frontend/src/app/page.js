@@ -309,21 +309,21 @@ export default function Home() {
 {Data ?
   <div>
 
-          <div className={!ShowCode ? "text-white text-xl hover:font-bold bottom-4 right-48 md:bottom-6 md:right-192 ml-auto absolute hover:text-gray-300 cursor-pointer" : "text-xl font-bold bottom-4 right-4 md:bottom-6 md:right-192 ml-auto absolute text-gray-300 cursor-pointer"} onMouseEnter={e=>setShowCode(true)} onClick={e=>setShowCode(false)}>
+          <div className={!ShowCode ? "text-white text-xl hover:font-bold bottom-4 right-48 md:bottom-6 md:right-192 ml-auto absolute hover:text-gray-300 cursor-pointer" : "text-xl font-bold bottom-4 right-48 md:bottom-6 md:right-192 ml-auto absolute text-gray-300 cursor-pointer"} onMouseEnter={e=>setShowCode(true)} onClick={e=>setShowCode(false)}>
             CODE
           </div>
           <div className="text-white text-xl hover:font-bold bottom-4 left-48 md:bottom-6 md:right-12 md:left-auto ml-auto absolute hover:text-gray-300 cursor-pointer" onMouseEnter={e=>setShowExample(true)} onMouseLeave={e=>setShowExample(false)}>
             EXAMPLE ONLY
           </div>
           {ShowCode ?
-            <div className="text-white p-4 py-5 bottom-16 right-1/2 md:bottom-18 md:right-192 ml-auto absolute w-auto md:w-128 h-auto rounded-lg bg-blue-600">
+            <div className="text-white p-4 py-5 bottom-16 right-56 md:bottom-18 md:right-192 ml-auto absolute w-auto md:w-128 h-auto rounded-lg bg-blue-600">
               <div className="text-md ">
                 <span className="font-bold">Frontend:</span> <a className="cursor-pointer hover:text-gray-300 hover:italic" href="https://www.github.com/jgddesigns/stateshaper/tree/graphics_demo" target="_blank">https://www.github.com/jgddesigns/stateshape/tree/graphics_demo</a>
               </div>
             </div>
           : null}
           {ShowExample ?
-            <div className="text-white p-4 bottom-16 left-1/2 md:bottom-18 md:right-12 md:left-auto ml-auto absolute w-auto md:w-128 h-auto rounded-lg bg-blue-600">
+            <div className="text-white p-4 bottom-16 left-56 md:bottom-18 md:right-12 md:left-auto ml-auto absolute w-auto md:w-128 h-auto rounded-lg bg-blue-600">
               <div className="text-lg font-bold">
                 Sample app, real logic. 
               </div>
