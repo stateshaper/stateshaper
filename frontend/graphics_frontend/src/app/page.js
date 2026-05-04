@@ -230,7 +230,7 @@ export default function Home() {
                       return (
                         <div
                           key={index}
-                          className="grid grid-rows-1 grid-cols-5 gap-2 md:gap-4 w-full h-8 place-items-center"
+                          className="grid grid-rows-1 grid-cols-5 gap-2 md:gap-4 w-8 h-8 place-items-center"
                         >
                           {row_shapes.map((shape, cols) => (
                             <div key={cols} className={shape}>
