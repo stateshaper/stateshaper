@@ -316,14 +316,14 @@ export default function Home() {
             EXAMPLE ONLY
           </div>
           {ShowCode && !ShowExample?
-            <div className="text-white p-4 py-5 bottom-16 right-auto md:bottom-18 md:right-192 ml-auto absolute w-auto md:w-128 h-auto rounded-lg bg-blue-600">
+            <div className="text-white p-4 py-5 bottom-16 right-54 md:bottom-18 md:right-192 ml-auto absolute w-auto md:w-128 h-auto rounded-lg bg-blue-600">
               <div className="text-md ">
                 <span className="font-bold">Frontend:</span> <a className="cursor-pointer hover:text-gray-300 hover:italic" href="https://www.github.com/jgddesigns/stateshaper/tree/graphics_demo" target="_blank">https://www.github.com/jgddesigns/stateshape/tree/graphics_demo</a>
               </div>
             </div>
           : null}
           {ShowExample && !ShowCode?
-            <div className="text-white p-4 bottom-16 left-auto md:bottom-18 md:right-12 md:left-auto ml-auto absolute w-auto md:w-128 h-auto rounded-lg bg-blue-600">
+            <div className="text-white p-4 bottom-16 left-54 md:bottom-18 md:right-12 md:left-auto ml-auto absolute w-auto md:w-128 h-auto rounded-lg bg-blue-600">
               <div className="text-lg font-bold">
                 Sample app, real logic. 
               </div>
