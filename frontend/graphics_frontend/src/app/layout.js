@@ -14,11 +14,15 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Stateshaper Graphics Demo",
   description: "Storing unlimited graphics with a finite amount of memory.",
+viewport: {
+    width: 1280,
+    initialScale: 0.25,
+    minimumScale: 0.25,
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
-    <meta name="viewport" content="width=1280, initial-scale=0.25">
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
