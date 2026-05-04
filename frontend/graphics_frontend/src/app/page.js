@@ -244,7 +244,7 @@ export default function Home() {
                 : null}
               </div>
               : 
-              <div className="grid place-items-center h-auto mt-4 md:mt-20 grid-cols-1 grid-auto-rows w-full max-w-[740px] gap-6 overflow-y-auto dot-scrollbar p-4 md:p-6 text-base md:text-lg" style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
+              <div className="grid place-items-center h-512 mt-4 md:mt-20 grid-cols-1 grid-auto-rows w-full max-w-[740px] gap-6 overflow-y-auto dot-scrollbar p-4 md:p-6 text-base md:text-lg static" style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
                 <div>
                   Implementing <i>Stateshaper</i> here allows for graphics to be drawn on the screen by using the token output to derive each graphic's attributes. This is a basic example that can be expanded upon up to the most detailed textures needed (such as modern video games or CGI). The key here is that this can be done from just a few bytes of memory. The limits are only what the GPU can handle and how detailed the code is. The output is not literally infinite (based on mathematical rules) but can come close depending on how large of a mod value is set.
                 </div>
