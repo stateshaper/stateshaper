@@ -312,7 +312,7 @@ export default function Home() {
           <div className={!ShowCode ? "text-white text-xl hover:font-bold bottom-4 right-48 md:bottom-6 md:right-192 ml-auto absolute hover:text-gray-300 cursor-pointer" : "text-xl font-bold bottom-4 right-48 md:bottom-6 md:right-192 ml-auto absolute text-gray-300 cursor-pointer"} onMouseEnter={!ShowExample ? e=>setShowCode(true) : e=>setShowExample(false)} onClick={e=>setShowCode(false)}>
             CODE
           </div>
-          <div className="text-white text-xl hover:font-bold bottom-4 left-48 md:bottom-6 md:right-12 md:left-auto ml-auto absolute hover:text-gray-300 cursor-pointer" onMouseEnter={!ShowCode ? e=>setShowExample(true) : e=>setShowCode(false} onClick={e=>setShowExample(false)}>
+          <div className="text-white text-xl hover:font-bold bottom-4 left-48 md:bottom-6 md:right-12 md:left-auto ml-auto absolute hover:text-gray-300 cursor-pointer" onMouseEnter={!ShowCode ? e=>setShowExample(true) : e=>setShowCode(false)} onClick={e=>setShowExample(false)}>
             EXAMPLE ONLY
           </div>
           {ShowCode && !ShowExample?
