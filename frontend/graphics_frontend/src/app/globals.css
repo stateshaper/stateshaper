@@ -22,7 +22,7 @@
 @media (max-width: 768){
   body{
      min-width: 1000px;
-     min-height: 800px;
+     height: 100%;
      zoom: .25;
   }
 }
