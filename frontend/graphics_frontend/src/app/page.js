@@ -161,7 +161,7 @@ export default function Home() {
 
 
   return (
-    <div className="flex grid grid-auto-rows dark:bg-black min-h-[400%] w-full relative overflow-x-hidden bg-[#02082c]">
+    <div className="flex grid grid-auto-rows dark:bg-black min-h-screen w-full relative overflow-x-hidden bg-[#02082c]">
       <style>
         {`
           .dot-scrollbar::-webkit-scrollbar {
@@ -182,9 +182,7 @@ export default function Home() {
       </style>
       <div className="grid grid-rows-1 place-items-center text-3xl mt-8 text-gray-200 font-bold px-4 text-center">
         <div className={IsMobile ? "text-lg" : ""}>
-      
           Stateshaper Graphics Demo
-      
         </div>
       </div>
       {IsMobile && (
