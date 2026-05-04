@@ -66,7 +66,7 @@ export default function Home() {
         let shape_class = item["shape"] + " " + colors[item["color"]]  + " " + text[item["color"]] + " w-" + item["size"]["width"] + " h-" + item["size"]["height"] + " justify-self-center self-center select-none"
         shapes.push(shape_class)
       }else{
-        shapes.push("w-32 h-64 justify-self-center self-center text-[#02082c] select-none")
+        shapes.push("w-8 h-16 md:w-32 md:h-64 justify-self-center self-center text-[#02082c] select-none")
       }
     }
     setShapes(shapes)
@@ -230,7 +230,7 @@ export default function Home() {
                       return (
                         <div
                           key={index}
-                          className="grid grid-rows-1 grid-cols-5 gap-2 md:gap-4 w-8 h-8 place-items-center"
+                          className="grid grid-rows-1 grid-cols-5 gap-2 md:gap-4 w-full h-auto place-items-center"
                         >
                           {row_shapes.map((shape, cols) => (
                             <div key={cols} className={shape}>
