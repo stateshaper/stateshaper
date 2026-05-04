@@ -223,7 +223,7 @@ export default function Home() {
                   </div>
                 </div>
                 {Shapes ?
-                  <div className="grid grid-rows-5 grid-cols-1 mt-8 h-auto md:mt-24 w-full max-w-[700px] p-2 md:p-4 self-start gap-8 md:gap-32">
+                  <div className="grid grid-rows-5 grid-cols-1 mt-8 h-[400px] md:mt-24 w-full max-w-[700px] p-2 md:p-4 self-start gap-8 md:gap-32">
                     {Array.from({ length: 5 }).map((_, index) => {
                       const start = index * 5
                       const row_shapes = Shapes.slice(start, start + 5)
