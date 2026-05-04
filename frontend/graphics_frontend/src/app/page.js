@@ -66,7 +66,7 @@ export default function Home() {
         let shape_class = item["shape"] + " " + colors[item["color"]]  + " " + text[item["color"]] + " w-" + item["size"]["width"] + " h-" + item["size"]["height"] + " justify-self-center self-center select-none"
         shapes.push(shape_class)
       }else{
-        shapes.push("w-8 h-16 md:w-32 md:h-64 justify-self-center self-center text-[#02082c] select-none")
+        shapes.push("w-8 h-8 md:w-32 md:h-64 justify-self-center self-center text-[#02082c] select-none")
       }
     }
     setShapes(shapes)
