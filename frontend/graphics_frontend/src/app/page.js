@@ -158,10 +158,10 @@ export default function Home() {
     setData(data["response"])
   }
 
-
+-
 
   return (
-<div className="flex grid grid-auto-rows dark:bg-black w-full relative overflow-x-hidden bg-[#02082c]" style={{minHeight: '100%'}}> 
+<div className="flex grid grid-auto-rows dark:bg-black w-full h-full min-h-full relative overflow-x-hidden bg-[#02082c]" style={{minHeight: '100%'}}> 
   <style>
         {`
           .dot-scrollbar::-webkit-scrollbar {
