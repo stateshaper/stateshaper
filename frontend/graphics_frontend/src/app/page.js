@@ -195,7 +195,7 @@ export default function Home() {
         </div>
       )}
       {Data ?
-          <div className="grid grid-cols-1 grid-rows-2 place-items-center mt-8 text-gray-200 min-w-full static gap-8 pb-24">
+          <div className="grid grid-cols-1 grid-rows-2 place-items-center mt-8 text-gray-200 min-w-full min-h-full static gap-8 pb-24">
             <div className="grid gap-8 h-full static place-items-center w-full px-4">
               <div className="grid grid-rows-1 grid-cols-2 w-full max-w-xs text-gray-200 text-xl cursor-pointer place-items-center">
                 <a className={ShowForm ? "font-bold text-2xl" : ""} onClick={()=>show_content("form")}>Draw</a>
