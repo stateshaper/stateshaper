@@ -200,7 +200,7 @@ export default function Home() {
                 <a className={ShowAbout ? "font-bold text-2xl" : ""} onClick={()=>show_content("about")}>About</a>
               </div>
               {ShowForm ?
-              <div className="grid w-full max-w-[800px] h-auto place-items-center overflow-y-auto mt-4 md:mt-20 p-4 dot-scrollbar static" style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
+              <div className="grid w-full max-w-[800px] h-[75%] md:h-auto place-items-center overflow-y-auto mt-4 md:mt-20 p-4 dot-scrollbar static" style={{scrollbarWidth: 'thin', scrollbarColor: 'gray transparent'}}>
                 <div className="w-full px-2 grid grid-cols-3 grid-rows-1 max-w-[750px] gap-4 place-items-center">
                   <div className={OriginalToken == CurrentToken ? "w-28 h-12 bg-gray-600 text-black rounded px-5 py-3 cursor-none mr-auto disabled select-none" : "w-28 h-12 bg-blue-600 text-white rounded px-5 py-3 cursor-pointer hover:text-gray-300 mr-auto select-none"} onClick={OriginalToken != CurrentToken ? ()=>send_api("reverse") : null}>
                     Prior Map
