@@ -16,6 +16,7 @@ export const metadata = {
   description: "Storing unlimited graphics with a finite amount of memory.",
 viewport: {
     width: 1280,
+    height: "device-height",
     initialScale: 0.25,
     minimumScale: 0.25,
   },
