@@ -327,47 +327,6 @@ From that, all other content can be generated during run time, and be personaliz
 
 <br> <br>
 
-**Considerations for Designing Custom Plugins**
-
-1. Define a Token List 
-Them 'vocab' parameter. This can be an array of any type of values, including functions. A custom plugin file can be written if needed.
-
-2. Are Custom 'seed', 'constants' or 'mod' Values  Needed?
-If specific deterministic output is needed, these values ca be adjusted to fit with the morph equation.
-
-3. Is a Custom Morph Rule Needed?
-The math done to change the array values can also be altered. This can allow for further customization of the deterministic array.
-
-4. Call *Stateshaper* Class Object and Pass the Created Parameters. 
-
-5. Generate the Ouput
-Create as many tokens as needed with *Stateshaper*().generate_token(x) method. This can be called all at once or during a loop.
-
-6. Modify the Stream if Needed 
-The data can be changed based on input such as user behavior or duration. The main class variables can be assigned new values in real time, or a new instance of the class can be created. 
-
-<br> <br>
-
----
-
-<br> <br>
-
-## Running Tests
-
-Tests can be ran using the *Tests* class.
-
-These tests demonstrate *Stateshaper's* ability to generate data against popular existing algorithms. 
-
-Areas of focus include determinism, reversibility, personalization, direct indexing, semantic flow and compression.
-
-For more info, see the [`TESTS`](src/main/tests/TESTS.md) documentation.
-
-<br> <br>
-
----
-
-<br> <br>
-
 ## Project Structure
 
 ```text
@@ -439,23 +398,4 @@ stateshaper/
 
 ```
 
-<br> 
-
-## Contributing
-
-Contributions, ideas, and experiments are welcome!
-
-See [`CONTRIBUTING`](CONTRIBUTING.md) instructions if you are interested in creating a custom plugin (or anything else). Right now you can fork this repo to experiment. An open source version of the code will be available soon. 
-
 <br> <br>
-
----
-
-<br> <br>
-
-## License
-
-This project is released under the MIT License. See [`LICENSE`](LICENSE) for details.
-
-If you use this in research, products, or experiments, a mention or citation of the
-"Stateshaper" and/or "Jason G. Dunn" is appreciated.
