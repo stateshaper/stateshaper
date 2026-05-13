@@ -219,54 +219,11 @@ To create the same output again, *start_engine* needs to be called once more.
 
 <br> <br>
 
-## Core Logic Example
-### Details of the Stateshaper Main Class
-
-This section shows examples of the main classes included in the engine. **They are not meant to be ran individually**.
-
-<br> 
-
-```python
-from main.core import Stateshaper
-from main.plugins.PluginData import PluginData
-
-# Small numeric seed. This can usually be one number, but can also be an array if needed for custom logic. During each step of the engine, output is derived from this value. It is then morphed into a new number to be used for the next iteration. 
-#
-state = 5
-
-# Tokens that are generated during each iteration of the program. For instance, this set of events can be used to generate sprites in a video game map. 
-#
-vocab = ["plant", "office building", "pedestrian", "tree", "pavement"...] 
-#
-# other examples include:
-# vocab = ["string1", "string2", "string3"...]
-# vocab = [event1, event2, event3...]
-#  
-# Class instantiation. The parameters are the only values that need to be stored other than your app's custom plugin file. In the most minimal cases, only the vocabulary is needed to be stored.
-engine = Stateshaper(
-    state=state,
-    vocab=vocab,
-    constants={"a": 3, "b": 5, "c": 7, "d": 11},
-    mod=9973,
-)
-
-# Generate 20 tokens. 
-tokens = [engine.next_token() for _ in range(20)]
-# Example Output : ["tree", "tree", "pedestrian", "tree", "office building", "pedestrian", "pavement"....]
-
-# Use the tokens to call events.
-# The first parameter, i is the type of sprite to draw.
-# The second parameter is a number from the state array (1 - mod, 9973). This can be used in the drawing function to add variations like color, size and position. 
-events = [i for plugin.draw(i, state[tokens.index(i)]) in tokens]
-```
-
-<br> 
-
 # Connector Class
 
 The *Connector* class can take your data and process it to be ready for compression into seed format.  
 
-For more ino, see the [`CONNECTOR`](src/main/connector/CONNECTOR.md) documentation.  
+For more info, see the [`CONNECTOR`](src/main/connector/CONNECTOR.md) documentation.  
 
 
 <br> <br>
@@ -279,47 +236,7 @@ For more ino, see the [`CONNECTOR`](src/main/connector/CONNECTOR.md) documentati
 
 Relevant data for applications featuring personalization can be stored in *Tiny State* and/or *Raw State* format. This format is needed in addition to the regular parameters because it is intended to decode user-specific data subsets. The subsets can be selected from a larger dataset featured within a plugin file. 
 
-The rules are flexible and dependent on a specific app and/or user. For example, assigning a ranking for a specific data item based on user attributes obtained when a profile is created.
-
-*Example:*
-
-**Tiny State: ABC-12345**
-
-The original rankings or ratings for all relevant data after the initial profile is created.
-
-**Raw State: QV589JX4**
-
-The subset of data that is selected to be displayed or included for the profile. This can evolve based on user input or other events. The cutoff rules for what is included can be set in the application's plugin file.
-
-
-```python 
-class TinyState:
-
-   # return: Coded dataset. 
-   # return[0]: Tiny State seed. Reperesents the compressed values for the master data set.
-   # return[1]: Raw State seed. Represents the subset of personalized values chosen for the specific instance.
-   def get_seed(data):
-      # Encode logic
-      # This is the value that will be kept in the database. It is where most of the compression happens. 
-      return ["ABC-12345", "QV589JX4"]
-
-   # return: personalized events for the specific user/instance.
-   def rebuild_data(master_seed, subset_seed):
-      # Decode logic.
-      # Numbers values from the seeds stand for key/value pairs from the master dataset and are kept in groups of four in data sets length 100 or less. If more length is needed the group size can be increased.
-      #
-      # Example: 0214 stands for key #3, value #15 
-      return ["event1", "event2", "event3"...]
-```
-
- 
-For a given user, all that will be needed to be stored for the above example is:
-
-["user-1234", ["abc-12345", QV589JX4]]
-
-From that, all other content can be generated during run time, and be personalized to each user. 
-
-*For more info, see the [`TINY_STATE`](src/main/tools/tiny_state/TINY_STATE.md) documentation.*
+For more info, see the [`TINY_STATE`](src/main/tools/tiny_state/TINY_STATE.md) documentation.
 
 <br> <br>
 
