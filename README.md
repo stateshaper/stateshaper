@@ -304,13 +304,10 @@ stateshaper/
 |              ├── TOOLS.md              
 │       ├── core.py
 │       ├── stateshaper.py
-├── CHANGELOG.md
-├── CONTRIBUTING.md
 ├── LICENSE
-├── pyproject.toml
 ├── QUICK_START.md
 ├── README.md
-├── setup.py
+
 
 
 ```
