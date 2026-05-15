@@ -1,5 +1,7 @@
 # *Stateshaper*
 
+<br> 
+
 ***Reduce file size and generate content using small seeds***
 
 
@@ -106,6 +108,8 @@ With a plugin file that uses a numerical token to set each graphic object's attr
 
 ## Quick Start
 
+<br> 
+
 Clone this repository:
 
 ```bash
@@ -185,7 +189,7 @@ engine.one_reverse()
 # ["one_item"]
 ```
 
-<br> 
+<br> <br>
 
 For continuous use, the engine can be called in a loop using the *run_engine* function. For one time, call it once with a specific *token_count* parameter.
 
@@ -197,32 +201,38 @@ To create the same output again, *start_engine* needs to be called once more.
 
 <br> <br>
 
-# Connector Class
+## Connector Class
+
+<br> 
 
 The *Connector* class can take your data and process it to be ready for compression into seed format.  
 
 For more info, see the [`CONNECTOR`](src/main/connector/CONNECTOR.md) documentation.  
 
 
-<br> <br>
+<br> 
 
 ---
 
 <br> <br>
 
-# TinyState Class
+## TinyState Class
+
+<br> 
 
 Relevant data for applications featuring personalization can be stored in *Tiny State* and/or *Raw State* format. This format is needed in addition to the regular parameters because it is intended to decode user-specific data subsets. The subsets can be selected from a larger dataset featured within a plugin file. 
 
 For more info, see the [`TINY_STATE`](src/main/tools/tiny_state/TINY_STATE.md) documentation.
 
-<br> <br>
+<br> 
 
 ---
 
 <br> <br>
 
 ## Project Structure
+
+<br> 
 
 ```text
 stateshaper/
