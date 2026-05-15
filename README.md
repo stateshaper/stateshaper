@@ -106,8 +106,6 @@ With a plugin file that uses a numerical token to set each graphic object's attr
 
 ## Quick Start
 
-### Installation
-
 Clone this repository:
 
 ```bash
@@ -115,33 +113,13 @@ git clone https://github.com/stateshaper/stateshaper.git
 cd stateshaper
 ```
 
-
-
 **Make sure your data is in one of the formats listed in the *"example_data"* directory. The output that is generated depends on the values contained in this dataset. The data types are based on the following rules:**
 
 Instructions: [`Formatting Data for Input`](example_data/format_data/FORMAT_DATA.md)
 
 <h6><i>If needed, use the FormatData class in the nested 'format_data' directory.</i></h6>
 
-<br> 
-
-*Compound* - A collection of items that include a specified group. Only items from the defined groups will be part of the final output.
-
-Example: [`Compound Dataset`](example_data/compound.json)
-
-<br> 
-
-*Rating* - Creates a sense of personalization for the output. The output is initially created based on a ratings preference. Afterward, the output is derived from the current included items and adjusted based on whatever parameters are decided upon (such as user input). The *'derived'* dataset is all that needs to be saved on the backend, and does not include a *'rating'* key. It can be used for all profiles in an application.
-
-Example: [`Initial Rating Dataset`](example_data/rating_initial.json), [`Derived Rating Dataset`](example_data/rating_derived.json) 
-
-<br> 
-
-*Random* - A seemingly random array of the included items is generated. Only one item from the master dataset is included per engine step.
-
-Example: [`Random Dataset`](src/main/connector/random.json)
-
-<br> <br> 
+<br> <br>
 
 **Initialize a *RunEngine* class:**
 
@@ -297,6 +275,7 @@ stateshaper/
 |                 ├── CompressJson.py
 |              └── derive_vocab/
 |                 ├── DeriveVocab.py
+|                 ├── derive_vocab.png
 |                 ├── DERIVE_VOCAB.md
 |              └── tiny_state/
 |                 ├── TinyState.py
@@ -304,7 +283,6 @@ stateshaper/
 |              ├── TOOLS.md              
 │       ├── core.py
 │       ├── stateshaper.py
-├── LICENSE
 ├── QUICK_START.md
 ├── README.md
 
